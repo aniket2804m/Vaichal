@@ -416,7 +416,7 @@ const Contact = () => {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#8F2621] font-serif leading-tight">
             Let's{" "}
             <span className="text-[#7A9636]">
-              Connect
+              Connect Us
             </span>
           </h2>
         </div>
