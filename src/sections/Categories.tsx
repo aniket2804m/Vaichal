@@ -96,7 +96,7 @@ export default function Categories({
             <h2 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-[#8F2621] font-serif">Property Categories</h2>
           </div>
 
-          <p className="mx-auto mt-6 max-w-2xl text-[#999991] text-lg font-light leading-relaxed">
+          <p className="mx-auto mt-6 max-6w-lg text-[#999991] text-lg font-light leading-relaxed">
             Find the perfect property tailored to your lifestyle, business, or investment goals.
           </p>
         </motion.div>

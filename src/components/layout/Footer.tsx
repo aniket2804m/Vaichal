@@ -227,7 +227,7 @@ export default function Footer() {
   };
 
   return (
-    <div ref={footerRef} className="relative w-full bg-[#1B1B1B] text-[#BDBDBD] select-none overflow-hidden border-t border-[#999991]/20">
+    <div ref={footerRef} className="relative w-full bg-[#F5F7E3] text-[#1B1B1B] select-none overflow-hidden border-t border-[#999991]/25">
       {/* Pure CSS animated particles */}
       <style>{`
         .luxury-particle {
@@ -260,7 +260,7 @@ export default function Footer() {
       {/* Section 1 & 2 Combined Sky Background Container */}
       <div 
         className="relative w-full pt-12 z-10" 
-        style={{ background: "linear-gradient(to bottom, #0F1B2E, #2A1F1A)" }}
+        style={{ background: "linear-gradient(to bottom, #0F1B2E, #F5F7E3)" }}
       >
         <svg
           ref={svgRef}
@@ -273,7 +273,7 @@ export default function Footer() {
             {/* Realistic Sky Gradient (deep navy to warm amber horizon) */}
             <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="220" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#0F1B2E" />
-              <stop offset="100%" stopColor="#2A1F1A" />
+              <stop offset="100%" stopColor="#F5F7E3" />
             </linearGradient>
 
             {/* Mountains Gradients (cool slate-grey/blue-green) */}
@@ -420,9 +420,9 @@ export default function Footer() {
 
           {/* Construction Tower Crane (industrial safety-yellow and black) */}
           <g
-  transform="translate(565,75)"
-  className="svg-crane"
->
+            transform="translate(565,75)"
+            className="svg-crane"
+          >
             {/* Crane Mast */}
             <line x1="5" y1="145" x2="5" y2="10" stroke="#F2B90C" strokeWidth="2.5" className="svg-draw-path" />
             <line x1="5" y1="145" x2="5" y2="10" stroke="#1A1A1A" strokeWidth="0.8" strokeDasharray="3,6" />
@@ -508,7 +508,7 @@ export default function Footer() {
             <defs>
               <linearGradient id="dividerGrad" x1="0" y1="0" x2="0" y2="120" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stopColor="#2A1F1A" />
-                <stop offset="100%" stopColor="#1B1B1B" />
+                <stop offset="100%" stopColor="#F5F7E3" />
               </linearGradient>
             </defs>
             <path d="M0,0 C150,60 350,90 600,90 C850,90 1050,60 1200,0 L1200,120 L0,120 Z" fill="url(#dividerGrad)" />
@@ -523,7 +523,7 @@ export default function Footer() {
           {/* COLUMN 1: Company Profile */}
           <div className="footer-animate-col flex flex-col space-y-6">
             <div>
-              <span className="font-serif text-xl md:text-2xl font-bold tracking-[0.2em] text-[#F5F5F5] block">
+              <span className="font-cinzel text-xl md:text-2xl font-bold tracking-[0.2em] text-[#1B1B1B] block">
                 Vaichal
               </span>
               <span className="font-sans text-xs font-semibold tracking-[0.45em] text-[#7A9636] block uppercase mt-1">
@@ -535,7 +535,7 @@ export default function Footer() {
               Building Luxury.<br />Creating Legacy.
             </h4>
 
-            <p className="font-sans font-light text-sm text-[#BDBDBD] leading-relaxed">
+            <p className="font-sans font-light text-sm text-[#999991] leading-relaxed">
               We develop premium residential, commercial, and investment properties designed for modern living and long-term value.
             </p>
 
@@ -554,7 +554,7 @@ export default function Footer() {
                     key={idx}
                     href="#"
                     aria-label={social.label}
-                    className="w-10 h-10 rounded-full border border-[#999991]/30 bg-white/5 backdrop-blur-md flex items-center justify-center text-[#BDBDBD] hover:text-[#8F2621] hover:border-[#8F2621] hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-sm focus:outline-none focus:ring-1 focus:ring-[#8F2621]"
+                    className="w-10 h-10 rounded-full border border-[#999991]/30 bg-white/50 backdrop-blur-md flex items-center justify-center text-[#1B1B1B] hover:text-[#8F2621] hover:border-[#8F2621] hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-sm focus:outline-none focus:ring-1 focus:ring-[#8F2621]"
                   >
                     <Icon size={16} />
                   </a>
@@ -565,7 +565,7 @@ export default function Footer() {
 
           {/* COLUMN 2: Quick Links */}
           <div className="footer-animate-col flex flex-col space-y-6">
-            <h3 className="font-serif text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/20 pb-3">
+            <h3 className="font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3">
               Quick Links
             </h3>
 
@@ -574,9 +574,9 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     to={link.path}
-                    className="group flex items-center gap-1.5 text-[#BDBDBD] hover:text-[#8F2621] transition-all duration-300 py-1"
+                    className="group flex items-center gap-1.5 text-[#1B1B1B] hover:text-[#8F2621] transition-all duration-300 py-1"
                   >
-                    <ChevronRight size={14} className="text-[#7A9636]/50 group-hover:translate-x-1 transition-transform duration-300" />
+                    <ChevronRight size={14} className="text-[#7A9636]/60 group-hover:translate-x-1 transition-transform duration-300" />
                     <span className="relative overflow-hidden block">
                       {link.name}
                       <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#8F2621] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -589,7 +589,7 @@ export default function Footer() {
 
           {/* COLUMN 3: Property Categories */}
           <div className="footer-animate-col flex flex-col space-y-6">
-            <h3 className="font-serif text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/20 pb-3">
+            <h3 className="font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3">
               Categories
             </h3>
 
@@ -598,7 +598,7 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     to={category.path}
-                    className="group flex items-center gap-3 text-[#BDBDBD] hover:text-[#8F2621] transition-all duration-300"
+                    className="group flex items-center gap-3 text-[#1B1B1B] hover:text-[#8F2621] transition-all duration-300"
                   >
                     <Home size={15} className="text-[#7A9636]/60 group-hover:scale-110 transition-transform" />
                     <span className="relative block">
@@ -613,15 +613,15 @@ export default function Footer() {
 
           {/* COLUMN 4: Contact & Office info */}
           <div className="footer-animate-col flex flex-col space-y-6">
-            <h3 className="font-serif text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/20 pb-3">
+            <h3 className="font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3">
               Contact Us
             </h3>
 
-            <div className="space-y-4 font-sans text-sm font-light text-[#BDBDBD]">
+            <div className="space-y-4 font-sans text-sm font-light text-[#1B1B1B]">
               <div className="flex items-start gap-3.5">
                 <Phone className="w-4 h-4 text-[#7A9636] shrink-0 mt-1" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-[#BDBDBD]/60">Call Specialist</span>
+                  <span className="text-xs text-[#999991]">Call Specialist</span>
                   <a href="tel:+919876543210" className="hover:text-[#8F2621] font-semibold transition-colors mt-0.5">
                     +91 98765 43210
                   </a>
@@ -631,7 +631,7 @@ export default function Footer() {
               <div className="flex items-start gap-3.5">
                 <Mail className="w-4 h-4 text-[#7A9636] shrink-0 mt-1" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-[#BDBDBD]/60">Email Inquiry</span>
+                  <span className="text-xs text-[#999991]">Email Inquiry</span>
                   <a href="mailto:info@vaichal.com" className="hover:text-[#8F2621] transition-colors mt-0.5">
                     info@vaichal.com
                   </a>
@@ -641,8 +641,8 @@ export default function Footer() {
               <div className="flex items-start gap-3.5">
                 <MapPin className="w-4 h-4 text-[#7A9636] shrink-0 mt-1" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-[#BDBDBD]/60">Corporate Address</span>
-                  <span className="leading-relaxed mt-0.5 text-xs">
+                  <span className="text-xs text-[#999991]">Corporate Address</span>
+                  <span className="leading-relaxed mt-0.5 text-xs text-[#1B1B1B]">
                     Baner Road, Pune, Maharashtra 411045
                   </span>
                 </div>
@@ -651,8 +651,8 @@ export default function Footer() {
               <div className="flex items-start gap-3.5">
                 <Clock className="w-4 h-4 text-[#7A9636] shrink-0 mt-1" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-[#BDBDBD]/60">Working Hours</span>
-                  <span className="mt-0.5">Mon–Sat: 10AM – 7PM</span>
+                  <span className="text-xs text-[#999991]">Working Hours</span>
+                  <span className="mt-0.5 text-[#1B1B1B]">Mon–Sat: 10AM – 7PM</span>
                 </div>
               </div>
             </div>
@@ -660,18 +660,16 @@ export default function Footer() {
         </div>
 
         {/* BOTTOM SECTION */}
-        <div className="border-t border-[#999991]/20 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans font-light">
-          <p className="text-[#BDBDBD]/60 text-center md:text-left">
+        <div className="border-t border-[#999991]/25 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans font-light">
+          <p className="text-[#999991] text-center md:text-left">
             © {new Date().getFullYear()} Vaichal Realty. All Rights Reserved.
           </p>
 
-          <div className="flex items-center gap-6 text-[#BDBDBD]/60">
+          <div className="flex items-center gap-6 text-[#999991]">
             <Link to="/privacy" className="hover:text-[#8F2621] transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-[#8F2621] transition-colors">Terms & Conditions</Link>
             <Link to="/cookie" className="hover:text-[#8F2621] transition-colors">Cookie Policy</Link>
           </div>
-
-        
         </div>
       </div>
 
@@ -679,7 +677,7 @@ export default function Footer() {
       <button
         ref={scrollBtnRef}
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-[#1B1B1B]/95 border border-[#8F2621]/45 text-[#8F2621] shadow-md flex items-center justify-center backdrop-blur-md opacity-0 scale-50 translate-y-6 cursor-pointer focus:outline-none transition-all duration-300 hover:scale-105 group"
+        className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-white/95 border border-[#8F2621]/45 text-[#8F2621] shadow-md flex items-center justify-center backdrop-blur-md opacity-0 scale-50 translate-y-6 cursor-pointer focus:outline-none transition-all duration-300 hover:scale-105 group"
         aria-label="Scroll to top"
       >
         <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300" />

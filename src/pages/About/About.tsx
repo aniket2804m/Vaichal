@@ -1,14 +1,14 @@
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-
 import { useNavigate } from "react-router-dom";
+import { ShieldCheck, Award, Clock, Compass } from "lucide-react";
 
 import myImage from "../../assets/images/Vaichal vastu.png";
 import { ScrollReveal } from "../../components/layout/ScrollProgress";
 import founderImage from "../../assets/images/Vaichal vastu.png";
 import ParticleBackground from "../../components/layout/ParticleBackground";
 
-import { services, stats } from "../../data/about";
+import { services, missionPoints, differentiators, teamMembers } from "../../data/about";
 
 const memberships = [
   { id: 1, name: "Builder's Association of India", logo: "🏗️" },
@@ -127,6 +127,13 @@ export default function About() {
   });
   const visionImgRotate = useTransform(visionProgress, [0, 1], [-6, 6]);
 
+  const missionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: missionProgress } = useScroll({
+    target: missionRef,
+    offset: ["start end", "end start"],
+  });
+  const missionImgRotate = useTransform(missionProgress, [0, 1], [6, -6]);
+
   return (
     <section id="about" className="bg-[#F5F7E3] text-[#1B1B1B] overflow-hidden">
       {/* ============ HERO — centered (original layout) ============ */}
@@ -203,7 +210,7 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* ============ STICKY STORY SECTION (signature element) ============ */}
+      {/* ============ OUR STORY SECTION ============ */}
       <div
         ref={storyRef}
         className="relative border-t border-[#999991]/25"
@@ -267,6 +274,279 @@ export default function About() {
         </div>
       </div>
 
+      {/* ============ OUR VISION — pinned image, scrolling text ============ */}
+      <div
+        ref={visionRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-32 border-t border-[#999991]/25 grid lg:grid-cols-2 gap-10 lg:gap-20"
+      >
+        <div className="lg:sticky lg:top-24 h-fit">
+          <motion.h2
+            style={{ rotate: visionImgRotate }}
+            className="text-[#8F2621] text-5xl sm:text-6xl md:text-8xl font-serif font-bold leading-none"
+          >
+            OUR
+            <br />
+            VISION
+          </motion.h2>
+        </div>
+
+        <div className="space-y-8 text-[#999991] text-lg leading-relaxed font-sans font-light">
+          {[
+            "To be recognized as a premier real estate development company, delivering world-class residential and commercial spaces that transcend luxury and establish new benchmarks in architectural excellence.",
+            "We envision creating timeless properties that become iconic landmarks, revered not just for their structural magnificence but for the quality of life they provide.",
+            "Every project is a testament to our commitment to craftsmanship, innovation, and customer satisfaction.",
+          ].map((para, i) => (
+            <motion.p
+              key={i}
+              initial={{ opacity: 0.15, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: false, amount: 0.6 }}
+            >
+              {para}
+            </motion.p>
+          ))}
+          <motion.p
+            className="text-[#7A9636] font-sans font-semibold tracking-wider uppercase text-base"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.6 }}
+          >
+            Excellence in every stone, integrity in every deal, legacy in
+            every project.
+          </motion.p>
+        </div>
+      </div>
+
+      {/* ============ OUR MISSION — styled to match Vision's layout ============ */}
+      <div
+        ref={missionRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-32 border-t border-[#999991]/25 grid lg:grid-cols-2 gap-10 lg:gap-20"
+      >
+        <div className="lg:sticky lg:top-24 h-fit lg:order-last">
+          <motion.h2
+            style={{ rotate: missionImgRotate }}
+            className="text-[#7A9636] text-5xl sm:text-6xl md:text-8xl font-serif font-bold leading-none text-right lg:text-left"
+          >
+            OUR
+            <br />
+            MISSION
+          </motion.h2>
+        </div>
+
+        <div className="space-y-8 text-[#999991] text-lg leading-relaxed font-sans font-light">
+          <motion.p
+            initial={{ opacity: 0.15, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.6 }}
+            className="font-serif italic text-xl text-[#1B1B1B]"
+          >
+            "Our mission is to build more than just properties—we build legacies that endure for generations, creating spaces where ambitions flourish and memories are made."
+          </motion.p>
+          {missionPoints.map((point, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0.15, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: i * 0.1 }}
+              viewport={{ once: false, amount: 0.6 }}
+              className="flex items-start gap-4"
+            >
+              <span className="text-[#8F2621] font-serif font-bold text-xl">0{i + 1}.</span>
+              <p className="mt-0.5">{point}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* ============ WHY CHOOSE VAICHAL ============ */}
+      <section id="why-choose-us" className="py-20 md:py-32 bg-[#F5F7E3] border-t border-[#999991]/25">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <div className="text-center mb-16">
+              <span className="font-cinzel uppercase tracking-[0.3em] text-[#7A9636] text-xs font-semibold">
+                Why Vaichal
+              </span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#8F2621] mt-3">
+                Why Choose Us
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {differentiators.map((diff, i) => {
+              const icons = [ShieldCheck, Award, Clock, Compass];
+              const IconComponent = icons[i % icons.length];
+              return (
+                <ScrollReveal key={diff.id} variant="scale-up" delay={0.06 * i}>
+                  <motion.div
+                    whileHover={{ y: -8, scale: 1.02, borderColor: "#8F2621" }}
+                    className="h-full border border-[#999991]/30 p-6 rounded-[16px] bg-white flex flex-col justify-between shadow-sm transition-all duration-300"
+                  >
+                    <div>
+                      <div className="w-12 h-12 rounded-[12px] bg-[#F5F7E3] flex items-center justify-center mb-5">
+                        <IconComponent className="text-[#8F2621] w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-serif font-bold text-[#1B1B1B]">
+                        {diff.title}
+                      </h3>
+                      <p className="text-sm text-[#999991] mt-3 font-light leading-relaxed">
+                        {diff.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ OUR SERVICES ============ */}
+      <section id="services" className="py-20 md:py-32 bg-[#F5F7E3] border-t border-[#999991]/25">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <div className="text-center mb-16">
+              <span className="font-cinzel uppercase tracking-[0.3em] text-[#7A9636] text-xs font-semibold">
+                Our Offerings
+              </span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#8F2621] mt-3">
+                Our Services
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {services.map((service, idx) => (
+              <ScrollReveal
+                key={service.number}
+                variant="fade-up"
+                delay={0.05 * idx}
+              >
+                <motion.div
+                  whileHover={{
+                    y: -8,
+                    borderColor: "#8F2621",
+                    boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
+                  }}
+                  transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                  className="h-full border border-[#999991]/30 p-6 sm:p-7 bg-white rounded-[16px] flex flex-col justify-between shadow-sm"
+                >
+                  <span className="text-[#7A9636] text-xl font-serif font-bold">
+                    {service.number}
+                  </span>
+                  <div>
+                    <h3 className="mt-4 font-serif font-bold text-base text-[#1B1B1B]">
+                      {service.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-[#999991] font-light leading-relaxed">
+                      {service.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* main feature image tile */}
+          <ScrollReveal variant="fade-up" delay={0.2}>
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              className="mt-10 rounded-[16px] border border-[#999991]/30 bg-white p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-8 shadow-sm"
+            >
+              <div className="w-40 h-40 sm:w-52 sm:h-52 shrink-0 rounded-full p-2 border border-[#999991]/30 bg-[#F5F7E3]">
+                <img
+                  src={myImage}
+                  alt="Vaichal Properties"
+                  loading="lazy"
+                  className="w-full h-full rounded-full object-contain"
+                />
+              </div>
+              <p className="text-[#999991] leading-relaxed font-light text-base md:text-lg text-center sm:text-left">
+                Every property we create is a masterpiece of design, comfort,
+                and elegance — from the selection of premium materials to the
+                precision of every detail.
+              </p>
+            </motion.div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ============ OUR TEAM ============ */}
+      <section id="team" className="relative py-20 md:py-32 bg-[#F5F7E3] border-t border-[#999991]/25">
+        <motion.div
+          className="absolute top-0 left-0 w-96 h-96 bg-[#7A9636]/5 blur-[150px] pointer-events-none"
+          animate={{ x: [0, 50, 0], y: [0, -50, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <div className="text-center mb-16">
+              <span className="font-cinzel uppercase tracking-[0.3em] text-[#7A9636] text-xs font-semibold">
+                Our Leadership & Experts
+              </span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#8F2621] mt-3">
+                Our Team
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            {teamMembers.map((member, i) => (
+              <ScrollReveal key={member.name} variant={i % 2 === 0 ? "fade-right" : "fade-left"} delay={0.1 * i}>
+                <motion.div
+                  whileHover={{ y: -8 }}
+                  className="border border-[#999991]/30 p-5 rounded-[16px] bg-white shadow-sm grid sm:grid-cols-5 gap-6 items-center h-full transition-all duration-300 hover:shadow-md"
+                >
+                  {/* Image wrapper: spans 2 cols */}
+                  <div className="sm:col-span-2 relative">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      className="relative border border-[#999991]/20 p-2 rounded-[12px] bg-[#F5F7E3] overflow-hidden"
+                    >
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full aspect-[4/5] object-cover rounded-[8px]"
+                        onError={(e) => {
+                          e.currentTarget.src = founderImage;
+                        }}
+                      />
+                    </motion.div>
+                  </div>
+
+                  {/* Bio details: spans 3 cols */}
+                  <div className="sm:col-span-3 flex flex-col justify-center">
+                    <span className="font-sans uppercase tracking-[0.15em] text-[#7A9636] text-[11px] font-bold">
+                      {member.role}
+                    </span>
+                    <h3 className="text-2xl font-serif font-bold text-[#1B1B1B] mt-2 leading-tight">
+                      {member.name}
+                    </h3>
+
+                    <motion.div
+                      className="w-12 h-[2px] bg-[#8F2621] my-4"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6 }}
+                      style={{ transformOrigin: "left" }}
+                    />
+
+                    <p className="text-[#999991] font-sans font-light text-sm leading-relaxed">
+                      {member.bio}
+                    </p>
+                  </div>
+                </motion.div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ============ MEMBERSHIP — infinite marquee ============ */}
       <div className="py-16 md:py-24 border-t border-[#999991]/25 overflow-hidden">
         <ScrollReveal variant="fade-up" delay={0.1}>
@@ -298,219 +578,6 @@ export default function About() {
             ))}
           </motion.div>
         </div>
-      </div>
-
-      {/* ============ VISION — pinned image, scrolling text ============ */}
-      <div
-        ref={visionRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-32 border-t border-[#999991]/25 grid lg:grid-cols-2 gap-10 lg:gap-20"
-      >
-        <div className="lg:sticky lg:top-24 h-fit">
-          <motion.h2
-            style={{ rotate: visionImgRotate }}
-            className="text-[#8F2621] text-5xl sm:text-6xl md:text-8xl font-serif font-bold leading-none"
-          >
-            OUR
-            <br />
-            VISION
-          </motion.h2>
-        </div>
-
-        <div className="space-y-8 text-[#999991] text-lg leading-relaxed font-sans font-light">
-          {[
-            "To be recognized as a premier real estate development company, delivering world-class residential and commercial spaces that transcend luxury and establish new benchmarks in architectural excellence.",
-            "We envision creating timeless properties that become iconic landmarks, revered not just for their structural magnificence but for the quality of life they provide.",
-            "Every project is a testament to our commitment to craftsmanship, innovation, and customer satisfaction.",
-            "Our mission is to build more than just properties—we build legacies that endure for generations, creating spaces where ambitions flourish and memories are made.",
-          ].map((para, i) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0.15, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              viewport={{ once: false, amount: 0.6 }}
-            >
-              {para}
-            </motion.p>
-          ))}
-          <motion.p
-            className="text-[#7A9636] font-sans font-semibold tracking-wider uppercase text-base"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.6 }}
-          >
-            Excellence in every stone, integrity in every deal, legacy in
-            every project.
-          </motion.p>
-        </div>
-      </div>
-
-      {/* ============ FOUNDER — asymmetric bento ============ */}
-      <section className="relative py-20 md:py-32 bg-[#F5F7E3] border-t border-[#999991]/25">
-        <motion.div
-          className="absolute top-0 left-0 w-96 h-96 bg-[#7A9636]/5 blur-[150px] pointer-events-none"
-          animate={{ x: [0, 50, 0], y: [0, -50, 0], scale: [1, 1.2, 1] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-5 gap-6 lg:gap-8 items-start">
-          {/* image: spans 2 cols, tall */}
-          <ScrollReveal variant="fade-right" delay={0.1} className="lg:col-span-2">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="relative border border-[#999991]/30 p-3 rounded-[16px] bg-white shadow-sm"
-            >
-              <img
-                src={founderImage}
-                alt="Founder"
-                className="w-full aspect-[4/5] h-auto object-cover rounded-[12px]"
-              />
-              {/* overlapping quote card */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="absolute -bottom-6 right-4 sm:-right-8 max-w-[240px] border border-[#8F2621]/30 bg-white rounded-[12px] p-5 shadow-sm"
-              >
-                <p className="font-serif italic text-base sm:text-lg text-[#1B1B1B] leading-snug">
-                  "Vision, precision, and unwavering commitment."
-                </p>
-              </motion.div>
-            </motion.div>
-          </ScrollReveal>
-
-          {/* text: spans 3 cols */}
-          <ScrollReveal variant="fade-left" delay={0.2} className="lg:col-span-3">
-            <div className="pt-8 lg:pt-0">
-              <span className="font-sans uppercase tracking-[0.3em] text-[#7A9636] text-xs font-semibold">
-                Founder & Visionary
-              </span>
-
-              <div className="mt-5">
-                <AnimatedText
-                  as="h2"
-                  text="Leading With Excellence"
-                  className="block text-4xl sm:text-5xl md:text-6xl font-serif font-bold leading-tight text-[#8F2621]"
-                />
-              </div>
-
-              <motion.div
-                className="w-20 h-[2px] bg-[#8F2621] my-8"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                style={{ transformOrigin: "left" }}
-              />
-
-              <div className="space-y-6 text-[#999991] leading-relaxed font-sans font-light text-base sm:text-lg">
-                <p>
-                  At Vaichal Group, our leadership stands as a beacon of
-                  integrity and visionary excellence. With decades of
-                  experience in the real estate and construction sectors,
-                  our founders have cultivated a culture of quality and
-                  innovation.
-                </p>
-                <p>
-                  Driven by a passion for creating timeless properties and
-                  a commitment to customer satisfaction, our leadership
-                  team has positioned Vaichal as a trusted name in premium
-                  real estate development.
-                </p>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ============ BENTO: STATS + SERVICES ============ */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 text-center border-t border-[#999991]/25 font-sans">
-        <ScrollReveal variant="fade-up" delay={0.1}>
-          <div className="mb-10">
-          <h2 className="text-4xl mb-10 sm:text-5xl text-center md:text-6xl font-serif font-bold text-[#8F2621] mb-14">
-            What We Deliver
-          </h2>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[minmax(140px,auto)] gap-4 md:gap-5">
-          {/* remaining stats as compact tiles */}
-          {stats.slice(2).map((stat, i) => (
-            <ScrollReveal key={`stat-${i}`} variant="scale-up" delay={0.06 * i}>
-              <motion.div
-                whileHover={{ y: -6, scale: 1.02, borderColor: "#8F2621" }}
-                className="h-full border border-[#999991]/30 p-5 sm:p-6 rounded-[16px] bg-white flex flex-col justify-center shadow-sm"
-              >
-                <stat.icon className="text-[#8F2621] mb-3 w-6 h-6" />
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#8F2621]">
-                  {stat.value}
-                </h3>
-                <p className="text-xs text-[#999991] mt-1 font-semibold">
-                  {stat.label}
-                </p>
-              </motion.div>
-            </ScrollReveal>
-          ))}
-
-          {/* services as varied-size bento tiles */}
-          {services.map((service, idx) => {
-            const big = idx % 5 === 0;
-            return (
-              <ScrollReveal
-                key={service.number}
-                variant="fade-up"
-                delay={0.05 * idx}
-                className={big ? "col-span-2 row-span-1" : ""}
-              >
-                <motion.div
-                  whileHover={{
-                    y: -8,
-                    borderColor: "#8F2621",
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
-                  }}
-                  transition={{ type: "spring", stiffness: 220, damping: 18 }}
-                  className="h-full border border-[#999991]/30 p-6 sm:p-7 bg-white rounded-[16px] flex flex-col justify-between shadow-sm"
-                >
-                  <span className="text-[#7A9636] text-xl font-serif font-bold">
-                    {service.number}
-                  </span>
-                  <div>
-                    <h3 className="mt-4 font-serif font-bold text-base text-[#1B1B1B]">
-                      {service.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-[#999991] font-light leading-relaxed">
-                      {service.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-
-        {/* main feature image tile */}
-        <ScrollReveal variant="fade-up" delay={0.2}>
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            className="mt-10 rounded-[16px] border border-[#999991]/30 bg-white p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-8 shadow-sm"
-          >
-            <div className="w-40 h-40 sm:w-52 sm:h-52 shrink-0 rounded-full p-2 border border-[#999991]/30 bg-[#F5F7E3]">
-              <img
-                src={myImage}
-                alt="Vaichal Properties"
-                loading="lazy"
-                className="w-full h-full rounded-full object-contain"
-              />
-            </div>
-            <p className="text-[#999991] leading-relaxed font-light text-base md:text-lg text-center sm:text-left">
-              Every property we create is a masterpiece of design, comfort,
-              and elegance — from the selection of premium materials to the
-              precision of every detail.
-            </p>
-          </motion.div>
-        </ScrollReveal>
       </div>
 
       {/* ============ MARQUEE STATEMENT ============ */}
