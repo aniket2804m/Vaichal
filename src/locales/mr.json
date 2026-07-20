@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "about": "आमच्याबद्दल",
+    "services": "सेवा",
+    "projects": "प्रकल्प",
+    "gallery": "गॅलरी",
+    "client": "ग्राहक",
+    "contact": "संपर्क",
+    "bookCall": "कॉल बुक करा",
+    "enquireNow": "आत्ताच चौकशी करा",
+    "toggleMenu": "मेनू टॉगल करा",
+    "close": "बंद करा"
+  },
+  "services": {
+    "industrial": "औद्योगिक",
+    "commercial": "व्यावसायिक",
+    "residential": "निवासी"
+  },
+  "caseStudies": {
+    "bushare": "बुशेअर",
+    "puneVoice": "पुणेव्हॉईस"
+  },
+  "common": {
+    "loading": "लोड होत आहे...",
+    "home": "होम"
+  }
+}

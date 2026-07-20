@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "gallery": "Gallery",
+    "client": "Client",
+    "contact": "Contact",
+    "bookCall": "Book a Call",
+    "enquireNow": "Enquire Now",
+    "toggleMenu": "Toggle Menu",
+    "close": "Close"
+  },
+  "services": {
+    "industrial": "Industrial",
+    "commercial": "Commercial",
+    "residential": "Residential"
+  },
+  "caseStudies": {
+    "bushare": "Bushare",
+    "puneVoice": "PuneVoice"
+  },
+  "common": {
+    "loading": "Loading...",
+    "home": "Home"
+  }
+}
