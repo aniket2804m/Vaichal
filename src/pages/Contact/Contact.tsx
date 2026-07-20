@@ -278,7 +278,7 @@ const Contact = () => {
     { icon: Mail, label: "Email", href: "mailto:info@vaichal.com", text: "info@vaichal.com" },
     { icon: Phone, label: "Phone", href: "tel:+918390025023", text: "+91 83900 25023" },
     { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/918390025023", text: "Chat on WhatsApp" },
-    { icon: MapPin, label: "Location", href: "https://maps.app.goo.gl/ni1Votk8grV3SUHg8", text: "Address: 602, D Wing, Swami Chaya Apartments, Lane, DP Rd, opp. Sainath Khanawal, Sridhar Colony, Karvenagar, Pune," },
+    { icon: MapPin, label: "Location", href: "https://maps.app.goo.gl/Jtj2BS3jgsNTATKd6", text: "Ideal Chambers, Paud Rd, Rambaug Colony, Kothrud, Pune, Maharashtra 411038" },
   ];
 
   // GSAP scroll animations
