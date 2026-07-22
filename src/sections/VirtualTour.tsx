@@ -13,6 +13,7 @@ import {
   TreePine,
 } from "lucide-react";
 
+import video from "../assets/Video/Toor.mp4"
 /**
  * VirtualTour.tsx
  * ---------------------------------------------------------------
@@ -32,7 +33,7 @@ interface Room {
   key: string;
   label: string;
   icon: typeof Home;
-  image: string;
+  video: string;
   videoUrl?: string;
   caption: string;
 }
@@ -42,15 +43,15 @@ const rooms: Room[] = [
     key: "living",
     label: "Living Room",
     icon: Sofa,
-    image:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1600&auto=format&fit=crop",
+    video:
+      video,
     caption: "Sunlit living space with an open, airy layout.",
   },
   {
     key: "bedroom",
     label: "Master Bedroom",
     icon: BedDouble,
-    image:
+    video:
       "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1600&auto=format&fit=crop",
     caption: "A quiet retreat with warm natural light.",
   },
@@ -58,7 +59,7 @@ const rooms: Room[] = [
     key: "kitchen",
     label: "Kitchen",
     icon: ChefHat,
-    image:
+    video:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop",
     caption: "Modular kitchen designed for everyday ease.",
   },
@@ -66,7 +67,7 @@ const rooms: Room[] = [
     key: "bathroom",
     label: "Bathroom",
     icon: Bath,
-    image:
+    video:
       "https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=1600&auto=format&fit=crop",
     caption: "Clean, minimal fittings with premium finish.",
   },
@@ -74,7 +75,7 @@ const rooms: Room[] = [
     key: "balcony",
     label: "Balcony View",
     icon: TreePine,
-    image:
+    video:
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1600&auto=format&fit=crop",
     caption: "Step outside to open skyline views.",
   },
@@ -167,18 +168,21 @@ export default function VirtualTour() {
           className="relative overflow-hidden rounded-3xl border border-[#999991]/30 bg-white"
         >
           <div className="relative aspect-[16/9] w-full overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={activeRoom.key}
-                src={activeRoom.image}
-                alt={activeRoom.label}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </AnimatePresence>
+           <AnimatePresence mode="wait">
+  <motion.video
+    key={activeRoom.key}
+    src={activeRoom.video}
+    autoPlay
+    muted
+    loop
+    playsInline
+    initial={{ opacity: 0, scale: 1.05 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, scale: 0.98 }}
+    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    className="absolute inset-0 h-full w-full object-cover"
+  />
+</AnimatePresence>
 
             {/* dark gradient for text legibility inside image */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -298,20 +302,12 @@ export default function VirtualTour() {
               </button>
 
               <div className="aspect-video w-full">
-                {activeRoom.videoUrl ? (
-                  <video
-                    src={activeRoom.videoUrl}
-                    controls
-                    autoPlay
-                    className="h-full w-full object-cover"
-                  />
-                ) : (
-                  <img
-                    src={activeRoom.image}
-                    alt={activeRoom.label}
-                    className="h-full w-full object-cover"
-                  />
-                )}
+               <video
+  src={activeRoom.video}
+  controls
+  autoPlay
+  className="h-full w-full object-cover"
+/>
               </div>
             </motion.div>
           </motion.div>
