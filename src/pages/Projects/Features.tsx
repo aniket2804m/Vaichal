@@ -14,6 +14,9 @@ import ProjectDetail from "./ProjectDetail";
 import img1 from "../../assets/images/Projects/Venkys.png";
 import img2 from "../../assets/images/Projects/Venkys1.png";
 import img3 from "../../assets/images/Projects/Venkys2.png";
+import img4 from "../../assets/images/Projects/Venkys4.png";
+
+import img5 from "../../assets/images/Projects/ador.png";
 
 type Category = "Commercial" | "Industrial" | "Residential";
 
@@ -56,6 +59,7 @@ const PROJECTS: Project[] = [
     gallery: [
       img2,
       img3,
+      img4,
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80"
     ],
     specifications: [
@@ -75,10 +79,10 @@ const PROJECTS: Project[] = [
     scope: "Factory Shed, RCC Frame & Site Grading",
     description:
       "A phased industrial rollout combining a high-bay manufacturing shed with landscaped site development and stormwater management.",
-    image: "/projects/ador-factory.jpg",
+    image: img5,
     status: "Completed",
     gallery: [
-      "/projects/ador-factory.jpg",
+      img5,
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80"
     ],
