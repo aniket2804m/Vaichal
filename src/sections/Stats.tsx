@@ -86,7 +86,7 @@ export default function Stats() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-[#F5F7E3] text-[#1B1B1B] py-24 px-6 border-b border-[#999991]/25 relative overflow-hidden"
+      className="w-full bg-[#F5F7E3] text-[#1B1B1B] py-5 px-6 border-b border-[#999991]/25 relative overflow-hidden"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(122,150,54,0.05),transparent_70%)] pointer-events-none" />
 

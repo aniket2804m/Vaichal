@@ -43,7 +43,7 @@ const servicesList = [
 
 export default function Services() {
   return (
-    <div className="relative w-full bg-[#F5F7E3] text-[#1B1B1B] pt-24 pb-20 selection:bg-[#7A9636] selection:text-white font-sans">
+    <div className="relative w-full bg-[#F5F7E3] text-[#1B1B1B] pt-10 pb-20 selection:bg-[#7A9636] selection:text-white font-sans">
       {/* Background nature shapes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-[#7A9636]/5 blur-3xl" />

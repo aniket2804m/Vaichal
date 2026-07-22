@@ -109,7 +109,7 @@ export default function VirtualTour() {
   const activeRoom = rooms.find((r) => r.key === activeKey) ?? rooms[0];
 
   return (
-    <section className="relative overflow-hidden bg-[#F5F7E3] py-24 px-6 sm:px-10 lg:px-16 border-b border-[#999991]/25">
+    <section className="relative overflow-hidden bg-[#F5F7E3] py-10 px-6 sm:px-10 lg:px-16 border-b border-[#999991]/25">
       {/* ambient glow, consistent with the rest of the site */}
       <div className="pointer-events-none absolute -top-32 left-[-10%] h-[480px] w-[480px] rounded-full bg-[#7A9636]/5 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-[-20%] right-[-8%] h-[420px] w-[420px] rounded-full bg-[#8F2621]/3 blur-[110px]" />

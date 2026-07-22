@@ -361,7 +361,7 @@ export default function Hero() {
       initial={{ width: 0 }}
       animate={{ width: "120px" }}
       transition={{ delay: 1, duration: 1 }}
-      className="mx-auto mt-8 h-[2px] bg-brand-maroon"
+      className="mx-auto mt-8 h-[2px] bg-brand-maroon shadow-[0_0_8px_#F5F7E3]"
     />
 
   </div>

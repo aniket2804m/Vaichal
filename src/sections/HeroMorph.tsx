@@ -1,5 +1,245 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "../lib/gsap-init";
+import { motion } from "framer-motion";
+
+const BASE_PATH = 
+  "M 0 280 L 100 280 L 110 285 L 280 285 L 290 280 L 450 280 L 470 290 L 590 290 L 600 280 L 1050 280 L 1070 290 L 1200 290 L 1215 280 L 1400 280 L 1420 285 L 1600 285" +
+  " M 30 280 L 30 220 L 80 220 L 80 280" +
+  " M 40 220 L 40 280 M 55 220 L 55 280 M 70 220 L 70 280" +
+  " M 25 220 L 85 220" +
+  " M 120 280 L 120 90 L 190 90 L 190 280" +
+  " M 120 120 L 190 120 M 120 150 L 190 150 M 120 180 L 190 180 M 120 210 L 190 210 M 120 240 L 190 240" +
+  " M 155 90 L 155 280" +
+  " M 115 90 L 195 90 M 115 85 L 195 85" +
+  " M 210 285 L 210 210 L 320 210 L 320 280" +
+  " M 200 210 L 330 210" +
+  " M 240 210 L 240 280" +
+  " M 390 280 L 390 110 L 470 170 L 470 280" +
+  " M 385 110 L 475 178" +
+  " M 480 290 L 480 180 L 570 180 L 570 290" +
+  " M 500 200 L 550 200 L 550 240 L 500 240 Z" +
+  " M 590 290 L 590 160 L 730 160 L 730 280" +
+  " M 600 200 L 720 200 L 720 215 L 600 215 Z" +
+  " M 580 160 L 740 160" +
+  " M 790 280 C 840 200, 930 200, 980 280" +
+  " M 980 280 L 1050 280" +
+  " M 975 280 L 975 273 L 985 273 L 985 266 L 995 266 L 995 259 L 1005 259 L 1005 252 L 1015 252 L 1015 245 L 1025 245 L 1025 280" +
+  " M 1060 280 L 1060 190 M 1160 280 L 1160 170" +
+  " M 1045 195 L 1175 165" +
+  " M 1045 190 L 1175 160" +
+  " M 1230 280 L 1230 100 L 1350 100 L 1350 280" +
+  " M 1225 100 L 1355 100" +
+  " M 1260 130 L 1320 130 L 1320 160 L 1260 160 Z" +
+  " M 1260 185 L 1320 185 L 1320 215 L 1260 215 Z" +
+  " M 1420 285 L 1420 80 L 1520 80 L 1520 285" +
+  " M 1415 80 L 1525 80" +
+  " M 1450 110 L 1490 110 L 1490 285";
+
+const HATCHING_PATH =
+  " M 125 125 L 140 145 M 135 125 L 150 145 M 145 125 L 160 145 M 155 125 L 170 145 M 165 125 L 180 145" +
+  " M 125 185 L 140 205 M 135 185 L 150 205 M 145 185 L 160 205 M 155 185 L 170 205 M 165 185 L 180 205" +
+  " M 400 120 L 400 280 M 410 128 L 410 280 M 420 135 L 420 280 M 430 142 L 430 280 M 440 150 L 440 280 M 450 158 L 450 280 M 460 165 L 460 280" +
+  " M 305 215 L 315 225 M 310 215 L 320 225 M 300 230 L 315 245 M 305 230 L 320 245 M 300 255 L 315 270 M 305 255 L 320 270" +
+  " M 595 165 L 605 175 M 605 165 L 615 175 M 615 165 L 625 175 M 625 165 L 635 175 M 635 165 L 645 175 M 645 165 L 655 175 M 655 165 L 665 175 M 665 165 L 675 175 M 675 165 L 685 175 M 685 165 L 695 175 M 695 165 L 705 175 M 705 165 L 715 175 M 715 165 L 725 175" +
+  " M 1455 115 L 1470 130 M 1465 115 L 1480 130 M 1475 115 L 1490 130" +
+  " M 1455 145 L 1470 160 M 1465 145 L 1480 160 M 1475 145 L 1490 160" +
+  " M 1455 175 L 1470 190 M 1465 175 L 1480 190 M 1475 175 L 1490 190";
+
+const FOLIAGE_PATH =
+  " M 15 280 C 12 230, 20 180, 25 150" +
+  " M 13 280 C 10 230, 17 180, 22 150" +
+  " M 25 150 Q 10 140 -5 145" +
+  " M 25 150 Q 15 130 5 125" +
+  " M 25 150 Q 25 125 20 115" +
+  " M 25 150 Q 40 130 50 128" +
+  " M 25 150 Q 45 145 55 152" +
+  " M 25 150 Q 35 160 40 170" +
+  " M 940 280 Q 942 260 940 245" +
+  " M 940 245 Q 925 235 918 225" +
+  " M 940 245 Q 955 235 962 228" +
+  " M 918 225 C 910 220 905 230 912 235 C 908 238 915 245 922 240" +
+  " M 962 228 C 970 222 975 232 968 237 C 972 240 965 248 958 243" +
+  " M 612 170 Q 615 155 613 145" +
+  " M 613 145 Q 595 135 613 130 Q 630 135 613 145" +
+  " M 602 138 C 598 135 605 130 610 133 C 613 130 622 132 620 136 C 623 138 615 144 610 141" +
+  " M 770 280 C 765 220, 775 170, 780 140" +
+  " M 780 140 Q 760 135 750 140 M 780 140 Q 770 125 765 115 M 780 140 Q 795 125 805 122 M 780 140 Q 795 145 808 152";
+
+const DETAILS_PATH =
+  " M 60 70 Q 65 65 70 70 Q 75 65 80 70" +
+  " M 72 55 Q 75 51 78 55 Q 81 51 84 55" +
+  " M 740 85 Q 745 80 750 85 Q 755 80 760 85" +
+  " M 270 80 L 285 70 L 300 80 L 285 90 Z" +
+  " M 285 70 L 285 90 M 270 80 L 300 80" +
+  " M 285 90 Q 280 105 288 120 Q 284 135 292 150" +
+  " M 285 85 Q 230 120 170 170" +
+  " M 50 220 L 50 210 M 50 207 A 2 2 0 1 1 50 203 A 2 2 0 1 1 50 207 M 47 213 L 53 213 M 48 220 L 50 215 L 52 220" +
+  " M 1120 190 L 1120 182 M 1120 180 A 1.5 1.5 0 1 1 1120 177 A 1.5 1.5 0 1 1 1120 180 M 1118 185 L 1122 185 M 1119 190 L 1120 186 L 1121 190" +
+  " M 1130 188 L 1130 180 M 1130 178 A 1.5 1.5 0 1 1 1130 175 A 1.5 1.5 0 1 1 1130 178 M 1127 183 L 1133 183 M 1128 188 L 1130 184 L 1132 188";
+
+const FILLS_PATH =
+  " M 25 150 C -5 140, 5 115, 20 115 C 50 115, 55 140, 40 170 Z" +
+  " M 918 225 C 900 215, 980 215, 962 228 C 975 250, 910 250, 918 225 Z" +
+  " M 613 145 Q 590 125 613 125 Q 635 125 613 145 Z" +
+  " M 780 140 Q 745 130, 765 110 Q 815 115, 808 152 Z";
+
+const TOWER_FILLS =
+  " M 120 280 L 120 240 L 190 240 L 190 280 Z" +
+  " M 120 210 L 120 180 L 190 180 L 190 210 Z" +
+  " M 120 150 L 120 120 L 190 120 L 190 150 Z" +
+  " M 210 285 L 210 210 L 240 210 L 240 285 Z" +
+  " M 590 290 L 590 160 L 730 160 L 730 290 Z" +
+  " M 1230 280 L 1230 100 L 1350 100 L 1350 280 Z";
+
+const OLIVE_BUILDING_FILLS =
+  " M 390 280 L 390 110 L 470 170 L 470 280 Z" +
+  " M 1420 285 L 1420 80 L 1520 80 L 1520 285 Z";
+
+const GRAY_BUILDING_FILLS =
+  " M 30 280 L 30 220 L 80 220 L 80 280 Z" +
+  " M 240 210 L 240 280 L 320 280 L 320 210 Z" +
+  " M 480 290 L 480 180 L 570 180 L 570 290 Z" +
+  " M 1060 280 L 1060 190 L 1160 170 L 1160 280 Z";
+
+const CREAM_DOME_FILL =
+  " M 790 280 C 840 200, 930 200, 980 280 Z";
+
+const SkylineSVG = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 1600 300"
+    preserveAspectRatio="none"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* Colored Fills (animated opacity wash - much darker!) */}
+    <motion.path
+      d={CREAM_DOME_FILL}
+      fill="#F5F7E3"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 1.0, 1.0, 0] }}
+      transition={{
+        duration: 4.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.4, 0.8, 1],
+      }}
+    />
+    <motion.path
+      d={TOWER_FILLS}
+      fill="#8F2621"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 0.48, 0.48, 0] }}
+      transition={{
+        duration: 4.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.4, 0.8, 1],
+      }}
+    />
+    <motion.path
+      d={OLIVE_BUILDING_FILLS}
+      fill="#7A9636"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 0.45, 0.45, 0] }}
+      transition={{
+        duration: 4.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.4, 0.8, 1],
+      }}
+    />
+    <motion.path
+      d={GRAY_BUILDING_FILLS}
+      fill="#999991"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 0.45, 0.45, 0] }}
+      transition={{
+        duration: 4.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.4, 0.8, 1],
+      }}
+    />
+    <motion.path
+      d={FILLS_PATH}
+      fill="#7A9636"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: [0, 0.65, 0.65, 0] }}
+      transition={{
+        duration: 4.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.4, 0.8, 1],
+      }}
+    />
+
+    {/* Outlines (pathLength stroke drawing loop - thicker and darker!) */}
+    <motion.path
+      d={BASE_PATH}
+      stroke="#7A9636"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      initial={{ pathLength: 0, opacity: 0.6 }}
+      animate={{ pathLength: [0, 1, 1], opacity: [0.6, 1.0, 0.6] }}
+      transition={{
+        duration: 4.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.6, 1],
+      }}
+    />
+    <motion.path
+      d={HATCHING_PATH}
+      stroke="#999991"
+      strokeWidth="0.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      initial={{ pathLength: 0, opacity: 0.4 }}
+      animate={{ pathLength: [0, 1, 1], opacity: [0.4, 0.9, 0.4] }}
+      transition={{
+        duration: 5.2,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.6, 1],
+        delay: 0.9,
+      }}
+    />
+    <motion.path
+      d={FOLIAGE_PATH}
+      stroke="#7A9636"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      initial={{ pathLength: 0, opacity: 0.5 }}
+      animate={{ pathLength: [0, 1, 1], opacity: [0.5, 1.0, 0.5] }}
+      transition={{
+        duration: 4.8,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.6, 1],
+        delay: 0.3,
+      }}
+    />
+    <motion.path
+      d={DETAILS_PATH}
+      stroke="#8F2621"
+      strokeWidth="1.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      initial={{ pathLength: 0, opacity: 0.5 }}
+      animate={{ pathLength: [0, 1, 1], opacity: [0.5, 1.0, 0.5] }}
+      transition={{
+        duration: 4.2,
+        repeat: Infinity,
+        ease: "easeInOut",
+        times: [0, 0.6, 1],
+        delay: 0.6,
+      }}
+    />
+  </svg>
+);
 
 export default function HeroMorph() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -9,116 +249,9 @@ export default function HeroMorph() {
   const glassCardRef = useRef<HTMLDivElement>(null);
   const shineSweepRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    // 1. Canvas Particles System
-    const canvas = canvasRef.current;
-    let animationFrameId: number;
-    let cleanupParticles: (() => void) | undefined;
-
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        let width = (canvas.width = canvas.offsetWidth);
-        let height = (canvas.height = canvas.offsetHeight);
-
-        const handleResize = () => {
-          if (!canvas) return;
-          width = canvas.width = canvas.offsetWidth;
-          height = canvas.height = canvas.offsetHeight;
-        };
-        window.addEventListener("resize", handleResize);
-
-        const particleCount = window.innerWidth < 768 ? 35 : 70;
-        const particles: Array<{
-          x: number;
-          y: number;
-          size: number;
-          speedX: number;
-          speedY: number;
-          opacity: number;
-          pulseSpeed: number;
-          pulseDir: number;
-        }> = [];
-
-        for (let i = 0; i < particleCount; i++) {
-          particles.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            size: Math.random() * 2 + 0.6,
-            speedX: (Math.random() - 0.5) * 0.35,
-            speedY: -(Math.random() * 0.4 + 0.15),
-            opacity: Math.random() * 0.5 + 0.25,
-            pulseSpeed: Math.random() * 0.015 + 0.003,
-            pulseDir: Math.random() > 0.5 ? 1 : -1,
-          });
-        }
-
-        let mouseX = width / 2;
-        let mouseY = height / 2;
-        const mouseTarget = { x: mouseX, y: mouseY };
-
-        const handleMouseMoveParticles = (e: MouseEvent) => {
-          const rect = canvas.getBoundingClientRect();
-          mouseTarget.x = e.clientX - rect.left;
-          mouseTarget.y = e.clientY - rect.top;
-        };
-        window.addEventListener("mousemove", handleMouseMoveParticles);
-
-        const render = () => {
-          ctx.clearRect(0, 0, width, height);
-
-          // Eased mouse interpolation
-          mouseX += (mouseTarget.x - mouseX) * 0.06;
-          mouseY += (mouseTarget.y - mouseY) * 0.06;
-
-          particles.forEach((p) => {
-            p.y += p.speedY;
-            p.x += p.speedX;
-
-            if (p.y < -10) {
-              p.y = height + 10;
-              p.x = Math.random() * width;
-            }
-            if (p.x < -10) p.x = width + 10;
-            if (p.x > width + 10) p.x = -10;
-
-            // Repulsive force from cursor
-            const dx = p.x - mouseX;
-            const dy = p.y - mouseY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 150) {
-              const force = (150 - dist) / 150;
-              p.x += (dx / dist) * force * 1.8;
-              p.y += (dy / dist) * force * 1.8;
-            }
-
-            p.opacity += p.pulseSpeed * p.pulseDir;
-            if (p.opacity > 0.75) p.pulseDir = -1;
-            if (p.opacity < 0.2) p.pulseDir = 1;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(122, 150, 54, ${p.opacity})`; // Olive tone matching nature-friendly theme
-            ctx.shadowBlur = 3;
-            ctx.shadowColor = "rgba(122, 150, 54, 0.3)";
-            ctx.fill();
-          });
-
-          animationFrameId = requestAnimationFrame(render);
-        };
-
-        render();
-
-        cleanupParticles = () => {
-          cancelAnimationFrame(animationFrameId);
-          window.removeEventListener("resize", handleResize);
-          window.removeEventListener("mousemove", handleMouseMoveParticles);
-        };
-      }
-    }
 
     // 2. GSAP Animations & Interactive Parallax
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -482,7 +615,6 @@ export default function HeroMorph() {
 
     return () => {
       ctx.revert();
-      if (cleanupParticles) cleanupParticles();
     };
   }, []);
 
@@ -551,6 +683,26 @@ export default function HeroMorph() {
           0% { transform: translate3d(-150%, 0, 0) skewX(-20deg); }
           100% { transform: translate3d(250%, 0, 0) skewX(-20deg); }
         }
+        
+        @keyframes scrollLeftToRight {
+          0% { transform: translate3d(-50%, 0, 0); }
+          100% { transform: translate3d(0%, 0, 0); }
+        }
+        
+        @keyframes drawReveal {
+          0% { clip-path: inset(0 100% 0 0); }
+          100% { clip-path: inset(0 0% 0 0); }
+        }
+        
+        .scroll-skyline {
+          display: flex;
+          width: 200%;
+          animation: scrollLeftToRight 80s linear infinite;
+        }
+        
+        .skyline-draw {
+          animation: drawReveal 6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
       `}</style>
 
       {/* Ambient background glows */}
@@ -617,8 +769,13 @@ export default function HeroMorph() {
         <rect width="100%" height="100%" filter="url(#noise)" />
       </svg>
 
-      {/* Interactive Canvas Particles */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-10" />
+      {/* Infinite Scrolling Architectural Skyline Background (z-10) */}
+      <div className="absolute bottom-0 left-0 w-full h-[220px] pointer-events-none z-10 overflow-hidden bg-gradient-to-t from-[#CBE0E3] via-[#E4F0F2] to-transparent opacity-[0.98]">
+        <div className="flex w-[200%] h-full scroll-skyline skyline-draw">
+          <SkylineSVG className="w-1/2 h-full" />
+          <SkylineSVG className="w-1/2 h-full" />
+        </div>
+      </div>
 
       {/* Interactive Mouse Glow */}
       <div

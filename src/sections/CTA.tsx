@@ -38,7 +38,7 @@ export default function CTA() {
     <section
       ref={ctaRef}
       id="contact"
-      className="w-full bg-[#F5F7E3] py-24 px-6 border-b border-[#999991]/25 relative overflow-hidden"
+      className="w-full bg-[#F5F7E3] py-10 px-6 border-b border-[#999991]/25 relative overflow-hidden"
     >
       {/* Decorative ambient gold glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#7A9636]/5 blur-[140px] pointer-events-none rounded-full" />

@@ -109,7 +109,7 @@ export default function Awards() {
   const [openIndex, setOpenIndex] = useState<number>(0);
 
   return (
-    <section className="relative overflow-hidden bg-[#F5F7E3] py-24 px-6 sm:px-10">
+    <section className="relative overflow-hidden bg-[#F5F7E3] py-10 px-6 sm:px-10">
       {/* ambient glow blobs */}
       <motion.div
         aria-hidden

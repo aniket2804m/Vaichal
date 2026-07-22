@@ -1,6 +1,9 @@
 import { Briefcase, Building2, Phone } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function FloatingNavBar() {
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Premium glassmorphism and luxury effects */}
@@ -172,6 +175,7 @@ export default function FloatingNavBar() {
             <button 
               className="nav-item group"
               aria-label="Search properties"
+              onClick={() => navigate("/services")}
             >
               <Briefcase className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0" />
               <span className="hidden md:inline">EXPLORE SERVICES</span>
@@ -187,6 +191,7 @@ export default function FloatingNavBar() {
             <button 
               className="nav-item group"
               aria-label="Watch full movie"
+              onClick={() => navigate("/features")}
             >
              <Building2 className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0" />
               <span className="hidden md:inline">VIEW PROJECTS</span>

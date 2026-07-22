@@ -10,6 +10,11 @@ import ProjectDetail from "./ProjectDetail";
  *  (Recommended: /public/projects/<slug>.jpg or a Cloudinary URL)
  * ─────────────────────────────────────────────────────────────
  */
+
+import img1 from "../../assets/images/Projects/Venkys.png";
+import img2 from "../../assets/images/Projects/Venkys1.png";
+import img3 from "../../assets/images/Projects/Venkys2.png";
+
 type Category = "Commercial" | "Industrial" | "Residential";
 
 interface ProjectSpecification {
@@ -46,11 +51,11 @@ const PROJECTS: Project[] = [
     scope: "Civil, Structural & Site Development",
     description:
       "A two-phase pharmaceutical manufacturing facility built to strict GMP compliance standards, including allied infrastructure, utility yards and internal road networks.",
-    image: "/projects/venkys-drugs.jpg",
+    image: img1,
     status: "Ongoing",
     gallery: [
-      "/projects/venkys-drugs.jpg",
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80",
+      img2,
+      img3,
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80"
     ],
     specifications: [
@@ -366,10 +371,6 @@ const FILTERS: ("Featured" | Category)[] = [
   "Residential",
 ];
 
-/** ───────────────────────────────────────────────
- *  Signature element: a site-signage "plate" number
- *  in the corner of every card + blueprint corner ticks
- *  ─────────────────────────────────────────────── */
 function CornerTicks() {
   return (
     <>
@@ -528,7 +529,7 @@ export default function Features({
   }, [activeFilter]);
 
   return (
-    <section id="projects" className="relative scroll-mt-24 bg-[#F5F7E3] px-5 py-24 sm:px-10 lg:px-16">
+    <section id="projects" className="relative scroll-mt-24 bg-[#F5F7E3] px-5 py-10 sm:px-10 lg:px-16">
       {/* header */}
       <div className="mx-auto mb-12 max-w-6xl">
         <motion.p

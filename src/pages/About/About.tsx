@@ -142,7 +142,7 @@ export default function About() {
       {/* ============ HERO — centered (original layout) ============ */}
       <div
         ref={heroRef}
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-20 relative overflow-hidden"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-10 relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-[#F5F7E3]" />
         <ParticleBackground color="#7A9636" />
@@ -217,7 +217,7 @@ export default function About() {
       <div ref={storyRef} className="relative border-t border-[#999991]/25">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[0.9fr_1.6fr] gap-10">
     {/* sticky left nav — same as before */}
-   <div className="lg:sticky lg:top-0 h-fit lg:h-screen flex flex-col justify-center py-16 lg:py-0">
+   <div className="lg:sticky lg:top-0 h-fit lg:h-screen flex flex-col justify-center py-10 lg:py-0">
       <span className="font-cinzel uppercase tracking-[0.3em] text-[#7A9636] text-xs mb-6">
         Our Story
       </span>
@@ -248,7 +248,7 @@ export default function About() {
     </div>
 
     {/* scrolling right panels — now split left/right per panel */}
-    <div className="py-16 lg:py-32 space-y-24 lg:space-y-48">
+    <div className="py-10 lg:py-10 space-y-10 lg:space-y-10">
       {storyPanels.map((panel, i) => {
         const reversed = i % 2 === 1; // alternate layout direction
         return (
@@ -304,7 +304,7 @@ export default function About() {
       {/* ============ OUR VISION — pinned image, scrolling text ============ */}
       <div
         ref={visionRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-32 border-t border-[#999991]/25 grid lg:grid-cols-2 gap-10 lg:gap-20"
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-10 border-t border-[#999991]/25 grid lg:grid-cols-2 gap-10 lg:gap-20"
       >
         <div className="lg:sticky lg:top-24 h-fit">
           <motion.h2
@@ -349,7 +349,7 @@ export default function About() {
       {/* ============ OUR MISSION — styled to match Vision's layout ============ */}
       <div
         ref={missionRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-32 border-t border-[#999991]/25 grid lg:grid-cols-2 gap-10 lg:gap-20"
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-10 border-t border-[#999991]/25 grid lg:grid-cols-2 gap-10 lg:gap-20"
       >
         <div className="lg:sticky lg:top-24 h-fit lg:order-last">
           <motion.h2
@@ -389,7 +389,7 @@ export default function About() {
       </div>
 
       {/* ============ WHY CHOOSE VAICHAL ============ */}
-      <section id="why-choose-us" className="py-20 md:py-32 bg-[#F5F7E3] border-t border-[#999991]/25">
+      <section id="why-choose-us" className="py-10 md:py-10 bg-[#F5F7E3] border-t border-[#999991]/25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <ScrollReveal variant="fade-up" delay={0.1}>
             <div className="text-center mb-16">
@@ -432,7 +432,7 @@ export default function About() {
       </section>
 
       {/* ============ OUR SERVICES ============ */}
-      <section id="services" className="py-20 md:py-32 bg-[#F5F7E3] border-t border-[#999991]/25">
+      <section id="services" className="py-10 md:py-10 bg-[#F5F7E3] border-t border-[#999991]/25">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <ScrollReveal variant="fade-up" delay={0.1}>
             <div className="text-center mb-16">
@@ -502,7 +502,7 @@ export default function About() {
       </section>
 
       {/* ============ OUR TEAM ============ */}
-      <section id="team" className="relative py-20 md:py-32 bg-[#F5F7E3] border-t border-[#999991]/25">
+      <section id="team" className="relative py-10 md:py-10 bg-[#F5F7E3] border-t border-[#999991]/25">
         <motion.div
           className="absolute top-0 left-0 w-96 h-96 bg-[#7A9636]/5 blur-[150px] pointer-events-none"
           animate={{ x: [0, 50, 0], y: [0, -50, 0], scale: [1, 1.2, 1] }}
@@ -575,7 +575,7 @@ export default function About() {
       </section>
 
       {/* ============ MEMBERSHIP — infinite marquee ============ */}
-      <div className="py-16 md:py-24 border-t border-[#999991]/25 overflow-hidden">
+      <div className="py-10 md:py-10 border-t border-[#999991]/25 overflow-hidden">
         <ScrollReveal variant="fade-up" delay={0.1}>
           <h2 className="text-center text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-[#8F2621] mb-14 px-4">
             Membership
@@ -655,7 +655,7 @@ export default function About() {
       {/* ============ CTA ============ */}
     {/* ============ CTA ============ */}
 <section className="border-t border-[#999991]/20 bg-[#F5F7E3]">
-  <div className="max-w-5xl mx-auto px-8 lg:px-20 py-24 text-center flex flex-col items-center">
+  <div className="max-w-5xl mx-auto px-8 lg:px-10 py-10 text-center flex flex-col items-center">
 
     {/* Small Label */}
     <span className="uppercase tracking-[0.35em] text-[#7A9636] text-sm font-medium">

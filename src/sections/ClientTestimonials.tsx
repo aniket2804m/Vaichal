@@ -151,7 +151,7 @@ export default function ClientTestimonials() {
   }, [isHovered]);
 
   return (
-    <section className="relative overflow-hidden bg-[#F5F7E3] py-24 border-b border-[#999991]/25">
+    <section className="relative overflow-hidden bg-[#F5F7E3] py-10 border-b border-[#999991]/25">
       <div className="pointer-events-none absolute -top-32 right-[-8%] h-[460px] w-[460px] rounded-full bg-[#7A9636]/5 blur-[120px]" />
       <div className="pointer-events-none absolute bottom-[-15%] left-[-10%] h-[420px] w-[420px] rounded-full bg-[#8F2621]/3 blur-[110px]" />
 

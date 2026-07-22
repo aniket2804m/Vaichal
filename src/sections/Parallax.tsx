@@ -56,7 +56,7 @@ function ParallaxBlock({ image, title, subtitle, description, reversed = false }
   return (
     <div
       ref={blockRef}
-      className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 py-20 px-6 max-w-7xl mx-auto overflow-hidden ${
+      className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 py-10 px-6 max-w-7xl mx-auto overflow-hidden ${
         reversed ? "lg:flex-row-reverse" : ""
       }`}
     >

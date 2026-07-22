@@ -140,7 +140,7 @@ export default function Amenities() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#F5F7E3] py-24 px-6 sm:px-10 lg:px-16 border-b border-[#999991]/25"
+      className="relative overflow-hidden bg-[#F5F7E3] py-10 px-6 sm:px-10 lg:px-16 border-b border-[#999991]/25"
     >
       {/* ambient background glow that drifts on scroll */}
       <motion.div
