@@ -24,34 +24,35 @@ const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => (
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed inset-0 bg-[#0A0A0A] flex items-center justify-center font-montserrat overflow-hidden z-[9999]"
+        className="fixed inset-0 bg-[#F5F7E3] flex items-center justify-center font-sans overflow-hidden z-[9999]"
       >
-        {/* Ambient gold glow, breathing slowly behind everything */}
+        {/* Ambient green accent glow, breathing slowly behind everything */}
         <motion.div
           className="absolute w-[520px] h-[520px] rounded-full pointer-events-none"
           style={{
             background:
-              "radial-gradient(circle, rgba(201,168,76,0.16) 0%, rgba(201,168,76,0) 70%)",
+              "radial-gradient(circle, rgba(122,150,54,0.15) 0%, rgba(122,150,54,0) 70%)",
           }}
           animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Drifting gold dust particles */}
+        {/* Drifting brand green and red dust particles */}
         {Array.from({ length: 14 }).map((_, i) => (
           <motion.span
             key={i}
-            className="absolute rounded-full bg-[#C9A84C]"
+            className="absolute rounded-full"
             style={{
+              backgroundColor: i % 2 === 0 ? "#7A9636" : "#8F2621",
               width: 2 + (i % 3),
               height: 2 + (i % 3),
               left: `${(i * 37) % 100}%`,
               top: `${(i * 53) % 100}%`,
-              opacity: 0.35,
+              opacity: 0.25,
             }}
             animate={{
               y: [0, -30, 0],
-              opacity: [0.15, 0.5, 0.15],
+              opacity: [0.15, 0.45, 0.15],
             }}
             transition={{
               duration: 5 + (i % 5),
@@ -72,7 +73,7 @@ const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => (
           {/* Wordmark — letters stagger in, then breathe together */}
           <motion.div
             className="font-cinzel font-bold mb-1 flex justify-center items-center select-none"
-            animate={{ opacity: [0.75, 1, 0.75] }}
+            animate={{ opacity: [0.8, 1, 0.8] }}
             transition={{
               duration: 2.2,
               repeat: Infinity,
@@ -87,7 +88,7 @@ const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => (
                 variants={letterVariants}
                 initial="hidden"
                 animate="show"
-                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#C9A84C] tracking-[0.15em]"
+                className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#1B1B1B] tracking-[0.15em]"
               >
                 {char}
               </motion.span>
@@ -99,12 +100,12 @@ const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => (
             initial={{ opacity: 0, letterSpacing: "0.1em" }}
             animate={{ opacity: 1, letterSpacing: "0.3em" }}
             transition={{ delay: 0.7, duration: 0.6, ease: "easeOut" }}
-            className="block text-[#F5F0E8] font-light uppercase text-[10px] sm:text-xs md:text-base mb-8"
+            className="block text-[#7A9636] font-cinzel font-light uppercase text-[10px] sm:text-xs md:text-sm mb-8"
           >
             Building the Real Estate
           </motion.span>
 
-          {/* Signature element: skyline drawing itself in gold, on loop */}
+          {/* Signature element: skyline drawing itself in brand red accent, on loop */}
           <motion.svg
             viewBox="0 0 310 130"
             className="w-40 sm:w-48 md:w-56 mx-auto mb-6 opacity-90"
@@ -112,7 +113,7 @@ const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => (
           >
             <motion.path
               d={SKYLINE_PATH}
-              stroke="#C9A84C"
+              stroke="#8F2621"
               strokeWidth="1.5"
               strokeLinejoin="round"
               strokeLinecap="round"
@@ -127,16 +128,16 @@ const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => (
             />
           </motion.svg>
 
-          {/* Sharp gold progress track with a soft light sweep */}
-          <div className="w-56 h-[1.5px] bg-[#1A1A1A] rounded-none overflow-hidden mx-auto relative">
+          {/* Clean brand red progress track with a soft light sweep */}
+          <div className="w-56 h-[1.5px] bg-[#999991]/20 rounded-none overflow-hidden mx-auto relative">
             <motion.div
-              className="h-full bg-[#C9A84C]"
+              className="h-full bg-[#8F2621]"
               initial={{ x: "-100%" }}
               animate={{ x: "100%" }}
               transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
             />
             <motion.div
-              className="absolute inset-0 h-full w-8 from-transparent via-[#F5F0E8]/70 to-transparent"
+              className="absolute inset-0 h-full w-8 from-transparent via-[#F5F7E3]/60 to-transparent"
               initial={{ x: "-120%" }}
               animate={{ x: "220%" }}
               transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}

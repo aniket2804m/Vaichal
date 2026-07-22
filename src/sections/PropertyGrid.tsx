@@ -82,15 +82,25 @@ export default function PropertyGrid() {
     const cards = gsap.utils.toArray<HTMLElement>(".property-card");
     if (cards.length === 0) return;
 
+    const isMobile = window.innerWidth < 768;
+
     const ctx = gsap.context(() => {
       cards.forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 60, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
+        if (isMobile) {
+          // On mobile, animate directly on mount to avoid ScrollTrigger layout shift bugs
+          gsap.from(card, {
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            delay: i * 0.1,
+            ease: "power2.out",
+          });
+        } else {
+          // On desktop, trigger on scroll with column staggers
+          gsap.from(card, {
+            opacity: 0,
+            y: 60,
+            scale: 0.95,
             duration: 0.9,
             ease: "power3.out",
             scrollTrigger: {
@@ -98,14 +108,22 @@ export default function PropertyGrid() {
               start: "top 85%",
               toggleActions: "play none none none",
             },
-            delay: (i % 3) * 0.12, // staggered column animation per row
-          }
-        );
+            delay: (i % 3) * 0.12,
+          });
+        }
       });
     }, gridRef);
 
+    // Refresh GSAP ScrollTrigger after images load to prevent offset triggers
+    const timer = setTimeout(() => {
+      import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+        ScrollTrigger.refresh();
+      });
+    }, 1200);
+
     return () => {
       ctx.revert();
+      clearTimeout(timer);
     };
   }, []);
 

@@ -34,15 +34,11 @@ const QUICK_LINKS = [
   { name: "Contact Specialist", path: "/contact" },
 ];
 
-const PROPERTY_CATEGORIES = [
-  { name: "Residential Apartments", path: "/properties/residential" },
-  { name: "Luxury Villas & Estates", path: "/properties/villas" },
-  { name: "Commercial Office Spaces", path: "/properties/commercial" },
-  { name: "Premium Retail Shops", path: "/properties/retail" },
-  { name: "Industrial Solutions", path: "/properties/industrial" },
-  { name: "Investment Plots & Land", path: "/properties/plots" },
-  { name: "Scenic Farm Houses", path: "/properties/farmhouses" },
-  { name: "Strategic High-Yield Projects", path: "/properties/investments" },
+const PROJECT_LINKS = [
+  { name: "Featured Projects", path: "/features" },
+  { name: "Residential Projects", path: "/features?type=Residential" },
+  { name: "Commercial Projects", path: "/features?type=Commercial" },
+  { name: "Industrial Projects", path: "/features?type=Industrial" },
 ];
 
 export default function Footer() {
@@ -140,15 +136,19 @@ export default function Footer() {
         }
       );
 
-      // 4. Animate Crane Jib
-      gsap.to(".svg-crane-jib", {
-        rotation: 10,
-        transformOrigin: "5px 10px",
-        duration: 20,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+      // 4. Animate only the suspended load (cable & concrete bucket) swinging gently in the wind, keeping the crane structure fixed
+      gsap.fromTo(
+        ".svg-crane-load",
+        { rotation: -5 },
+        {
+          rotation: 5,
+          transformOrigin: "0px 0px",
+          duration: 4.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        }
+      );
 
       // 5. Welding Spark Flickering
       gsap.to(".svg-welding-flash", {
@@ -437,9 +437,23 @@ export default function Footer() {
               <path d="M-30 10 L-20 6 L-10 10 L0 6 L10 10 L20 6 L30 10 L40 6 L50 10 L60 6 L70 10 L80 6" stroke="#1A1A1A" strokeWidth="0.5" fill="none" />
               <rect x="-24" y="12" width="10" height="7" fill="#1A1A1A" />
               <polygon points="5,10 5,0 12,10" fill="#F2B90C" stroke="#1A1A1A" strokeWidth="0.5" />
-              {/* Steel hoisting cable */}
-              <line x1="60" y1="10" x2="60" y2="55" stroke="#9B9B9B" strokeWidth="0.8" />
-              <path d="M 59 55 Q 60 58 61 55" stroke="#1A1A1A" strokeWidth="1.2" fill="none" />
+              
+              {/* Suspended Hoisting Load (Cable + Concrete Bucket / Konte) */}
+              <g className="svg-crane-load" transform="translate(60, 10)">
+                {/* Steel hoisting cable */}
+                <line x1="0" y1="0" x2="0" y2="40" stroke="#9B9B9B" strokeWidth="0.8" />
+                
+                {/* Concrete Bucket / Konte */}
+                <g transform="translate(0, 40)">
+                  {/* Bucket handle */}
+                  <path d="M -5 10 Q 0 5 5 10" stroke="#1A1A1A" strokeWidth="0.8" fill="none" />
+                  {/* Bucket body (trapezoid concrete hopper) */}
+                  <polygon points="-6,10 6,10 4,20 -4,20" fill="#8F2621" stroke="#1A1A1A" strokeWidth="0.8" />
+                  {/* Discharge valve gate */}
+                  <line x1="-2" y1="20" x2="2" y2="20" stroke="#1A1A1A" strokeWidth="1.5" />
+                  <rect x="-1" y="20" width="2" height="3" fill="#7A9636" />
+                </g>
+              </g>
             </g>
           </g>
 
@@ -587,22 +601,22 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* COLUMN 3: Property Categories */}
+          {/* COLUMN 3: Projects */}
           <div className="footer-animate-col flex flex-col space-y-6">
             <h3 className="font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3">
-              Categories
+              Projects
             </h3>
 
             <ul className="space-y-3.5 font-sans text-sm font-light">
-              {PROPERTY_CATEGORIES.map((category, idx) => (
+              {PROJECT_LINKS.map((proj, idx) => (
                 <li key={idx}>
                   <Link
-                    to={category.path}
+                    to={proj.path}
                     className="group flex items-center gap-3 text-[#1B1B1B] hover:text-[#8F2621] transition-all duration-300"
                   >
                     <Home size={15} className="text-[#7A9636]/60 group-hover:scale-110 transition-transform" />
                     <span className="relative block">
-                      {category.name}
+                      {proj.name}
                       <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#8F2621] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                     </span>
                   </Link>

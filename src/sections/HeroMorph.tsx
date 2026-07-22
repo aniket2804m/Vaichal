@@ -423,7 +423,7 @@ export default function HeroMorph() {
 
           // Compute float shadow shift opposite to rotation
           gsap.to(glassCard, {
-            boxShadow: `${-tiltY * 1.5}px ${tiltX * 1.5}px 50px -15px rgba(201, 163, 93, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.65)`,
+            boxShadow: `${-tiltY * 1.5}px ${tiltX * 1.5}px 50px -15px rgba(122, 150, 54, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.05)`,
             duration: 0.45
           });
         }
@@ -447,7 +447,7 @@ export default function HeroMorph() {
             });
           }
           gsap.to(glassCard, {
-            boxShadow: "0 25px 60px -15px rgba(201, 163, 93, 0.08), 0 20px 40px -12px rgba(0, 0, 0, 0.6)",
+            boxShadow: "0 25px 60px -15px rgba(122, 150, 54, 0.08), 0 20px 40px -12px rgba(0, 0, 0, 0.05)",
             duration: 0.65
           });
         }
@@ -544,7 +544,7 @@ export default function HeroMorph() {
     <div
       ref={containerRef}
       id="discover"
-      className="relative w-full h-screen bg-[#050505] flex items-center justify-center overflow-hidden [perspective:1200px]"
+      className="relative w-full h-screen bg-[#F5F7E3] flex items-center justify-center overflow-hidden [perspective:1200px]"
     >
       <style>{`
         @keyframes shine {
@@ -555,16 +555,16 @@ export default function HeroMorph() {
 
       {/* Ambient background glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[#050505]" />
+        <div className="absolute inset-0 bg-[#F5F7E3]" />
         
-        {/* Gold radial ambient glow top-left */}
-        <div className="ambient-glow absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,_rgba(201,163,93,0.05)_0%,_transparent_70%)] opacity-30 pointer-events-none will-change-transform" />
+        {/* Olive radial ambient glow top-left */}
+        <div className="ambient-glow absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,_rgba(122,150,54,0.08)_0%,_transparent_70%)] opacity-30 pointer-events-none will-change-transform" />
         
-        {/* Gold radial ambient glow bottom-right */}
-        <div className="ambient-glow absolute -bottom-[15%] -right-[15%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,_rgba(201,163,93,0.04)_0%,_transparent_70%)] opacity-25 pointer-events-none will-change-transform" />
+        {/* Maroon radial ambient glow bottom-right */}
+        <div className="ambient-glow absolute -bottom-[15%] -right-[15%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,_rgba(143,38,33,0.06)_0%,_transparent_70%)] opacity-25 pointer-events-none will-change-transform" />
         
         {/* Center radial depth mask */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-[radial-gradient(circle,_rgba(12,12,12,0.85)_0%,_rgba(5,5,5,1)_80%)] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-[radial-gradient(circle,_rgba(245,247,227,0.7)_0%,_#F5F7E3_80%)] pointer-events-none" />
       </div>
 
       {/* Ambient Light Rays */}
@@ -572,9 +572,9 @@ export default function HeroMorph() {
         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ray-grad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#C9A35D" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#C9A35D" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#C9A35D" stopOpacity="0" />
+              <stop offset="0%" stopColor="#7A9636" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#7A9636" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#7A9636" stopOpacity="0" />
             </linearGradient>
           </defs>
           <polygon points="10,0 25,0 70,100 50,100" fill="url(#ray-grad)" />
@@ -589,22 +589,22 @@ export default function HeroMorph() {
           <defs>
             <radialGradient id="flare-center" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-              <stop offset="15%" stopColor="#ffd89b" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#c5a059" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+              <stop offset="15%" stopColor="#F5F7E3" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#7A9636" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#F5F7E3" stopOpacity="0" />
             </radialGradient>
             <radialGradient id="flare-ring" cx="50%" cy="50%" r="50%">
-              <stop offset="60%" stopColor="#c5a059" stopOpacity="0" />
-              <stop offset="70%" stopColor="#c5a059" stopOpacity="0.1" />
-              <stop offset="75%" stopColor="#ffd89b" stopOpacity="0.15" />
-              <stop offset="80%" stopColor="#c5a059" stopOpacity="0.05" />
-              <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+              <stop offset="60%" stopColor="#7A9636" stopOpacity="0" />
+              <stop offset="70%" stopColor="#7A9636" stopOpacity="0.1" />
+              <stop offset="75%" stopColor="#8F2621" stopOpacity="0.15" />
+              <stop offset="80%" stopColor="#7A9636" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="#F5F7E3" stopOpacity="0" />
             </radialGradient>
           </defs>
           <circle cx="100" cy="100" r="80" fill="url(#flare-center)" />
           <circle cx="100" cy="100" r="95" fill="url(#flare-ring)" />
-          <line x1="20" y1="20" x2="180" y2="180" stroke="#c5a059" strokeWidth="0.5" strokeOpacity="0.15" />
-          <line x1="180" y1="20" x2="20" y2="180" stroke="#c5a059" strokeWidth="0.5" strokeOpacity="0.15" />
+          <line x1="20" y1="20" x2="180" y2="180" stroke="#7A9636" strokeWidth="0.5" strokeOpacity="0.15" />
+          <line x1="180" y1="20" x2="20" y2="180" stroke="#7A9636" strokeWidth="0.5" strokeOpacity="0.15" />
         </svg>
       </div>
 
@@ -623,7 +623,7 @@ export default function HeroMorph() {
       {/* Interactive Mouse Glow */}
       <div
         ref={glowRef}
-        className="absolute w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,_rgba(201,163,93,0.13)_0%,_transparent_70%)] pointer-events-none opacity-0 mix-blend-screen z-10 will-change-transform"
+        className="absolute w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,_rgba(122,150,54,0.18)_0%,_transparent_70%)] pointer-events-none opacity-0 mix-blend-screen z-10 will-change-transform"
       />
 
       {/* Pinned Morphing Image Card */}
@@ -634,40 +634,40 @@ export default function HeroMorph() {
       >
         <img
           ref={imageRef}
-          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=3840&q=95"
           alt="Luxury Architecture Pune"
           className="w-full h-full object-cover scale-[1.15] will-change-[transform,filter,opacity]"
         />
         {/* Dark overlay inside image wrapper */}
-        <div ref={overlayRef} className="absolute inset-0 bg-[#050505] opacity-0 mix-blend-multiply z-10 will-change-[opacity]" />
+        <div ref={overlayRef} className="absolute inset-0 bg-[#1B1B1B] opacity-0 mix-blend-multiply z-10 will-change-[opacity]" />
         
         {/* Golden vignette shadow */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 z-15 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1B1B1B]/50 via-transparent to-[#1B1B1B]/20 z-15 pointer-events-none" />
       </div>
 
       {/* Premium Glass Card Container */}
       <div
         ref={glassCardRef}
-        className="relative z-30 p-[1.5px] rounded-[36px] overflow-hidden bg-gradient-to-b from-[#C9A35D]/30 via-white/5 to-[#C9A35D]/10 shadow-[0_25px_60px_-15px_rgba(201,163,93,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d]"
+        className="relative z-30 p-[1.5px] rounded-[36px] overflow-hidden bg-gradient-to-b from-[#7A9636]/30 via-white/5 to-[#8F2621]/15 shadow-[0_25px_60px_-15px_rgba(122,150,54,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d]"
       >
         {/* Card Background glass layout */}
-        <div className="bg-[#0c0b09]/80 backdrop-blur-3xl rounded-[34.5px] p-6 sm:p-8 md:p-12 lg:p-16 text-center flex flex-col items-center relative z-20 [transform-style:preserve-3d]">
+        <div className="bg-[#FFFFFF]/90 backdrop-blur-3xl rounded-[34.5px] p-6 sm:p-8 md:p-12 lg:p-16 text-center flex flex-col items-center relative z-20 [transform-style:preserve-3d]">
           
           {/* Shine sweep reflection */}
           <div
             ref={shineSweepRef}
-            className="absolute top-0 bottom-0 left-[-150%] w-[120%] bg-gradient-to-r from-transparent via-[#C9A35D]/12 to-transparent skew-x-[-22deg] pointer-events-none z-10 will-change-[left]"
+            className="absolute top-0 bottom-0 left-[-150%] w-[120%] bg-gradient-to-r from-transparent via-[#7A9636]/10 to-transparent skew-x-[-22deg] pointer-events-none z-10 will-change-[left]"
           />
 
           <div className="card-content flex flex-col items-center w-full z-20 [transform-style:preserve-3d] will-change-transform">
             
             {/* Tagline / Subheading */}
-            <span className="subheading block text-[#C9A35D] font-sans font-bold tracking-[0.3em] text-[10px] md:text-xs uppercase mb-4 opacity-0 will-change-[transform,opacity,filter]">
+            <span className="subheading block text-[#7A9636] font-cinzel font-bold tracking-[0.3em] text-[10px] md:text-xs uppercase mb-4 opacity-0 will-change-[transform,opacity,filter]">
               The Crown Jewel of Pune's Skyline
             </span>
 
             {/* Split Heading with overflow masked slide up */}
-            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#F8F7F3] font-bold leading-none tracking-tight mb-6 flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em] pointer-events-none">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#1B1B1B] font-bold leading-none tracking-tight mb-6 flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em] pointer-events-none">
               {titleWords.map((word, wordIndex) => (
                 <span key={wordIndex} className="inline-block whitespace-nowrap overflow-hidden py-1.5">
                   {word.split("").map((char, charIndex) => (
@@ -680,7 +680,7 @@ export default function HeroMorph() {
             </h2>
 
             {/* Paragraph lines revealed */}
-            <div className="max-w-xl text-[#A8A297] font-sans font-light text-xs sm:text-sm md:text-base leading-relaxed mb-8 flex flex-col gap-y-1.5">
+            <div className="max-w-xl text-[#999991] font-sans font-light text-xs sm:text-sm md:text-base leading-relaxed mb-8 flex flex-col gap-y-1.5">
               {descLines.map((line, index) => (
                 <span key={index} className="block overflow-hidden py-0.5">
                   <span className="desc-line inline-block translate-y-[100%] opacity-0 will-change-[transform,opacity]">
@@ -695,7 +695,7 @@ export default function HeroMorph() {
               ref={buttonRef}
               onMouseMove={handleButtonMouseMove}
               onMouseLeave={handleButtonMouseLeave}
-              className="luxury-button group relative px-7 py-3.5 bg-gradient-to-r from-[#8a6f3e] via-[#c5a059] to-[#8a6f3e] text-black font-sans font-bold tracking-[0.22em] text-[10px] md:text-xs uppercase rounded-full shadow-[0_0_25px_rgba(201,163,93,0.22)] hover:shadow-[0_0_45px_rgba(201,163,93,0.5)] transition-shadow duration-500 overflow-hidden outline-none cursor-pointer flex items-center justify-center select-none opacity-0"
+              className="luxury-button group relative px-7 py-3.5 bg-gradient-to-r from-[#8F2621] via-[#7A9636] to-[#8F2621] text-white font-sans font-bold tracking-[0.22em] text-[10px] md:text-xs uppercase rounded-full shadow-[0_0_25px_rgba(143,38,33,0.22)] hover:shadow-[0_0_45px_rgba(143,38,33,0.5)] transition-shadow duration-500 overflow-hidden outline-none cursor-pointer flex items-center justify-center select-none opacity-0"
               aria-label="Request Private Preview"
             >
               {/* Inner magnetic mouse-glow */}

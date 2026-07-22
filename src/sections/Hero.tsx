@@ -1,14 +1,15 @@
 import { useEffect, useRef } from "react";
 import { ArrowDown } from "lucide-react";
 import { gsap } from "../lib/gsap-init";
+import { motion } from "framer-motion";
 import FloatingNavBar from "../sections/FloatingNavBar";
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80", // Ext mansion
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80", // Interior pool
-  "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=2000&q=80", // Luxury Lounge
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=80",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80",  // Pool deck living (matches HeroMorph.tsx)
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=3840&q=95", // Ext mansion
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=3840&q=95", // Interior pool
+  "https://images.unsplash.com/photo-160066753376-12c8ab7fb75b?auto=format&fit=crop&w=3840&q=95", // Luxury Lounge
+  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=3840&q=95",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=3840&q=95",  // Pool deck living (matches HeroMorph.tsx)
 ];
 
 export default function Hero() {
@@ -43,7 +44,7 @@ export default function Hero() {
     };
 
     const ctx = gsap.context(() => {
-      // Set initial 3D positions for the images (scale: 1.2 to allow breathing scale inside wrappers)
+      // Set initial 3D positions for the images (scale: 1.25 to allow breathing scale inside wrappers)
       gsap.set([img2Ref.current, img3Ref.current, img4Ref.current], {
         opacity: 0,
         scale: 1.25,
@@ -208,9 +209,12 @@ export default function Hero() {
       ref={heroRef}
       className="relative w-full h-screen overflow-hidden bg-brand-black select-none"
     >
-      {/* Floating Navigation Bar */}
-      <FloatingNavBar />
-      {/* CSS Animation for breathing Ken Burns-style image motion wrappers */}
+      {/* Floating Navigation Bar (z-40) */}
+      <div className="relative z-40">
+        <FloatingNavBar />
+      </div>
+
+      {/* CSS Animation for breathing Ken Burns-style image motion wrappers & luxury shadows */}
       <style>{`
         @keyframes slowBreathing {
           0% { transform: scale(1.01) translate(0px, 0px); }
@@ -223,18 +227,25 @@ export default function Hero() {
         .animated-img-wrap-4 { animation: slowBreathing 32s infinite ease-in-out; animation-delay: -18s; }
         
         .premium-text-shadow {
-          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.65), 0 2px 4px rgba(0, 0, 0, 0.4);
+          text-shadow: 
+            0 2px 4px rgba(0, 0, 0, 0.6),
+            0 8px 16px rgba(0, 0, 0, 0.4),
+            0 16px 32px rgba(0, 0, 0, 0.3),
+            0 0 60px rgba(0, 0, 0, 0.2);
         }
       `}</style>
 
-      {/* Pinned Image Wrapper */}
+      {/* Pinned Image Wrapper (z-10) */}
       <div
         ref={imageWrapperRef}
         className="absolute w-full h-full overflow-hidden flex items-center justify-center z-10"
         style={{ transformStyle: "preserve-3d", perspective: "1500px" }}
       >
-        {/* Animated Wrapper 1 */}
-        <div className="absolute inset-0 w-full h-full animated-img-wrap-1 overflow-hidden">
+        {/* Animated Wrapper 1 (brightness set to 92% to keep sides vibrant and highlight 4K detail) */}
+        <div 
+          className="absolute inset-0 w-full h-full animated-img-wrap-1 overflow-hidden"
+          style={{ filter: "brightness(0.92)" }}
+        >
           <img
             ref={img1Ref}
             src={HERO_IMAGES[0]}
@@ -244,7 +255,10 @@ export default function Hero() {
         </div>
 
         {/* Animated Wrapper 2 */}
-        <div className="absolute inset-0 w-full h-full animated-img-wrap-2 overflow-hidden">
+        <div 
+          className="absolute inset-0 w-full h-full animated-img-wrap-2 overflow-hidden"
+          style={{ filter: "brightness(0.92)" }}
+        >
           <img
             ref={img2Ref}
             src={HERO_IMAGES[1]}
@@ -254,7 +268,10 @@ export default function Hero() {
         </div>
 
         {/* Animated Wrapper 3 */}
-        <div className="absolute inset-0 w-full h-full animated-img-wrap-3 overflow-hidden">
+        <div 
+          className="absolute inset-0 w-full h-full animated-img-wrap-3 overflow-hidden"
+          style={{ filter: "brightness(0.92)" }}
+        >
           <img
             ref={img3Ref}
             src={HERO_IMAGES[2]}
@@ -264,7 +281,10 @@ export default function Hero() {
         </div>
 
         {/* Animated Wrapper 4 */}
-        <div className="absolute inset-0 w-full h-full animated-img-wrap-4 overflow-hidden">
+        <div 
+          className="absolute inset-0 w-full h-full animated-img-wrap-4 overflow-hidden"
+          style={{ filter: "brightness(0.92)" }}
+        >
           <img
             ref={img4Ref}
             src={HERO_IMAGES[3]}
@@ -273,46 +293,90 @@ export default function Hero() {
           />
         </div>
 
-        {/* High-contrast vertical gradient overlay to make top navigation and center text pop */}
-        <div className="absolute inset-0 from-black/60 via-black/25 to-black/60 z-20 pointer-events-none" />
+        {/* Multi-layered dark gradient overlays (z-20) */}
+        {/* Subtle top and bottom linear gradient overlay to protect navigation and scroll indicators without darkening the sides */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/35 z-20 pointer-events-none" />
       </div>
 
-      {/* Main heading (Fades out during stage 1 scroll) */}
-      <div
-        ref={headingRef}
-        className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 pointer-events-none px-6"
-      >
-        <span className="text-brand-gold font-sans font-semibold tracking-[0.25em] text-xs md:text-sm uppercase mb-4 block premium-text-shadow">
-          Introducing The Pinnacle of Living
-        </span>
-        <h1 className="max-w-5xl text-5xl md:text-7xl lg:text-8xl font-serif text-brand-white font-semibold leading-tight tracking-tight premium-text-shadow">
-          Crafting Legends
-          <span className="block text-3xl md:text-5xl lg:text-6xl font-serif italic text-brand-gold font-light mt-2">
-            In Pune's Skyline
-          </span>
-        </h1>
-        <p className="mt-6 max-w-lg text-sm md:text-base text-brand-white/70 font-sans font-light leading-relaxed premium-text-shadow">
-          An elite collection of private sanctuaries, custom-built for those who appreciate the poetry of detail.
-        </p>
-      </div>
+      {/* Main heading (z-30 - Fades out during stage 1 scroll) */}
+     <div
+  ref={headingRef}
+  className="absolute inset-0 flex items-center justify-center text-center z-30 px-6"
+>
+  <div className="relative max-w-6xl px-8 py-10 md:px-16 md:py-14">
 
-      {/* Stage Progress Dots at Bottom Left */}
-      {/* <div
-        ref={indicatorsRef}
-        className="absolute bottom-10 left-10 z-30 flex items-center gap-2 bg-brand-black/45 backdrop-blur-md px-4 py-2 border border-brand-gold/10 rounded-xl"
-      >
-        <div className="h-1 w-7 rounded-full bg-brand-gold transition-all duration-300" />
-        <div className="h-1 w-2 rounded-full bg-brand-white/25 transition-all duration-300" />
-        <div className="h-1 w-2 rounded-full bg-brand-white/25 transition-all duration-300" />
-        <div className="h-1 w-2 rounded-full bg-brand-white/25 transition-all duration-300" />
-      </div> */}
+    {/* Premium Background Glow */}
+    <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.72)_0%,transparent_75%)] blur-3xl scale-125"></div>
 
-      {/* Scrolling mouse/chevron helper (Fades out during stage 1 scroll) */}
+    {/* Gold Glow */}
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#C9A84C]/10 blur-[180px] rounded-full -z-10"></div>
+
+    {/* Top Label */}
+    <motion.span
+      initial={{ opacity: 0, y: -20, letterSpacing: "0.1em" }}
+      animate={{ opacity: 1, y: 0, letterSpacing: "0.35em" }}
+      transition={{ duration: 1 }}
+      className="inline-block uppercase font-cinzel text-xs md:text-sm tracking-[0.35em] text-[#C9A84C] mb-6"
+    >
+      ✦ Introducing The Pinnacle of Living ✦
+    </motion.span>
+
+    {/* Main Heading */}
+    <motion.h1
+      initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+      className="font-cinzel font-bold leading-[0.95]"
+    >
+      <span className="block text-5xl md:text-7xl lg:text-8xl xl:text-[6.5rem] text-[#F5F0E8] drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+        Crafting Legends
+      </span>
+
+      <span className="relative inline-block mt-5 text-3xl md:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-r from-[#FFF4CC] via-[#C9A84C] to-[#A97C20] bg-clip-text text-transparent italic font-cormorant font-medium">
+
+        In Pune's Skyline
+
+        <motion.span
+          initial={{ width: 0 }}
+          animate={{ width: "100%" }}
+          transition={{ delay: 0.8, duration: 1.2 }}
+          className="absolute -bottom-4 left-0 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent"
+        />
+      </span>
+    </motion.h1>
+
+    {/* Description */}
+    <motion.p
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.6, duration: 1 }}
+      className="mt-10 max-w-2xl mx-auto text-[#F5F0E8]/85 text-base md:text-lg lg:text-xl font-montserrat leading-9 tracking-wide"
+    >
+      <span className="text-[#C9A84C] font-medium">
+        An elite collection
+      </span>{" "}
+      of private sanctuaries, custom-built for those who appreciate the{" "}
+      <span className="text-white font-medium">
+        poetry of detail.
+      </span>
+    </motion.p>
+
+    {/* Premium Divider */}
+    <motion.div
+      initial={{ width: 0 }}
+      animate={{ width: "120px" }}
+      transition={{ delay: 1, duration: 1 }}
+      className="mx-auto mt-10 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent"
+    />
+
+  </div>
+</div>
+
+      {/* Scrolling mouse/chevron helper (z-30 - Fades out during stage 1 scroll) */}
       <div
         ref={scrollHelperRef}
-        className="absolute bottom-10 right-10 z-20 flex items-center gap-3 pointer-events-none"
+        className="absolute bottom-10 right-10 z-30 flex items-center gap-3 pointer-events-none"
       >
-        
         <div className="animate-bounce rounded-full p-3 bg-[#121212]">
           <ArrowDown className="w-4 h-4 text-brand-gold" />
         </div>
