@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { ShieldCheck, Award, Clock, Compass } from "lucide-react";
 
 import myImage from "../../assets/images/Vaichal vastu.png";
@@ -31,16 +31,19 @@ const storyPanels = [
     tag: "01 — Foundation",
     title: "About Us",
     body: "At Vaichal Group, we believe in creating value for our customers helping them build their long term assets. We are at the beginning of the journey when our customers envision the future of their companies, businesses and industries. We help them realize their visions by being their partners in this process.",
+    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop",
   },
   {
     tag: "02 — Since 1990",
     title: "History",
     body: "The Vaichal Group story begins back in 1990, with a humble beginning executing small scale jobs under MCES, Sopur industrial area. Vaichal Constructions Pvt. Ltd. was incorporated in 2000 with the same passion and vision — and today, with 20+ years in the industry, we're poised to expand across the country.",
+    image: "https://images.unsplash.com/photo-1541976590-713941681591?q=80&w=1200&auto=format&fit=crop",
   },
   {
     tag: "03 — What Drives Us",
     title: "Core Ideology",
     body: "We hold a strong commitment to quality, integrity, teamwork and customer satisfaction as our core ideals. We do business with the highest standards of fairness and professional ethics, and believe in proactive learning, innovation and change. We care.",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
@@ -107,7 +110,7 @@ function AnimatedText({
 }
 
 export default function About() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [activePanel, setActivePanel] = useState(0);
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -211,68 +214,92 @@ export default function About() {
       </div>
 
       {/* ============ OUR STORY SECTION ============ */}
-      <div
-        ref={storyRef}
-        className="relative border-t border-[#999991]/25"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[0.9fr_1.6fr] gap-10">
-          {/* sticky left nav */}
-          <div className="lg:sticky lg:top-0 h-fit lg:h-screen flex flex-col justify-center py-16 lg:py-0">
-            <span className="font-cinzel uppercase tracking-[0.3em] text-[#7A9636] text-xs mb-6">
-              Our Story
-            </span>
-            <div className="space-y-4">
-              {storyPanels.map((panel, i) => (
-                <button
-                  key={panel.title}
-                  onClick={() => {
-                    document
-                      .getElementById(`story-panel-${i}`)
-                      ?.scrollIntoView({ behavior: "smooth", block: "center" });
-                  }}
-                  className="block text-left w-full group"
-                >
-                  <motion.h3
-                    animate={{
-                      opacity: activePanel === i ? 1 : 0.35,
-                      x: activePanel === i ? 8 : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#1B1B1B] group-hover:opacity-80"
-                  >
-                    {panel.title}
-                  </motion.h3>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* scrolling right panels */}
-          <div className="py-16 lg:py-32 space-y-24 lg:space-y-48">
-            {storyPanels.map((panel, i) => (
-              <motion.div
-                id={`story-panel-${i}`}
-                key={panel.title}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.6 }}
-                onViewportEnter={() => setActivePanel(i)}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="border border-[#999991]/30 rounded-[16px] p-8 sm:p-12 bg-white shadow-sm"
-              >
-                <span className="text-[#7A9636] font-cinzel text-sm tracking-widest uppercase font-semibold">
-                  {panel.tag}
-                </span>
-                <AnimatedText
-                  as="p"
-                  text={panel.body}
-                  className="block mt-6 text-[#999991] leading-relaxed font-sans font-light text-base md:text-lg"
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+      <div ref={storyRef} className="relative border-t border-[#999991]/25">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[0.9fr_1.6fr] gap-10">
+    {/* sticky left nav — same as before */}
+   <div className="lg:sticky lg:top-0 h-fit lg:h-screen flex flex-col justify-center py-16 lg:py-0">
+      <span className="font-cinzel uppercase tracking-[0.3em] text-[#7A9636] text-xs mb-6">
+        Our Story
+      </span>
+      <div className="space-y-4">
+        {storyPanels.map((panel, i) => (
+          <button
+            key={panel.title}
+            onClick={() =>
+              document
+                .getElementById(`story-panel-${i}`)
+                ?.scrollIntoView({ behavior: "smooth", block: "center" })
+            }
+            className="block text-left w-full group"
+          >
+            <motion.h3
+              animate={{
+                opacity: activePanel === i ? 1 : 0.35,
+                x: activePanel === i ? 8 : 0,
+              }}
+              transition={{ duration: 0.3 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#1B1B1B] group-hover:opacity-80"
+            >
+              {panel.title}
+            </motion.h3>
+          </button>
+        ))}
       </div>
+    </div>
+
+    {/* scrolling right panels — now split left/right per panel */}
+    <div className="py-16 lg:py-32 space-y-24 lg:space-y-48">
+      {storyPanels.map((panel, i) => {
+        const reversed = i % 2 === 1; // alternate layout direction
+        return (
+          <motion.div
+            id={`story-panel-${i}`}
+            key={panel.title}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.6 }}
+            onViewportEnter={() => setActivePanel(i)}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="border border-[#999991]/30 rounded-[16px] p-8 sm:p-12 bg-white shadow-sm grid md:grid-cols-2 gap-8 items-center"
+          >
+            {/* text side */}
+            <motion.div
+              initial={{ opacity: 0, x: reversed ? 40 : -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.6 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className={reversed ? "md:order-2" : "md:order-1"}
+            >
+              <span className="text-[#7A9636] font-cinzel text-sm tracking-widest uppercase font-semibold">
+                {panel.tag}
+              </span>
+              <AnimatedText
+                as="p"
+                text={panel.body}
+                className="block mt-6 text-[#999991] leading-relaxed font-sans font-light text-base md:text-lg"
+              />
+            </motion.div>
+
+            {/* image / highlight side */}
+            <motion.div
+              initial={{ opacity: 0, x: reversed ? -40 : 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.6 }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+              className={`${reversed ? "md:order-1" : "md:order-2"} rounded-[12px] overflow-hidden aspect-[4/3]`}
+            >
+              <img
+                src={panel.image}
+                alt={panel.title}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </motion.div>
+        );
+      })}
+    </div>
+  </div>
+</div>
 
       {/* ============ OUR VISION — pinned image, scrolling text ============ */}
       <div
@@ -327,7 +354,7 @@ export default function About() {
         <div className="lg:sticky lg:top-24 h-fit lg:order-last">
           <motion.h2
             style={{ rotate: missionImgRotate }}
-            className="text-[#7A9636] text-5xl sm:text-6xl md:text-8xl font-serif font-bold leading-none text-right lg:text-left"
+            className="text-[#7A9636] text-5xl sm:text-6xl md:text-8xl font-serif font-bold leading-none text-right lg:text-right"
           >
             OUR
             <br />
@@ -581,72 +608,87 @@ export default function About() {
       </div>
 
       {/* ============ MARQUEE STATEMENT ============ */}
-      <div className="py-16 md:py-24 border-t border-[#999991]/25 bg-[#F5F7E3] overflow-hidden">
+      <div className="py-10 md:py-10 border-t border-[#999991]/25 bg-[#F5F7E3] overflow-hidden">
         <motion.div
           className="flex whitespace-nowrap w-max"
           animate={{ x: ["0%", "-50%"] }}
           transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
         >
           {[...Array(2)].map((_, i) => (
-            <span
-              key={i}
-              className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold text-[#8F2621] px-8"
-            >
-              QUALITY WITHOUT COMPROMISE
-              <span className="text-[#7A9636] italic px-6">·</span>
-              INTEGRITY WITHOUT EXCEPTION
-              <span className="text-[#7A9636] italic px-6">·</span>
-            </span>
+           <span
+  key={i}
+  className="font-serif text-2xl sm:text-xl md:text-2xl font-bold text-[#8F2621] px-8"
+>
+  CRAFTED FOR GENERATIONS
+  <span className="text-[#7A9636] px-6">✦</span>
+
+  ROOTED IN TRUST
+  <span className="text-[#7A9636] px-6">✦</span>
+
+  VĀSTU INSPIRED LIVING
+  <span className="text-[#7A9636] px-6">✦</span>
+
+  THOUGHTFULLY DESIGNED SPACES
+  <span className="text-[#7A9636] px-6">✦</span>
+
+  WHERE DREAMS FIND HOME
+  <span className="text-[#7A9636] px-6">✦</span>
+
+  ELEVATING EVERYDAY LIVING
+  <span className="text-[#7A9636] px-6">✦</span>
+
+  TIMELESS ARCHITECTURE
+  <span className="text-[#7A9636] px-6">✦</span>
+
+  QUALITY THAT ENDURES
+  <span className="text-[#7A9636] px-6">✦</span>
+
+  BUILDING LEGACIES
+  <span className="text-[#7A9636] px-6">✦</span>
+
+  WHERE EVERY WISH TAKES ROOT
+</span>
           ))}
         </motion.div>
       </div>
 
-      {/* ============ CTA — split screen ============ */}
-      <div className="grid lg:grid-cols-2 border-t border-[#999991]/25">
-        <div className="relative flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-24 lg:py-0 overflow-hidden bg-[#F5F7E3]">
-          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_50%,rgba(122,150,54,0.1),transparent_70%)] pointer-events-none" />
+      {/* ============ CTA ============ */}
+    {/* ============ CTA ============ */}
+<section className="border-t border-[#999991]/20 bg-[#F5F7E3]">
+  <div className="max-w-5xl mx-auto px-8 lg:px-20 py-24 text-center flex flex-col items-center">
 
-          <AnimatedText
-            as="h2"
-            text="Transcend the ordinary. Embrace the extraordinary."
-            className="block relative z-10 font-serif text-3xl sm:text-5xl md:text-6xl font-bold italic text-[#8F2621] leading-tight"
-          />
+    {/* Small Label */}
+    <span className="uppercase tracking-[0.35em] text-[#7A9636] text-sm font-medium">
+      Build Your Legacy
+    </span>
 
-          <ScrollReveal variant="fade-up" delay={0.3}>
-            <p className="relative z-10 mt-8 text-[#999991] font-light text-base md:text-lg max-w-md">
-              Your dream property awaits. Let's build something legendary
-              together.
-            </p>
+    {/* Heading */}
+    <h2 className="mt-20 font-serif text-4xl sm:text-5xl lg:text-7xl leading-tight text-[#8F2621]">
+      Homes Crafted <br />
+      For Generations.
+    </h2>
 
-            <motion.button
-              whileTap={{ scale: 0.97 }}
-              onClick={() => navigate("/contact")}
-              className="relative z-10 mt-10 overflow-hidden bg-[#8F2621] text-white px-8 py-4 font-sans font-semibold tracking-widest uppercase rounded-[10px] shadow-sm text-sm sm:text-base border-none cursor-pointer w-fit hover:bg-[#7A9636] transition-colors"
-            >
-              <span className="relative z-10">Schedule Your Private Viewing</span>
-            </motion.button>
-          </ScrollReveal>
-        </div>
+    {/* Description */}
+    <p className="mt-8 max-w-2xl text-[#999991] text-lg leading-8">
+      More than residences, we create thoughtfully planned spaces rooted in
+      Vāstu principles, timeless architecture, and uncompromising quality.
+      Experience a lifestyle where every detail is designed to inspire comfort,
+      prosperity, and lasting memories.
+    </p>
 
-        <motion.div
-          className="relative min-h-[320px] lg:min-h-0 bg-[#F5F7E3] flex items-center justify-center overflow-hidden"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.img
-            src={founderImage}
-            alt="Vaichal signature project"
-            className="w-full h-full object-cover opacity-80"
-            initial={{ scale: 1.15 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#F5F7E3] via-transparent to-transparent" />
-        </motion.div>
-      </div>
+    {/* Buttons */}
+    <div className="flex flex-col sm:flex-row gap-5 mt-12">
+      <button className="bg-[#8F2621] hover:bg-[#7A9636] text-white px-8 py-4 rounded-xl uppercase tracking-widest font-semibold transition">
+        Schedule Visit
+      </button>
+
+      <button className="border border-[#8F2621] text-[#8F2621] hover:bg-[#8F2621] hover:text-white px-8 py-4 rounded-xl uppercase tracking-widest font-semibold transition">
+        View Projects
+      </button>
+    </div>
+
+  </div>
+</section>
     </section>
   );
 }

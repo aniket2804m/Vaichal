@@ -233,6 +233,13 @@ export default function Hero() {
             0 16px 32px rgba(0, 0, 0, 0.3),
             0 0 60px rgba(0, 0, 0, 0.2);
         }
+        
+        .light-premium-shadow {
+          text-shadow: 
+            0 0 15px rgba(245, 247, 227, 0.95),
+            0 0 30px rgba(245, 247, 227, 0.8),
+            0 0 45px rgba(255, 255, 255, 0.7);
+        }
       `}</style>
 
       {/* Pinned Image Wrapper (z-10) */}
@@ -241,10 +248,9 @@ export default function Hero() {
         className="absolute w-full h-full overflow-hidden flex items-center justify-center z-10"
         style={{ transformStyle: "preserve-3d", perspective: "1500px" }}
       >
-        {/* Animated Wrapper 1 (brightness set to 92% to keep sides vibrant and highlight 4K detail) */}
+        {/* Animated Wrapper 1 (no brightness limit to highlight 4K detail) */}
         <div 
           className="absolute inset-0 w-full h-full animated-img-wrap-1 overflow-hidden"
-          style={{ filter: "brightness(0.92)" }}
         >
           <img
             ref={img1Ref}
@@ -257,7 +263,6 @@ export default function Hero() {
         {/* Animated Wrapper 2 */}
         <div 
           className="absolute inset-0 w-full h-full animated-img-wrap-2 overflow-hidden"
-          style={{ filter: "brightness(0.92)" }}
         >
           <img
             ref={img2Ref}
@@ -270,7 +275,6 @@ export default function Hero() {
         {/* Animated Wrapper 3 */}
         <div 
           className="absolute inset-0 w-full h-full animated-img-wrap-3 overflow-hidden"
-          style={{ filter: "brightness(0.92)" }}
         >
           <img
             ref={img3Ref}
@@ -283,7 +287,6 @@ export default function Hero() {
         {/* Animated Wrapper 4 */}
         <div 
           className="absolute inset-0 w-full h-full animated-img-wrap-4 overflow-hidden"
-          style={{ filter: "brightness(0.92)" }}
         >
           <img
             ref={img4Ref}
@@ -295,7 +298,7 @@ export default function Hero() {
 
         {/* Multi-layered dark gradient overlays (z-20) */}
         {/* Subtle top and bottom linear gradient overlay to protect navigation and scroll indicators without darkening the sides */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/35 z-20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/25 z-20 pointer-events-none" />
       </div>
 
       {/* Main heading (z-30 - Fades out during stage 1 scroll) */}
@@ -303,20 +306,14 @@ export default function Hero() {
   ref={headingRef}
   className="absolute inset-0 flex items-center justify-center text-center z-30 px-6"
 >
-  <div className="relative max-w-6xl px-8 py-10 md:px-16 md:py-14">
-
-    {/* Premium Background Glow */}
-    <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.72)_0%,transparent_75%)] blur-3xl scale-125"></div>
-
-    {/* Gold Glow */}
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#C9A84C]/10 blur-[180px] rounded-full -z-10"></div>
+  <div className="relative max-w-4xl px-6 py-8 md:px-12 md:py-10 bg-transparent">
 
     {/* Top Label */}
     <motion.span
-      initial={{ opacity: 0, y: -20, letterSpacing: "0.1em" }}
-      animate={{ opacity: 1, y: 0, letterSpacing: "0.35em" }}
+      initial={{ opacity: 0, y: -20, letterSpacing: "0.15em" }}
+      animate={{ opacity: 1, y: 0, letterSpacing: "0.25em" }}
       transition={{ duration: 1 }}
-      className="inline-block uppercase font-cinzel text-xs md:text-sm tracking-[0.35em] text-[#C9A84C] mb-6"
+      className="inline-block uppercase font-serif text-xs md:text-sm tracking-[0.25em] text-brand-maroon font-semibold mb-6 light-premium-shadow"
     >
       ✦ Introducing The Pinnacle of Living ✦
     </motion.span>
@@ -326,21 +323,19 @@ export default function Hero() {
       initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-      className="font-cinzel font-bold leading-[0.95]"
+      className="font-serif font-bold leading-[1.1] text-brand-black"
     >
-      <span className="block text-5xl md:text-7xl lg:text-8xl xl:text-[6.5rem] text-[#F5F0E8] drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+      <span className="block text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-brand-maroon light-premium-shadow">
         Crafting Legends
       </span>
 
-      <span className="relative inline-block mt-5 text-3xl md:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-r from-[#FFF4CC] via-[#C9A84C] to-[#A97C20] bg-clip-text text-transparent italic font-cormorant font-medium">
-
+      <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-olive font-bold light-premium-shadow">
         In Pune's Skyline
-
         <motion.span
           initial={{ width: 0 }}
           animate={{ width: "100%" }}
           transition={{ delay: 0.8, duration: 1.2 }}
-          className="absolute -bottom-4 left-0 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent"
+          className="absolute -bottom-3 left-0 h-[2px] bg-brand-maroon shadow-[0_0_8px_#F5F7E3]"
         />
       </span>
     </motion.h1>
@@ -350,13 +345,13 @@ export default function Hero() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6, duration: 1 }}
-      className="mt-10 max-w-2xl mx-auto text-[#F5F0E8]/85 text-base md:text-lg lg:text-xl font-montserrat leading-9 tracking-wide"
+      className="mt-8 max-w-2xl mx-auto text-[#F5F7E3] text-sm md:text-base lg:text-lg font-sans leading-relaxed tracking-wide premium-text-shadow font-medium"
     >
-      <span className="text-[#C9A84C] font-medium">
+      <span className="text-white font-semibold">
         An elite collection
       </span>{" "}
       of private sanctuaries, custom-built for those who appreciate the{" "}
-      <span className="text-white font-medium">
+      <span className="text-brand-olive font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
         poetry of detail.
       </span>
     </motion.p>
@@ -366,7 +361,7 @@ export default function Hero() {
       initial={{ width: 0 }}
       animate={{ width: "120px" }}
       transition={{ delay: 1, duration: 1 }}
-      className="mx-auto mt-10 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent"
+      className="mx-auto mt-8 h-[2px] bg-brand-maroon"
     />
 
   </div>

@@ -1,4 +1,4 @@
-import { Search, Play, Phone } from "lucide-react";
+import { Briefcase, Building2, Phone } from "lucide-react";
 
 export default function FloatingNavBar() {
   return (
@@ -31,8 +31,6 @@ export default function FloatingNavBar() {
           background: 
             linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(122, 150, 54, 0.02) 100%),
             rgba(20, 20, 20, 0.6);
-          border: 1.5px solid;
-          border-image: linear-gradient(135deg, rgba(143, 38, 33, 0.6), rgba(122, 150, 54, 0.4), rgba(255, 255, 255, 0.15)) 1;
           backdrop-filter: blur(20px) saturate(180%);
           -webkit-backdrop-filter: blur(20px) saturate(180%);
           box-shadow: 
@@ -175,9 +173,9 @@ export default function FloatingNavBar() {
               className="nav-item group"
               aria-label="Search properties"
             >
-              <Search className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0" />
-              <span className="hidden md:inline">SEARCH ALL PROPERTIES</span>
-              <span className="inline md:hidden">SEARCH</span>
+              <Briefcase className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0" />
+              <span className="hidden md:inline">EXPLORE SERVICES</span>
+              <span className="inline md:hidden">SERVICES</span>
             </button>
           </div>
 
@@ -190,9 +188,9 @@ export default function FloatingNavBar() {
               className="nav-item group"
               aria-label="Watch full movie"
             >
-              <Play className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 fill-current" />
-              <span className="hidden md:inline">WATCH FULL MOVIE RESUME</span>
-              <span className="inline md:hidden">WATCH</span>
+             <Building2 className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0" />
+              <span className="hidden md:inline">VIEW PROJECTS</span>
+              <span className="inline md:hidden">PROJECTS</span>
             </button>
           </div>
 

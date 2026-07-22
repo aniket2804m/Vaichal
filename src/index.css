@@ -10,7 +10,7 @@
   --color-brand-gold: #8F2621; /* Maps gold classes to brand Maroon */
   --color-brand-maroon: #8F2621;
   --color-brand-olive: #7A9636;
-  --color-brand-gray: #4A4A45;
+  --color-brand-gray: #999991;
   --color-brand-cream: #F5F7E3;
   --color-brand-dark: #1B1B1B;
   
@@ -18,9 +18,9 @@
   --color-luxury-surface: #FFFFFF;
   --color-luxury-section: #F5F7E3;
   --color-luxury-text-primary: #1B1B1B;
-  --color-luxury-text-secondary: #4A4A45;
+  --color-luxury-text-secondary: #999991;
   --color-luxury-gold: #8F2621;
-  --color-luxury-border: rgba(74, 74, 69, 0.25);
+  --color-luxury-border: rgba(153, 153, 145, 0.25);
   --color-luxury-glass: rgba(255, 255, 255, 0.8);
   --color-luxury-shadow: rgba(0, 0, 0, 0.05);
 }
@@ -46,7 +46,7 @@ body {
 
 :root {
   --text: #1B1B1B;
-  --text-muted: #4A4A45;
+  --text-muted: #999991;
   --text-h: #1B1B1B;
   --bg: #F5F7E3;
   --border: rgba(74, 74, 69, 0.25);
