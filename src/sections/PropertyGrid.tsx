@@ -128,7 +128,7 @@ export default function PropertyGrid() {
   }, []);
 
   return (
-    <section ref={gridRef} className="w-full bg-[#F5F7E3] text-[#1B1B1B] py-24 px-6 relative border-b border-[#999991]/25">
+    <section ref={gridRef} className="w-full bg-[#F5F7E3] text-[#1B1B1B] py-10 px-6 relative border-b border-[#999991]/25">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Header */}

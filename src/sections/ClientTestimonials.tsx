@@ -171,7 +171,9 @@ export default function ClientTestimonials() {
   <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-[#8F2621] font-bold">
     Trusted by families
     <br />
-    <span className="text-[#7A9636]">across Maharashtra</span>
+    <span className="inline-block pt-4 text-[#7A9636]">
+  across Maharashtra
+</span>
   </h2>
 
   <motion.div

@@ -131,7 +131,9 @@ export default function VirtualTour() {
   <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-[#8F2621] font-bold">
     Take a virtual
     <br />
-    <span className="text-[#7A9636]">walk through home</span>
+    <span className="inline-block pt-4 text-[#7A9636]">
+  walk through home
+</span>
   </h2>
 
   <motion.div

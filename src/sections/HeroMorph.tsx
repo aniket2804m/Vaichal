@@ -316,13 +316,13 @@ export default function HeroMorph() {
       tl.fromTo(
         imageWrapperRef.current,
         {
-          width: "90vw",
-          height: "90vh",
+          width: () => window.innerWidth < 768 ? "92vw" : "90vw",
+          height: () => window.innerWidth < 768 ? "60vh" : "90vh",
           borderRadius: "20px",
         },
         {
           width: () => window.innerWidth < 768 ? "92vw" : "70vw",
-          height: () => window.innerWidth < 768 ? "70vh" : "60vh",
+          height: () => window.innerWidth < 768 ? "60vh" : "60vh",
           borderRadius: "32px",
           ease: "none",
         },
@@ -806,91 +806,107 @@ export default function HeroMorph() {
 
 {/* Premium Glass Card Container */}
       <div
-        ref={glassCardRef}
-        className={`relative z-30 p-[1.5px] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-gradient-to-b from-[#7A9636]/30 via-white/5 to-[#8F2621]/15 shadow-[0_25px_60px_-15px_rgba(122,150,54,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d] ${showCard ? "" : "hidden"}`}
+  ref={glassCardRef}
+  className={`relative z-30 p-[1.5px] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-gradient-to-b from-[#7A9636]/30 via-white/5 to-[#8F2621]/15 shadow-[0_25px_60px_-15px_rgba(122,150,54,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d] ${showCard ? "" : "hidden"}`}
+>
+  {/* Card Background - now transparent instead of white */}
+  <div className="bg-transparent backdrop-blur-md rounded-[18.5px] sm:rounded-[34.5px] p-5 sm:p-8 md:p-12 lg:p-16 text-center flex flex-col items-center relative z-20 [transform-style:preserve-3d]">
+    
+    {/* Close Button */}
+    <button
+      onClick={() => setShowCard(false)}
+      className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-[#7A9636]/20 flex items-center justify-center text-[#8F2621] hover:bg-[#8F2621] hover:text-white transition-all duration-300 shadow-lg cursor-pointer [transform:translateZ(20px)]"
+      aria-label="Close card"
+    >
+      <X className="w-5 h-5" />
+    </button>
+
+    {/* Shine sweep reflection */}
+    <div
+      ref={shineSweepRef}
+      className="absolute top-0 bottom-0 left-[-150%] w-[120%] bg-gradient-to-r from-transparent via-[#7A9636]/10 to-transparent skew-x-[-22deg] pointer-events-none z-10 will-change-[left]"
+    />
+
+    <div className="card-content flex flex-col items-center w-full z-20 [transform-style:preserve-3d] will-change-transform">
+      
+      {/* Tagline / Subheading */}
+      <motion.h1
+        initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+        className="font-serif font-bold leading-[1.1] text-brand-black"
       >
-        {/* Card Background glass layout */}
-        <div className="bg-[#FFFFFF]/90 backdrop-blur-3xl rounded-[18.5px] sm:rounded-[34.5px] p-5 sm:p-8 md:p-12 lg:p-16 text-center flex flex-col items-center relative z-20 [transform-style:preserve-3d]">
-          
-          {/* Close Button - positioned inside the 3D space */}
-          <button
-            onClick={() => setShowCard(false)}
-            className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-[#7A9636]/20 flex items-center justify-center text-[#8F2621] hover:bg-[#8F2621] hover:text-white transition-all duration-300 shadow-lg cursor-pointer [transform:translateZ(20px)]"
-            aria-label="Close card"
-          >
-            <X className="w-5 h-5" />
-          </button>
+        <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-maroon drop-shadow-[0_2px_6px_rgba(255,255,255,0.6)]">
+          Built by the company Tata Housing and Godrej trust with their own projects
+        </span>
 
-          {/* Shine sweep reflection */}
-          <div
-            ref={shineSweepRef}
-            className="absolute top-0 bottom-0 left-[-150%] w-[120%] bg-gradient-to-r from-transparent via-[#7A9636]/10 to-transparent skew-x-[-22deg] pointer-events-none z-10 will-change-[left]"
+        <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-olive font-bold drop-shadow-[0_2px_6px_rgba(255,255,255,0.6)]">
+          Now building yours
+          <motion.span
+            initial={{ width: 0 }}
+            animate={{ width: "100%" }}
+            transition={{ delay: 0.8, duration: 1.2 }}
+            className="absolute -bottom-3 left-0 h-[2px] bg-brand-maroon shadow-[0_0_8px_#F5F7E3]"
           />
+        </span>
+      </motion.h1>
 
-          <div className="card-content flex flex-col items-center w-full z-20 [transform-style:preserve-3d] will-change-transform">
-            
-            {/* Tagline / Subheading */}
-            <span className="subheading block text-[#7A9636] font-cinzel font-bold tracking-[0.3em] text-[10px] md:text-xs uppercase mb-2 sm:mb-4 opacity-0 will-change-[transform,opacity,filter]">
-              The Crown Jewel of Pune's Skyline
-            </span>
-
-            {/* Split Heading with overflow masked slide up */}
-            <h2 className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#1B1B1B] font-bold leading-none tracking-tight mb-4 sm:mb-6 flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em] pointer-events-none">
-              {titleWords.map((word, wordIndex) => (
-                <span key={wordIndex} className="inline-block whitespace-nowrap overflow-hidden py-1.5">
-                  {word.split("").map((char, charIndex) => (
-                    <span key={charIndex} className="char inline-block translate-y-[100%] opacity-0 will-change-[transform,opacity]">
-                      {char}
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </h2>
-
-            {/* Paragraph lines revealed */}
-            <div className="max-w-xl text-[#999991] font-sans font-light text-[11px] sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 flex flex-col gap-y-1.5">
-              {descLines.map((line, index) => (
-                <span key={index} className="block overflow-hidden py-0.5">
-                  <span className="desc-line inline-block translate-y-[100%] opacity-0 will-change-[transform,opacity]">
-                    {line}
-                  </span>
-                </span>
-              ))}
-            </div>
-
-            {/* Luxury Gold Button */}
-            <button
-              ref={buttonRef}
-              onMouseMove={handleButtonMouseMove}
-              onMouseLeave={handleButtonMouseLeave}
-              className="luxury-button group relative px-5 py-2.5 sm:px-7 sm:py-3.5 bg-gradient-to-r from-[#8F2621] via-[#7A9636] to-[#8F2621] text-white font-sans font-bold tracking-[0.22em] text-[9px] sm:text-xs uppercase rounded-full shadow-[0_0_25px_rgba(143,38,33,0.22)] hover:shadow-[0_0_45px_rgba(143,38,33,0.5)] transition-shadow duration-500 overflow-hidden outline-none cursor-pointer flex items-center justify-center select-none opacity-0"
-              aria-label="Request Private Preview"
-            >
-              {/* Inner magnetic mouse-glow */}
-              <span className="btn-inner-glow absolute w-24 h-24 rounded-full bg-white/20 blur-md pointer-events-none opacity-0" />
-              
-              {/* Button light reflection sweep */}
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent skew-x-[-20deg] translate-x-[-150%] group-hover:animate-[shine_1.5s_infinite] pointer-events-none" />
-
-              <span className="relative z-10 flex items-center">
-                Request Private Preview
-                <span className="relative w-4 h-4 ml-2.5 overflow-hidden flex items-center justify-center">
-                  <span className="absolute transition-transform duration-300 transform translate-x-0 group-hover:translate-x-4">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </span>
-                  <span className="absolute transition-transform duration-300 transform -translate-x-4 group-hover:translate-x-0">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </span>
-                </span>
+      {/* Split Heading with overflow masked slide up */}
+      <h2 className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#1B1B1B] font-bold leading-none tracking-tight mb-4 sm:mb-6 flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em] pointer-events-none drop-shadow-[0_2px_8px_rgba(255,255,255,0.7)]">
+        {titleWords.map((word, wordIndex) => (
+          <span key={wordIndex} className="inline-block whitespace-nowrap overflow-hidden py-1.5">
+            {word.split("").map((char, charIndex) => (
+              <span key={charIndex} className="char inline-block translate-y-[100%] opacity-0 will-change-[transform,opacity]">
+                {char}
               </span>
-            </button>
-          </div>
-        </div>
+            ))}
+          </span>
+        ))}
+      </h2>
+
+      {/* Paragraph lines revealed */}
+      <div className="max-w-xl text-[#4A4A44] font-sans font-light text-[11px] sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 flex flex-col gap-y-1.5 drop-shadow-[0_1px_4px_rgba(255,255,255,0.6)]">
+        {descLines.map((line, index) => (
+          <span key={index} className="block overflow-hidden py-0.5">
+            <span className="desc-line inline-block translate-y-[100%] opacity-0 will-change-[transform,opacity]">
+              {line}
+            </span>
+          </span>
+        ))}
       </div>
+
+      {/* Luxury Gold Button */}
+      <button
+        ref={buttonRef}
+        onMouseMove={handleButtonMouseMove}
+        onMouseLeave={handleButtonMouseLeave}
+        className="luxury-button group relative px-5 py-2.5 sm:px-7 sm:py-3.5 bg-gradient-to-r from-[#8F2621] via-[#7A9636] to-[#8F2621] text-white font-sans font-bold tracking-[0.22em] text-[9px] sm:text-xs uppercase rounded-full shadow-[0_0_25px_rgba(143,38,33,0.22)] hover:shadow-[0_0_45px_rgba(143,38,33,0.5)] transition-shadow duration-500 overflow-hidden outline-none cursor-pointer flex items-center justify-center select-none opacity-0"
+        aria-label="Request Private Preview"
+      >
+        <span className="btn-inner-glow absolute w-24 h-24 rounded-full bg-white/20 blur-md pointer-events-none opacity-0" />
+        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent skew-x-[-20deg] translate-x-[-150%] group-hover:animate-[shine_1.5s_infinite] pointer-events-none" />
+        <span className="relative z-10 flex items-center">
+          Request Private Preview
+          <span className="relative w-4 h-4 ml-2.5 overflow-hidden flex items-center justify-center">
+            <span className="absolute transition-transform duration-300 transform translate-x-0 group-hover:translate-x-4">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+            <span className="absolute transition-transform duration-300 transform -translate-x-4 group-hover:translate-x-0">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </span>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
     </div>
   );
 }

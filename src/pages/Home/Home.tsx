@@ -8,6 +8,7 @@ import Categories from "../../sections/Categories";
 import Amenities from "../../sections/Amenities";
 import VirtualTour from "../../sections/VirtualTour";
 import ClientTestimonials from "../../sections/ClientTestimonials";
+import Card from "../../sections/Card";
 
 import { useLenis } from "../../hooks/useLenis";
 
@@ -19,6 +20,7 @@ export default function Hero() {
     <div className="relative w-full bg-[#F8F7F3] text-[#111111] selection:bg-[#C9A35D] selection:text-white">
       <HeroIntro />
       <HeroMorph />
+      <Card />
       <Stats />
       <Categories />
       <Amenities />

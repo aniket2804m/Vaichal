@@ -38,7 +38,7 @@ export default function CTA() {
     <section
       ref={ctaRef}
       id="contact"
-      className="w-full bg-[#F5F7E3] py-10 px-6 border-b border-[#999991]/25 relative overflow-hidden"
+      className="w-full bg-[#F5F7E3] py-5 px-6 border-b border-[#999991]/25 relative overflow-hidden"
     >
       {/* Decorative ambient gold glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#7A9636]/5 blur-[140px] pointer-events-none rounded-full" />
@@ -55,16 +55,16 @@ export default function CTA() {
           Begin Your Private Journey
         </h2>
         
-        <p className="max-w-xl mx-auto text-[#999991] font-sans font-light text-sm md:text-base leading-relaxed mb-10">
+        <p className="max-6w-xl mx-auto text-[#999991] font-sans font-light text-sm md:text-base leading-relaxed mb-10">
           Private tours of Pune’s finest residential landmarks are available by appointment only. Enter your details to schedule a bespoke consultation with our client relation curators.
         </p>
 
         <div>
           <button
             onClick={() => navigate("/contact")}
-            className="group relative inline-flex items-center justify-center overflow-hidden px-10 py-4 bg-[#8F2621] text-white transition duration-300 text-xs font-semibold uppercase tracking-widest rounded-[10px] hover:bg-[#7A9636] border-none cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            className="group relative inline-flex items-center justify-center overflow-hidden mt-7 px-10 py-4 bg-[#8F2621] text-white transition duration-300 text-xs font-semibold uppercase tracking-widest rounded-[10px] hover:bg-[#7A9636] border-none cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
           >
-            Request Private Viewing
+           Schedule a Site Visit
           </button>
         </div>
       </div>
