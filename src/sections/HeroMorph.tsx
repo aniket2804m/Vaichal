@@ -831,40 +831,26 @@ export default function HeroMorph() {
       
       {/* Tagline / Subheading */}
       <motion.h1
-  initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
-  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-  transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-  className="font-bold leading-[1.05] tracking-tight"
->
-  <span
-    className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl
-               bg-gradient-to-r from-[#8F2621] via-[#B23A32] to-[#8F2621]
-               bg-clip-text text-transparent
-               drop-shadow-[0_4px_15px_rgba(143,38,33,0.45)]"
-  >
-    Built by the company Tata Housing and Godrej trust with their own projects
-  </span>
+        initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+        className="font-bold leading-[1.05] tracking-tight text-brand-black"
+        style={{ fontFamily: "'Cormorant Garamond', serif" }}
+      >
+        <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-maroon drop-shadow-[0_2px_6px_rgba(255,255,255,0.6)]">
+          Built by the company Tata Housing and Godrej trust with their own projects
+        </span>
 
-  <br />
-
-  <span
-    className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl
-               bg-gradient-to-r from-[#7A9636] via-[#A8C45A] to-[#7A9636]
-               bg-clip-text text-transparent
-               drop-shadow-[0_4px_15px_rgba(122,150,54,0.45)]"
-  >
-    Now building yours
-
-    <motion.span
-      initial={{ width: 0 }}
-      animate={{ width: "100%" }}
-      transition={{ delay: 0.8, duration: 1.2 }}
-      className="absolute -bottom-3 left-0 h-[3px] rounded-full
-                 bg-gradient-to-r from-[#8F2621] to-[#7A9636]"
-    />
-  </span>
-</motion.h1>
+        <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-olive font-bold drop-shadow-[0_2px_6px_rgba(255,255,255,0.6)]">
+          Now building yours
+          <motion.span
+            initial={{ width: 0 }}
+            animate={{ width: "100%" }}
+            transition={{ delay: 0.8, duration: 1.2 }}
+            className="absolute -bottom-3 left-0 h-[2px] bg-brand-maroon shadow-[0_0_8px_#F5F7E3]"
+          />
+        </span>
+      </motion.h1>
 
       {/* Split Heading with overflow masked slide up */}
       {/* <h2 className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#1B1B1B] font-bold leading-none tracking-tight mb-4 sm:mb-6 flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em] pointer-events-none drop-shadow-[0_2px_8px_rgba(255,255,255,0.7)]">
