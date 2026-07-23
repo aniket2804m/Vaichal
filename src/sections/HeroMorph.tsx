@@ -112,132 +112,136 @@ const SkylineSVG = ({ className }: { className?: string }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    {/* Colored Fills (animated opacity wash - much darker!) */}
-    <motion.path
-      d={CREAM_DOME_FILL}
-      fill="#F5F7E3"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: [0, 1.0, 1.0, 0] }}
-      transition={{
-        duration: 4.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.4, 0.8, 1],
-      }}
-    />
-    <motion.path
-      d={TOWER_FILLS}
-      fill="#8F2621"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: [0, 0.48, 0.48, 0] }}
-      transition={{
-        duration: 4.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.4, 0.8, 1],
-      }}
-    />
-    <motion.path
-      d={OLIVE_BUILDING_FILLS}
-      fill="#7A9636"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: [0, 0.45, 0.45, 0] }}
-      transition={{
-        duration: 4.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.4, 0.8, 1],
-      }}
-    />
-    <motion.path
-      d={GRAY_BUILDING_FILLS}
-      fill="#999991"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: [0, 0.45, 0.45, 0] }}
-      transition={{
-        duration: 4.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.4, 0.8, 1],
-      }}
-    />
-    <motion.path
-      d={FILLS_PATH}
-      fill="#7A9636"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: [0, 0.65, 0.65, 0] }}
-      transition={{
-        duration: 4.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.4, 0.8, 1],
-      }}
-    />
+    <g className="skyline-fills">
+      {/* Colored Fills (animated opacity wash - much darker!) */}
+      <motion.path
+        d={CREAM_DOME_FILL}
+        fill="#F5F7E3"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 1.0, 1.0, 0] }}
+        transition={{
+          duration: 4.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.4, 0.8, 1],
+        }}
+      />
+      <motion.path
+        d={TOWER_FILLS}
+        fill="#8F2621"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.48, 0.48, 0] }}
+        transition={{
+          duration: 4.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.4, 0.8, 1],
+        }}
+      />
+      <motion.path
+        d={OLIVE_BUILDING_FILLS}
+        fill="#7A9636"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.45, 0.45, 0] }}
+        transition={{
+          duration: 4.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.4, 0.8, 1],
+        }}
+      />
+      <motion.path
+        d={GRAY_BUILDING_FILLS}
+        fill="#999991"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.45, 0.45, 0] }}
+        transition={{
+          duration: 4.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.4, 0.8, 1],
+        }}
+      />
+      <motion.path
+        d={FILLS_PATH}
+        fill="#7A9636"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.65, 0.65, 0] }}
+        transition={{
+          duration: 4.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.4, 0.8, 1],
+        }}
+      />
+    </g>
 
-    {/* Outlines (pathLength stroke drawing loop - thicker and darker!) */}
-    <motion.path
-      d={BASE_PATH}
-      stroke="#7A9636"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      initial={{ pathLength: 0, opacity: 0.6 }}
-      animate={{ pathLength: [0, 1, 1], opacity: [0.6, 1.0, 0.6] }}
-      transition={{
-        duration: 4.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.6, 1],
-      }}
-    />
-    <motion.path
-      d={HATCHING_PATH}
-      stroke="#999991"
-      strokeWidth="0.9"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      initial={{ pathLength: 0, opacity: 0.4 }}
-      animate={{ pathLength: [0, 1, 1], opacity: [0.4, 0.9, 0.4] }}
-      transition={{
-        duration: 5.2,
-        repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.6, 1],
-        delay: 0.9,
-      }}
-    />
-    <motion.path
-      d={FOLIAGE_PATH}
-      stroke="#7A9636"
-      strokeWidth="1.3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      initial={{ pathLength: 0, opacity: 0.5 }}
-      animate={{ pathLength: [0, 1, 1], opacity: [0.5, 1.0, 0.5] }}
-      transition={{
-        duration: 4.8,
-        repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.6, 1],
-        delay: 0.3,
-      }}
-    />
-    <motion.path
-      d={DETAILS_PATH}
-      stroke="#8F2621"
-      strokeWidth="1.25"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      initial={{ pathLength: 0, opacity: 0.5 }}
-      animate={{ pathLength: [0, 1, 1], opacity: [0.5, 1.0, 0.5] }}
-      transition={{
-        duration: 4.2,
-        repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.6, 1],
-        delay: 0.6,
-      }}
-    />
+    <g className="skyline-outlines">
+      {/* Outlines (pathLength stroke drawing loop - thicker and darker!) */}
+      <motion.path
+        d={BASE_PATH}
+        stroke="#7A9636"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0, opacity: 0.6 }}
+        animate={{ pathLength: [0, 1, 1], opacity: [0.6, 1.0, 0.6] }}
+        transition={{
+          duration: 4.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.6, 1],
+        }}
+      />
+      <motion.path
+        d={HATCHING_PATH}
+        stroke="#999991"
+        strokeWidth="0.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0, opacity: 0.4 }}
+        animate={{ pathLength: [0, 1, 1], opacity: [0.4, 0.9, 0.4] }}
+        transition={{
+          duration: 5.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.6, 1],
+          delay: 0.9,
+        }}
+      />
+      <motion.path
+        d={FOLIAGE_PATH}
+        stroke="#7A9636"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0, opacity: 0.5 }}
+        animate={{ pathLength: [0, 1, 1], opacity: [0.5, 1.0, 0.5] }}
+        transition={{
+          duration: 4.8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.6, 1],
+          delay: 0.3,
+        }}
+      />
+      <motion.path
+        d={DETAILS_PATH}
+        stroke="#8F2621"
+        strokeWidth="1.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0, opacity: 0.5 }}
+        animate={{ pathLength: [0, 1, 1], opacity: [0.5, 1.0, 0.5] }}
+        transition={{
+          duration: 4.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+          times: [0, 0.6, 1],
+          delay: 0.6,
+        }}
+      />
+    </g>
   </svg>
 );
 
@@ -689,9 +693,14 @@ export default function HeroMorph() {
           100% { transform: translate3d(0%, 0, 0); }
         }
         
-        @keyframes drawReveal {
-          0% { clip-path: inset(0 100% 0 0); }
-          100% { clip-path: inset(0 0% 0 0); }
+        @keyframes outlineGrow {
+          0% { transform: scaleY(0); }
+          100% { transform: scaleY(1); }
+        }
+        
+        @keyframes fillsGrowAndFade {
+          0% { transform: scaleY(0); opacity: 0; }
+          100% { transform: scaleY(1); opacity: 1; }
         }
         
         .scroll-skyline {
@@ -700,8 +709,16 @@ export default function HeroMorph() {
           animation: scrollLeftToRight 80s linear infinite;
         }
         
-        .skyline-draw {
-          animation: drawReveal 6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .skyline-outlines {
+          transform-origin: bottom;
+          animation: outlineGrow 4.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .skyline-fills {
+          transform-origin: bottom;
+          opacity: 0;
+          animation: fillsGrowAndFade 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation-delay: 1.2s;
         }
       `}</style>
 
@@ -769,9 +786,9 @@ export default function HeroMorph() {
         <rect width="100%" height="100%" filter="url(#noise)" />
       </svg>
 
-      {/* Infinite Scrolling Architectural Skyline Background (z-10) */}
-      <div className="absolute bottom-0 left-0 w-full h-[220px] pointer-events-none z-10 overflow-hidden bg-gradient-to-t from-[#CBE0E3] via-[#E4F0F2] to-transparent opacity-[0.98]">
-        <div className="flex w-[200%] h-full scroll-skyline skyline-draw">
+      {/* Infinite Scrolling Architectural Skyline Background (z-1) */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-1 overflow-hidden bg-gradient-to-t from-[#CBE0E3] via-[#E4F0F2] to-transparent opacity-[0.98]">
+        <div className="flex w-[200%] h-full scroll-skyline">
           <SkylineSVG className="w-1/2 h-full" />
           <SkylineSVG className="w-1/2 h-full" />
         </div>
@@ -783,26 +800,8 @@ export default function HeroMorph() {
         className="absolute w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,_rgba(122,150,54,0.18)_0%,_transparent_70%)] pointer-events-none opacity-0 mix-blend-screen z-10 will-change-transform"
       />
 
-      {/* Pinned Morphing Image Card */}
-      <div
-        ref={imageWrapperRef}
-        className="absolute overflow-hidden flex items-center justify-center z-20 select-none will-change-[width,height,border-radius] shadow-2xl"
-        style={{ width: "90vw", height: "90vh", borderRadius: "20px" }}
-      >
-        <img
-          ref={imageRef}
-          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=3840&q=95"
-          alt="Luxury Architecture Pune"
-          className="w-full h-full object-cover scale-[1.15] will-change-[transform,filter,opacity]"
-        />
-        {/* Dark overlay inside image wrapper */}
-        <div ref={overlayRef} className="absolute inset-0 bg-[#1B1B1B] opacity-0 mix-blend-multiply z-10 will-change-[opacity]" />
-        
-        {/* Golden vignette shadow */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1B1B1B]/50 via-transparent to-[#1B1B1B]/20 z-15 pointer-events-none" />
-      </div>
 
-      {/* Premium Glass Card Container */}
+{/* Premium Glass Card Container */}
       <div
         ref={glassCardRef}
         className="relative z-30 p-[1.5px] rounded-[36px] overflow-hidden bg-gradient-to-b from-[#7A9636]/30 via-white/5 to-[#8F2621]/15 shadow-[0_25px_60px_-15px_rgba(122,150,54,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d]"

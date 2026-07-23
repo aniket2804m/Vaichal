@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Landmark, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 /**
  * `filterKey` must match Features.tsx's category values exactly:
@@ -48,12 +49,6 @@ const categories = [
 
 type FilterValue = "Featured" | "Commercial" | "Industrial" | "Residential";
 
-interface CategoriesProps {
-  /** Called with the category the user clicked; wire this to Features.tsx's onFilterChange. */
-  onSelectCategory?: (filter: FilterValue) => void;
-  /** id of the section to scroll to after selecting — defaults to Features.tsx's section id. */
-  scrollTargetId?: string;
-}
 
 /** House with a door that swings open on click (Residential) */
 function DoorIcon({ isOpening }: { isOpening: boolean }) {
@@ -133,15 +128,13 @@ function AnimatedIcon({
   return <GateIcon isOpening={isOpening} />;
 }
 
-const ResidentialBackgroundSVG = () => (
-  <svg viewBox="0 0 400 300" preserveAspectRatio="none" className="w-full h-full stroke-[#7A9636]/50 fill-none" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+const ResidentialBackgroundSVG = ({ isOpening }: { isOpening: boolean }) => (
+  <svg viewBox="0 0 400 300" preserveAspectRatio="none" className="w-full h-full stroke-[#7A9636]/50 fill-none" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" style={{ perspective: 800 }}>
     {/* House structure */}
     <path d="M 50 250 L 50 150 L 150 70 L 250 150 L 250 250 Z" />
     <path d="M 30 150 L 270 150" />
     <path d="M 250 250 L 370 250 L 370 170 L 250 170" />
-    {/* Doors and Windows */}
-    <rect x="120" y="190" width="40" height="60" />
-    <circle cx="140" cy="220" r="2" fill="currentColor" />
+    {/* Windows */}
     <rect x="75" y="170" width="30" height="30" />
     <path d="M 75 185 L 105 185 M 90 170 L 90 200" />
     <rect x="180" y="170" width="30" height="30" />
@@ -150,6 +143,16 @@ const ResidentialBackgroundSVG = () => (
     <path d="M 135 110 L 165 110 M 150 95 L 150 125" />
     {/* Hatching for roof */}
     <path d="M 65 138 L 85 150 M 80 126 L 105 150 M 95 114 L 125 150 M 110 102 L 145 150 M 125 90 L 165 150 M 140 78 L 185 150" opacity="0.55" />
+
+    {/* Door swinging open on click */}
+    <motion.g
+      animate={{ rotateY: isOpening ? -110 : 0 }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+      style={{ transformOrigin: "120px 220px", transformStyle: "preserve-3d" }}
+    >
+      <rect x="120" y="190" width="40" height="60" fill="#F5F7E3" stroke="#7A9636" strokeWidth="1.2" />
+      <circle cx="150" cy="220" r="2.5" fill="#8F2621" stroke="none" />
+    </motion.g>
   </svg>
 );
 
@@ -207,7 +210,7 @@ function CategoryBackground({
   category: "Residential" | "Commercial" | "Industrial";
   isOpening: boolean;
 }) {
-  if (category === "Residential") return <ResidentialBackgroundSVG />;
+  if (category === "Residential") return <ResidentialBackgroundSVG isOpening={isOpening} />;
   if (category === "Commercial") return <CommercialBackgroundSVG />;
   return <IndustrialBackgroundSVG isOpening={isOpening} />;
 }
@@ -287,7 +290,7 @@ function CategoryCard({
             scale: isOpening ? 1.15 : (isHovered ? 1.08 : 1),
             x: isOpening ? 0 : mousePos.x * -15,
             y: isOpening ? 0 : mousePos.y * -15,
-            opacity: isOpening ? 1.0 : (isHovered ? 0.45 : 0.38),
+            opacity: isOpening ? 1.0 : 0.0,
           }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="absolute inset-0 w-full h-full"
@@ -432,11 +435,9 @@ function CategoryCard({
   );
 }
 
-export default function Categories({
-  onSelectCategory,
-  scrollTargetId = "projects",
-}: CategoriesProps) {
+export default function Categories() {
   const [openingIndex, setOpeningIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const handleClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -448,10 +449,7 @@ export default function Categories({
 
     setOpeningIndex(index);
     window.setTimeout(() => {
-      onSelectCategory?.(filterKey);
-      document
-        .getElementById(scrollTargetId)
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      navigate(`/features?type=${filterKey}`);
       setOpeningIndex(null);
     }, 1000);
   };

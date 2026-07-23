@@ -9,16 +9,10 @@ import Amenities from "../../sections/Amenities";
 import VirtualTour from "../../sections/VirtualTour";
 import ClientTestimonials from "../../sections/ClientTestimonials";
 
-import { useState } from "react";
-import Features from "../../pages/Projects/Features";
-
-type FilterValue = "Featured" | "Commercial" | "Industrial" | "Residential";
-
 import { useLenis } from "../../hooks/useLenis";
 
 export default function Hero() {
-  const [activeCategory, setActiveCategory] = useState<FilterValue>("Featured");
-  // Initialize Lenis smooth scroll driven by GSAP ticker
+  
   useLenis();
 
   return (
@@ -26,8 +20,7 @@ export default function Hero() {
       <HeroIntro />
       <HeroMorph />
       <Stats />
-      <Categories onSelectCategory={setActiveCategory} />
-      <Features activeFilter={activeCategory} onFilterChange={setActiveCategory} />
+      <Categories />
       <Amenities />
       <VirtualTour />
       <ClientTestimonials />
