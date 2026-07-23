@@ -834,7 +834,8 @@ export default function HeroMorph() {
         initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-        className="font-Cormorant Garamond font-bold leading-[1.1] text-brand-black"
+        className="font-bold leading-[1.05] tracking-tight text-brand-black"
+        style={{ fontFamily: "'Cormorant Garamond', serif" }}
       >
         <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-maroon drop-shadow-[0_2px_6px_rgba(255,255,255,0.6)]">
           Built by the company Tata Housing and Godrej trust with their own projects
