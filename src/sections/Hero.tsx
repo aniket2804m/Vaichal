@@ -4,24 +4,34 @@ import { gsap } from "../lib/gsap-init";
 import { motion } from "framer-motion";
 import FloatingNavBar from "../sections/FloatingNavBar";
 
+import cad from "../../src/assets/images/Hero/cad.png";
+import home1 from "../../src/assets/images/Hero/home1.png";
+import home2 from "../../src/assets/images/Hero/home2.png";
+import home3 from "../../src/assets/images/Hero/home3.png";
+import home4 from "../../src/assets/images/Hero/home4.png";
+
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=3840&q=95", // Ext mansion
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=3840&q=95", // Interior pool
-  "https://images.unsplash.com/photo-160066753376-12c8ab7fb75b?auto=format&fit=crop&w=3840&q=95", // Luxury Lounge
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=3840&q=95",
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=3840&q=95",  // Pool deck living (matches HeroMorph.tsx)
+  cad,
+  home1,
+  home2,
+  home3,
+  home4,
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=3840&q=95", // Royal Suite
 ];
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
-  const img1Ref = useRef<HTMLImageElement>(null);
-  const img2Ref = useRef<HTMLImageElement>(null);
-  const img3Ref = useRef<HTMLImageElement>(null);
-  const img4Ref = useRef<HTMLImageElement>(null);
+  const wrap1Ref = useRef<HTMLDivElement>(null);
+  const wrap2Ref = useRef<HTMLDivElement>(null);
+  const wrap3Ref = useRef<HTMLDivElement>(null);
+  const wrap4Ref = useRef<HTMLDivElement>(null);
+  const wrap5Ref = useRef<HTMLDivElement>(null);
+  const wrap6Ref = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const indicatorsRef = useRef<HTMLDivElement>(null);
   const scrollHelperRef = useRef<HTMLDivElement>(null);
+  const vignetteRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -44,158 +54,178 @@ export default function Hero() {
     };
 
     const ctx = gsap.context(() => {
-      // Set initial 3D positions for the images (scale: 1.25 to allow breathing scale inside wrappers)
-      gsap.set([img2Ref.current, img3Ref.current, img4Ref.current], {
-        opacity: 0,
-        scale: 1.25,
-        rotateY: 10,
-        rotateX: -5,
-        z: -200,
-        filter: "blur(8px)",
+      const isMobile = window.innerWidth < 768;
+
+      // Set initial responsive positions programmatically
+      gsap.set(wrap1Ref.current, {
+        width: "100%",
+        height: "100%",
+        top: "0%",
+        left: "0%",
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+      });
+
+      gsap.set(wrap2Ref.current, {
+        width: isMobile ? "50%" : "33.33%",
+        height: isMobile ? "33.33%" : "50%",
+        top: isMobile ? "0%" : "50%",
+        left: isMobile ? "100%" : "-100%", // off-screen left/right
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+      });
+
+      gsap.set(wrap3Ref.current, {
+        width: isMobile ? "50%" : "33.33%",
+        height: isMobile ? "33.33%" : "50%",
+        top: isMobile ? "33.33%" : "-100%", // off-screen top/left
+        left: isMobile ? "-100%" : "33.33%",
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+      });
+
+      gsap.set(wrap4Ref.current, {
+        width: isMobile ? "50%" : "33.33%",
+        height: isMobile ? "33.33%" : "50%",
+        top: isMobile ? "33.33%" : "100%", // off-screen bottom/right
+        left: isMobile ? "100%" : "33.33%",
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+      });
+
+      gsap.set(wrap5Ref.current, {
+        width: isMobile ? "50%" : "33.33%",
+        height: isMobile ? "33.33%" : "50%",
+        top: isMobile ? "66.66%" : "0%",
+        left: isMobile ? "-100%" : "100%", // off-screen right/left
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+      });
+
+      gsap.set(wrap6Ref.current, {
+        width: isMobile ? "50%" : "33.33%",
+        height: isMobile ? "33.33%" : "50%",
+        top: isMobile ? "66.66%" : "50%",
+        left: isMobile ? "100%" : "100%", // off-screen right
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
       });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
-          end: "+=350%",
+          end: "+=300%",
           scrub: 1.2,
           pin: true,
           anticipatePin: 1,
           onUpdate: (self) => {
             const progress = self.progress;
-            const activeIndex = progress < 0.28 ? 0
-              : progress < 0.56 ? 1
-              : progress < 0.82 ? 2
-              : 3;
+            const activeIndex = progress < 0.16 ? 0
+              : progress < 0.33 ? 1
+              : progress < 0.50 ? 2
+              : progress < 0.66 ? 3
+              : progress < 0.83 ? 4
+              : 5;
             updateIndicators(activeIndex);
           },
         },
       });
 
-      // 1. Stage 1 -> 2: Fade & Blur img1, Reveal img2
+      // 1. Fade out heading & scroll indicator
       tl.to(
-        img1Ref.current,
-        {
-          opacity: 0,
-          scale: 0.85,
-          rotateY: -10,
-          rotateX: 5,
-          z: -200,
-          filter: "blur(8px)",
-          ease: "power2.inOut",
-          duration: 1,
-        },
-        0
-      )
-      .to(
-        img2Ref.current,
-        {
-          opacity: 1,
-          scale: 1,
-          rotateY: 0,
-          rotateX: 0,
-          z: 0,
-          filter: "blur(0px)",
-          ease: "power2.inOut",
-          duration: 1,
-        },
-        0
-      )
-      // Fade out main heading during first scroll stage
-      .to(
         headingRef.current,
         {
           opacity: 0,
           y: -50,
           ease: "power2.inOut",
-          duration: 0.6,
+          duration: 1,
         },
         0
       )
-      // Fade out scroll helper indicator early
       .to(
         scrollHelperRef.current,
         {
           opacity: 0,
           y: 20,
           ease: "power2.inOut",
-          duration: 0.4,
+          duration: 0.6,
         },
         0
       )
-
-      // 2. Stage 2 -> 3: Fade & Blur img2, Reveal img3
+      
+      // 2. Grid Resolve Animation
+      // Wrap 1 goes from full screen to left column top (33.33% w, 50% h)
       .to(
-        img2Ref.current,
+        wrap1Ref.current,
         {
-          opacity: 0,
-          scale: 0.85,
-          rotateY: 10,
-          rotateX: -5,
-          z: -200,
-          filter: "blur(8px)",
+          width: isMobile ? "50%" : "33.33%",
+          height: isMobile ? "33.33%" : "50%",
           ease: "power2.inOut",
-          duration: 1,
+          duration: 2.5,
         },
-        1
+        0.3
       )
+      // Wrap 2 slides in to left column bottom (0%, 50%)
       .to(
-        img3Ref.current,
+        wrap2Ref.current,
         {
-          opacity: 1,
-          scale: 1,
-          rotateY: 0,
-          rotateX: 0,
-          z: 0,
-          filter: "blur(0px)",
+          left: isMobile ? "50%" : "0%",
+          top: isMobile ? "0%" : "50%",
           ease: "power2.inOut",
-          duration: 1,
+          duration: 2.5,
         },
-        1
+        0.3
       )
-
-      // 3. Stage 3 -> 4: Fade & Blur img3, Reveal img4
+      // Wrap 3 slides in to middle column top (33.33%, 0%)
       .to(
-        img3Ref.current,
+        wrap3Ref.current,
         {
-          opacity: 0,
-          scale: 0.85,
-          rotateY: -10,
-          rotateX: 5,
-          z: -200,
-          filter: "blur(8px)",
+          left: isMobile ? "0%" : "33.33%",
+          top: isMobile ? "33.33%" : "0%",
           ease: "power2.inOut",
-          duration: 1,
+          duration: 2.5,
         },
-        2
+        0.3
       )
+      // Wrap 4 slides in to middle column bottom (33.33%, 50%)
       .to(
-        img4Ref.current,
+        wrap4Ref.current,
         {
-          opacity: 1,
-          scale: 1,
-          rotateY: 0,
-          rotateX: 0,
-          z: 0,
-          filter: "blur(0px)",
+          left: isMobile ? "50%" : "33.33%",
+          top: isMobile ? "33.33%" : "50%",
           ease: "power2.inOut",
-          duration: 1,
+          duration: 2.5,
         },
-        2
+        0.3
       )
-
-      // 4. Stage 4 -> Handoff: Begin imageWrapper shrink to match HeroMorph initial layout
+      // Wrap 5 slides in to right column top (66.66%, 0%)
       .to(
-        imageWrapperRef.current,
+        wrap5Ref.current,
         {
-          width: "90vw",
-          height: "90vh",
-          borderRadius: "20px",
+          left: isMobile ? "0%" : "66.66%",
+          top: isMobile ? "66.66%" : "0%",
           ease: "power2.inOut",
-          duration: 0.8,
+          duration: 2.5,
         },
-        3
+        0.3
+      )
+      // Wrap 6 slides in to right column bottom (66.66%, 50%)
+      .to(
+        wrap6Ref.current,
+        {
+          left: isMobile ? "50%" : "66.66%",
+          top: isMobile ? "66.66%" : "50%",
+          ease: "power2.inOut",
+          duration: 2.5,
+        },
+        0.3
       );
     }, heroRef);
 
@@ -203,7 +233,6 @@ export default function Hero() {
       ctx.revert();
     };
   }, []);
-
   return (
     <section
       ref={heroRef}
@@ -246,59 +275,126 @@ export default function Hero() {
       <div
         ref={imageWrapperRef}
         className="absolute w-full h-full overflow-hidden flex items-center justify-center z-10"
-        style={{ transformStyle: "preserve-3d", perspective: "1500px" }}
       >
-        {/* Animated Wrapper 1 (no brightness limit to highlight 4K detail) */}
+        {/* Animated Wrapper 1 */}
         <div 
-          className="absolute inset-0 w-full h-full animated-img-wrap-1 overflow-hidden"
+          ref={wrap1Ref}
+          className="absolute overflow-hidden z-20 group/card cursor-pointer border border-[#F5F7E3]/10"
         >
           <img
-            ref={img1Ref}
             src={HERO_IMAGES[0]}
-            alt="Estate Façade"
-            className="absolute inset-0 w-full h-full object-cover will-change-transform"
+            alt="Estate Floor Plan"
+            className="absolute inset-0 w-full h-full object-cover animated-img-wrap-1 will-change-transform transition-transform duration-700 group-hover/card:scale-105"
           />
+          <div className="absolute inset-0 bg-black/0 group-hover/card:bg-black/35 transition-colors duration-500 pointer-events-none" />
+          <div className="absolute bottom-6 left-6 z-30 opacity-0 translate-y-3 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-500 pointer-events-none flex flex-col">
+            <span className="font-serif text-[#F5F7E3] text-sm md:text-lg tracking-widest uppercase font-semibold mb-1 drop-shadow-md">
+              Floor Layout
+            </span>
+            <span className="h-[2px] bg-[#C9A35D] w-8 transition-all duration-500 group-hover/card:w-20" />
+          </div>
         </div>
 
         {/* Animated Wrapper 2 */}
         <div 
-          className="absolute inset-0 w-full h-full animated-img-wrap-2 overflow-hidden"
+          ref={wrap2Ref}
+          className="absolute overflow-hidden z-10 group/card cursor-pointer border border-[#F5F7E3]/10"
         >
           <img
-            ref={img2Ref}
             src={HERO_IMAGES[1]}
-            alt="Estate Valleys"
-            className="absolute inset-0 w-full h-full object-cover will-change-transform"
+            alt="Mansion Exterior"
+            className="absolute inset-0 w-full h-full object-cover animated-img-wrap-2 will-change-transform transition-transform duration-700 group-hover/card:scale-105"
           />
+          <div className="absolute inset-0 bg-black/0 group-hover/card:bg-black/35 transition-colors duration-500 pointer-events-none" />
+          <div className="absolute bottom-6 left-6 z-30 opacity-0 translate-y-3 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-500 pointer-events-none flex flex-col">
+            <span className="font-serif text-[#F5F7E3] text-sm md:text-base tracking-widest uppercase font-semibold mb-1 drop-shadow-md">
+              Mansion Exterior
+            </span>
+            <span className="h-[2px] bg-[#C9A35D] w-8 transition-all duration-500 group-hover/card:w-16" />
+          </div>
         </div>
 
         {/* Animated Wrapper 3 */}
         <div 
-          className="absolute inset-0 w-full h-full animated-img-wrap-3 overflow-hidden"
+          ref={wrap3Ref}
+          className="absolute overflow-hidden z-10 group/card cursor-pointer border border-[#F5F7E3]/10"
         >
           <img
-            ref={img3Ref}
             src={HERO_IMAGES[2]}
-            alt="Estate Lounge"
-            className="absolute inset-0 w-full h-full object-cover will-change-transform"
+            alt="Infinity Pool"
+            className="absolute inset-0 w-full h-full object-cover animated-img-wrap-3 will-change-transform transition-transform duration-700 group-hover/card:scale-105"
           />
+          <div className="absolute inset-0 bg-black/0 group-hover/card:bg-black/35 transition-colors duration-500 pointer-events-none" />
+          <div className="absolute bottom-6 left-6 z-30 opacity-0 translate-y-3 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-500 pointer-events-none flex flex-col">
+            <span className="font-serif text-[#F5F7E3] text-sm md:text-base tracking-widest uppercase font-semibold mb-1 drop-shadow-md">
+              Infinity Pool
+            </span>
+            <span className="h-[2px] bg-[#C9A35D] w-8 transition-all duration-500 group-hover/card:w-16" />
+          </div>
         </div>
 
         {/* Animated Wrapper 4 */}
         <div 
-          className="absolute inset-0 w-full h-full animated-img-wrap-4 overflow-hidden"
+          ref={wrap4Ref}
+          className="absolute overflow-hidden z-10 group/card cursor-pointer border border-[#F5F7E3]/10"
         >
           <img
-            ref={img4Ref}
             src={HERO_IMAGES[3]}
-            alt="Estate Pool Side"
-            className="absolute inset-0 w-full h-full object-cover will-change-transform"
+            alt="Luxe Interior"
+            className="absolute inset-0 w-full h-full object-cover animated-img-wrap-4 will-change-transform transition-transform duration-700 group-hover/card:scale-105"
           />
+          <div className="absolute inset-0 bg-black/0 group-hover/card:bg-black/35 transition-colors duration-500 pointer-events-none" />
+          <div className="absolute bottom-6 left-6 z-30 opacity-0 translate-y-3 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-500 pointer-events-none flex flex-col">
+            <span className="font-serif text-[#F5F7E3] text-sm md:text-base tracking-widest uppercase font-semibold mb-1 drop-shadow-md">
+              Luxe Interior
+            </span>
+            <span className="h-[2px] bg-[#C9A35D] w-8 transition-all duration-500 group-hover/card:w-16" />
+          </div>
         </div>
 
-        {/* Multi-layered dark gradient overlays (z-20) */}
-        {/* Subtle top and bottom linear gradient overlay to protect navigation and scroll indicators without darkening the sides */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/25 z-20 pointer-events-none" />
+        {/* Animated Wrapper 5 */}
+        <div 
+          ref={wrap5Ref}
+          className="absolute overflow-hidden z-10 group/card cursor-pointer border border-[#F5F7E3]/10"
+        >
+          <img
+            src={HERO_IMAGES[4]}
+            alt="Scenic Lounge"
+            className="absolute inset-0 w-full h-full object-cover animated-img-wrap-1 will-change-transform transition-transform duration-700 group-hover/card:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover/card:bg-black/35 transition-colors duration-500 pointer-events-none" />
+          <div className="absolute bottom-6 left-6 z-30 opacity-0 translate-y-3 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-500 pointer-events-none flex flex-col">
+            <span className="font-serif text-[#F5F7E3] text-sm md:text-base tracking-widest uppercase font-semibold mb-1 drop-shadow-md">
+              Scenic Lounge
+            </span>
+            <span className="h-[2px] bg-[#C9A35D] w-8 transition-all duration-500 group-hover/card:w-16" />
+          </div>
+        </div>
+
+        {/* Animated Wrapper 6 */}
+        <div 
+          ref={wrap6Ref}
+          className="absolute overflow-hidden z-10 group/card cursor-pointer border border-[#F5F7E3]/10"
+        >
+          <img
+            src={HERO_IMAGES[5]}
+            alt="Royal Suite"
+            className="absolute inset-0 w-full h-full object-cover animated-img-wrap-2 will-change-transform transition-transform duration-700 group-hover/card:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover/card:bg-black/35 transition-colors duration-500 pointer-events-none" />
+          <div className="absolute bottom-6 left-6 z-30 opacity-0 translate-y-3 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-500 pointer-events-none flex flex-col">
+            <span className="font-serif text-[#F5F7E3] text-sm md:text-base tracking-widest uppercase font-semibold mb-1 drop-shadow-md">
+              Royal Suite
+            </span>
+            <span className="h-[2px] bg-[#C9A35D] w-8 transition-all duration-500 group-hover/card:w-16" />
+          </div>
+        </div>
+
+        {/* Multi-layered dark gradient overlays (z-25) */}
+        <div 
+          ref={vignetteRef}
+          className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/25 z-25 pointer-events-none" 
+        />
       </div>
 
       {/* Main heading (z-30 - Fades out during stage 1 scroll) */}
@@ -309,14 +405,14 @@ export default function Hero() {
   <div className="relative max-w-4xl px-6 py-8 md:px-12 md:py-10 bg-transparent">
 
     {/* Top Label */}
-    <motion.span
+    {/* <motion.span
       initial={{ opacity: 0, y: -20, letterSpacing: "0.15em" }}
       animate={{ opacity: 1, y: 0, letterSpacing: "0.25em" }}
       transition={{ duration: 1 }}
       className="inline-block uppercase font-serif text-xs md:text-sm tracking-[0.25em] text-brand-maroon font-semibold mb-6 light-premium-shadow"
     >
       ✦ Introducing The Pinnacle of Living ✦
-    </motion.span>
+    </motion.span> */}
 
     {/* Main Heading */}
     <motion.h1
@@ -325,12 +421,12 @@ export default function Hero() {
       transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
       className="font-serif font-bold leading-[1.1] text-brand-black"
     >
-      <span className="block text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-brand-maroon light-premium-shadow">
-        Crafting Legends
+      <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-maroon light-premium-shadow">
+        Built by the company Tata Housing and Godrej trust with their own projects
       </span>
 
       <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-olive font-bold light-premium-shadow">
-        In Pune's Skyline
+        Now building yours
         <motion.span
           initial={{ width: 0 }}
           animate={{ width: "100%" }}
@@ -345,7 +441,7 @@ export default function Hero() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6, duration: 1 }}
-      className="mt-8 max-w-2xl mx-auto text-[#F5F7E3] text-sm md:text-base lg:text-lg font-sans leading-relaxed tracking-wide premium-text-shadow font-medium"
+      className="mt-8 max-w-6xl mx-auto text-[#F5F7E3] text-sm md:text-base lg:text-lg font-sans leading-relaxed tracking-wide premium-text-shadow font-medium"
     >
       <span className="text-white font-semibold">
         An elite collection
@@ -366,6 +462,19 @@ export default function Hero() {
 
   </div>
 </div>
+
+      {/* Scroll Indicators (z-30) */}
+      <div
+        ref={indicatorsRef}
+        className="absolute bottom-10 left-10 z-30 flex gap-2.5 pointer-events-none"
+      >
+        <div className="h-2 w-[28px] rounded-full bg-[#8F2621] transition-all duration-300" />
+        <div className="h-2 w-2 rounded-full bg-[#F5F4F0]/25 transition-all duration-300" />
+        <div className="h-2 w-2 rounded-full bg-[#F5F4F0]/25 transition-all duration-300" />
+        <div className="h-2 w-2 rounded-full bg-[#F5F4F0]/25 transition-all duration-300" />
+        <div className="h-2 w-2 rounded-full bg-[#F5F4F0]/25 transition-all duration-300" />
+        <div className="h-2 w-2 rounded-full bg-[#F5F4F0]/25 transition-all duration-300" />
+      </div>
 
       {/* Scrolling mouse/chevron helper (z-30 - Fades out during stage 1 scroll) */}
       <div

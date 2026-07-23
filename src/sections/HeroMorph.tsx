@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { gsap } from "../lib/gsap-init";
 import { motion } from "framer-motion";
+import { X } from "lucide-react";
 
 const BASE_PATH = 
   "M 0 280 L 100 280 L 110 285 L 280 285 L 290 280 L 450 280 L 470 290 L 590 290 L 600 280 L 1050 280 L 1070 290 L 1200 290 L 1215 280 L 1400 280 L 1420 285 L 1600 285" +
@@ -254,6 +255,8 @@ export default function HeroMorph() {
   const shineSweepRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const [showCard, setShowCard] = useState(true);
+
 
   useEffect(() => {
 
@@ -804,11 +807,20 @@ export default function HeroMorph() {
 {/* Premium Glass Card Container */}
       <div
         ref={glassCardRef}
-        className="relative z-30 p-[1.5px] rounded-[36px] overflow-hidden bg-gradient-to-b from-[#7A9636]/30 via-white/5 to-[#8F2621]/15 shadow-[0_25px_60px_-15px_rgba(122,150,54,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d]"
+        className={`relative z-30 p-[1.5px] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-gradient-to-b from-[#7A9636]/30 via-white/5 to-[#8F2621]/15 shadow-[0_25px_60px_-15px_rgba(122,150,54,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d] ${showCard ? "" : "hidden"}`}
       >
         {/* Card Background glass layout */}
-        <div className="bg-[#FFFFFF]/90 backdrop-blur-3xl rounded-[34.5px] p-6 sm:p-8 md:p-12 lg:p-16 text-center flex flex-col items-center relative z-20 [transform-style:preserve-3d]">
+        <div className="bg-[#FFFFFF]/90 backdrop-blur-3xl rounded-[18.5px] sm:rounded-[34.5px] p-5 sm:p-8 md:p-12 lg:p-16 text-center flex flex-col items-center relative z-20 [transform-style:preserve-3d]">
           
+          {/* Close Button - positioned inside the 3D space */}
+          <button
+            onClick={() => setShowCard(false)}
+            className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-[#7A9636]/20 flex items-center justify-center text-[#8F2621] hover:bg-[#8F2621] hover:text-white transition-all duration-300 shadow-lg cursor-pointer [transform:translateZ(20px)]"
+            aria-label="Close card"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
           {/* Shine sweep reflection */}
           <div
             ref={shineSweepRef}
@@ -818,12 +830,12 @@ export default function HeroMorph() {
           <div className="card-content flex flex-col items-center w-full z-20 [transform-style:preserve-3d] will-change-transform">
             
             {/* Tagline / Subheading */}
-            <span className="subheading block text-[#7A9636] font-cinzel font-bold tracking-[0.3em] text-[10px] md:text-xs uppercase mb-4 opacity-0 will-change-[transform,opacity,filter]">
+            <span className="subheading block text-[#7A9636] font-cinzel font-bold tracking-[0.3em] text-[10px] md:text-xs uppercase mb-2 sm:mb-4 opacity-0 will-change-[transform,opacity,filter]">
               The Crown Jewel of Pune's Skyline
             </span>
 
             {/* Split Heading with overflow masked slide up */}
-            <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#1B1B1B] font-bold leading-none tracking-tight mb-6 flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em] pointer-events-none">
+            <h2 className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#1B1B1B] font-bold leading-none tracking-tight mb-4 sm:mb-6 flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em] pointer-events-none">
               {titleWords.map((word, wordIndex) => (
                 <span key={wordIndex} className="inline-block whitespace-nowrap overflow-hidden py-1.5">
                   {word.split("").map((char, charIndex) => (
@@ -836,7 +848,7 @@ export default function HeroMorph() {
             </h2>
 
             {/* Paragraph lines revealed */}
-            <div className="max-w-xl text-[#999991] font-sans font-light text-xs sm:text-sm md:text-base leading-relaxed mb-8 flex flex-col gap-y-1.5">
+            <div className="max-w-xl text-[#999991] font-sans font-light text-[11px] sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 flex flex-col gap-y-1.5">
               {descLines.map((line, index) => (
                 <span key={index} className="block overflow-hidden py-0.5">
                   <span className="desc-line inline-block translate-y-[100%] opacity-0 will-change-[transform,opacity]">
@@ -851,7 +863,7 @@ export default function HeroMorph() {
               ref={buttonRef}
               onMouseMove={handleButtonMouseMove}
               onMouseLeave={handleButtonMouseLeave}
-              className="luxury-button group relative px-7 py-3.5 bg-gradient-to-r from-[#8F2621] via-[#7A9636] to-[#8F2621] text-white font-sans font-bold tracking-[0.22em] text-[10px] md:text-xs uppercase rounded-full shadow-[0_0_25px_rgba(143,38,33,0.22)] hover:shadow-[0_0_45px_rgba(143,38,33,0.5)] transition-shadow duration-500 overflow-hidden outline-none cursor-pointer flex items-center justify-center select-none opacity-0"
+              className="luxury-button group relative px-5 py-2.5 sm:px-7 sm:py-3.5 bg-gradient-to-r from-[#8F2621] via-[#7A9636] to-[#8F2621] text-white font-sans font-bold tracking-[0.22em] text-[9px] sm:text-xs uppercase rounded-full shadow-[0_0_25px_rgba(143,38,33,0.22)] hover:shadow-[0_0_45px_rgba(143,38,33,0.5)] transition-shadow duration-500 overflow-hidden outline-none cursor-pointer flex items-center justify-center select-none opacity-0"
               aria-label="Request Private Preview"
             >
               {/* Inner magnetic mouse-glow */}

@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import {
-  Waves,
   Dumbbell,
   Trees,
   ShieldCheck,
@@ -11,7 +10,6 @@ import {
   Users,
   Sun,
   Car,
-  Wifi,
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
@@ -36,11 +34,7 @@ interface Amenity {
 }
 
 const amenities: Amenity[] = [
-  {
-    icon: Waves,
-    title: "Swimming Pool",
-    description: "Temperature-controlled pool with a dedicated kids' zone.",
-  },
+  
   {
     icon: Dumbbell,
     title: "Modern Gymnasium",
@@ -48,7 +42,7 @@ const amenities: Amenity[] = [
   },
   {
     icon: Trees,
-    title: "Landscaped Gardens",
+    title: "Gardens",
     description: "Green open spaces designed for walks and relaxation.",
   },
   {
@@ -64,7 +58,7 @@ const amenities: Amenity[] = [
   {
     icon: Gamepad2,
     title: "Indoor Games Room",
-    description: "Table tennis, chess, carrom and more under one roof.",
+    description: "An inviting indoor leisure space designed for recreation, relaxation, and community engagement.",
   },
   {
     icon: Baby,
@@ -84,12 +78,7 @@ const amenities: Amenity[] = [
   {
     icon: Car,
     title: "Ample Parking",
-    description: "Covered parking with visitor slots included.",
-  },
-  {
-    icon: Wifi,
-    title: "High-Speed Connectivity",
-    description: "Fiber-ready infrastructure across the property.",
+    description: "Covered parking with included.",
   },
   {
     icon: Sparkles,
@@ -175,11 +164,12 @@ export default function Amenities() {
     Life Here
   </span>
 
-  <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-[#8F2621] font-bold">
-    Amenities built around
-    <br />
-    <span className="text-[#7A9636]">everyday living</span>
-  </h2>
+  <h2 className="font-serif text-4xl sm:text-5xl leading-tight text-[#8F2621] font-bold flex flex-col">
+  <span>Amenities built around</span>
+  <span className="mt-4 text-[#7A9636]">
+    everyday living
+  </span>
+</h2>
 
   {/* maroon divider */}
   <motion.div

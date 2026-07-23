@@ -473,13 +473,13 @@ export default function Categories() {
             Explore Properties
           </p>
 
-          <div className="flex flex-col items-center">
-            <h2 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-[#8F2621] font-serif">Property Categories</h2>
+          <div className="flex flex-col items-center mt-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#8F2621] font-serif">Property Categories</h2>
           </div>
 
-          <p className="mx-auto mt-6 max-w-lg text-[#999991] text-lg font-light leading-relaxed">
-            Find the perfect property tailored to your lifestyle, business, or investment goals.
-          </p>
+         <p className="mx-auto pt-4 max-6w-2xl text-[#999991] text-lg font-light leading-relaxed">
+  Find the perfect property tailored to your lifestyle, business, or investment goals.
+</p>
         </motion.div>
 
         {/* Cards */}
