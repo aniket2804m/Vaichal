@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-[#F5F7E3] select-none">
       {/* Floating Navigation Bar (z-40) */}
-      <div className="relative z-40">
+      <div className="absolute bottom-6 left-0 w-full z-40">
         <FloatingNavBar />
       </div>
 

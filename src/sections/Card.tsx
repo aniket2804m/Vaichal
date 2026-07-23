@@ -68,10 +68,10 @@ const Card = () => {
       className="relative bg-[#F5F7E3] py-12 sm:py-20 border-t border-[#999991]/25 min-h-screen text-[#1B1B1B] font-sans selection:bg-[#7A9636] selection:text-white"
     >
       {/* Background Nature Glows */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-[#7A9636]/10 rounded-full blur-[160px]" />
         <div className="absolute bottom-20 right-1/4 w-[500px] h-[500px] bg-[#8F2621]/8 rounded-full blur-[160px]" />
-      </div>
+      </div> */}
 
       {/* Cards Stack Container */}
       <div className="relative flex flex-col items-center gap-12 md:gap-20 max-w-7xl mx-auto pb-40">

@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "../lib/gsap-init";
 import { motion } from "framer-motion";
-import { X } from "lucide-react";
+// import { X } from "lucide-react";
 
 const BASE_PATH = 
   "M 0 280 L 100 280 L 110 285 L 280 285 L 290 280 L 450 280 L 470 290 L 590 290 L 600 280 L 1050 280 L 1070 290 L 1200 290 L 1215 280 L 1400 280 L 1420 285 L 1600 285" +
@@ -255,7 +255,7 @@ export default function HeroMorph() {
   const shineSweepRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [showCard, setShowCard] = useState(true);
+  // const [showCard, setShowCard] = useState(true);
 
 
   useEffect(() => {
@@ -807,19 +807,19 @@ export default function HeroMorph() {
 {/* Premium Glass Card Container */}
       <div
   ref={glassCardRef}
-  className={`relative z-30 p-[1.5px] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-gradient-to-b from-[#7A9636]/30 via-white/5 to-[#8F2621]/15 shadow-[0_25px_60px_-15px_rgba(122,150,54,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d] ${showCard ? "" : "hidden"}`}
+  className={`relative z-30 p-[1.5px] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-gradient-to-b from-[#7A9636]/30 via-white/5 to-[#8F2621]/15 shadow-[0_25px_60px_-15px_rgba(122,150,54,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d]`}
 >
   {/* Card Background - now transparent instead of white */}
   <div className="bg-transparent backdrop-blur-md rounded-[18.5px] sm:rounded-[34.5px] p-5 sm:p-8 md:p-12 lg:p-16 text-center flex flex-col items-center relative z-20 [transform-style:preserve-3d]">
     
     {/* Close Button */}
-    <button
+    {/* <button
       onClick={() => setShowCard(false)}
       className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-[#7A9636]/20 flex items-center justify-center text-[#8F2621] hover:bg-[#8F2621] hover:text-white transition-all duration-300 shadow-lg cursor-pointer [transform:translateZ(20px)]"
       aria-label="Close card"
     >
       <X className="w-5 h-5" />
-    </button>
+    </button> */}
 
     {/* Shine sweep reflection */}
     <div
@@ -834,7 +834,7 @@ export default function HeroMorph() {
         initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-        className="font-serif font-bold leading-[1.1] text-brand-black"
+        className="font-Cormorant font-bold leading-[1.1] text-brand-black"
       >
         <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-maroon drop-shadow-[0_2px_6px_rgba(255,255,255,0.6)]">
           Built by the company Tata Housing and Godrej trust with their own projects
