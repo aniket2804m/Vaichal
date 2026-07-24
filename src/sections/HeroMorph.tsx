@@ -524,9 +524,27 @@ export default function HeroMorph() {
               className="font-bold leading-[1.15] sm:leading-[1.1] tracking-tight text-brand-black w-full"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
-              <span className="font-extrabold block mt-2 sm:mt-4 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-brand-maroon drop-shadow-[0_2px_4px_rgba(0,0,0,0.18)] break-words">
-                Built by the company <span className="font-extrabold">Tata Housing</span>  and <span className="font-extrabold">Godrej trust</span> with their own projects
-              </span>
+              <span className="font-extrabold block mt-2 sm:mt-4 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.18)] break-words">
+  <span className="text-black dark:text-white">
+    Built by the company{" "}
+  </span>
+
+  <span className="text-brand-maroon">
+    Tata Housing
+  </span>
+
+  <span className="text-black dark:text-white">
+    {" "}and{" "}
+  </span>
+
+  <span className="text-brand-maroon">
+    Godrej
+  </span>
+
+  <span className="text-black dark:text-white">
+    {" "}trust with their own projects
+  </span>
+</span>
 
               <span style={{ fontFamily: "'Cormorant Garamond', serif" }} className="relative inline-block mt-3 sm:mt-5 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-brand-olive font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.18)]">
                 Now building yours
