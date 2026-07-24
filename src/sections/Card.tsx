@@ -81,11 +81,11 @@ const Card = () => {
       <div className="relative z-10 w-full max-w-7xl px-3 sm:px-6 flex flex-col h-full justify-between py-2 md:py-4">
         {/* Header */}
         <div className="showcase-header text-center max-w-3xl mx-auto pt-2 pb-1 sm:pb-3">
-          <span className="inline-flex items-center gap-2 px-3 py-0.5 sm:py-1 rounded-full bg-[#8F2621]/10 text-[#8F2621] text-[11px] sm:text-xs font-semibold tracking-wider uppercase border border-[#8F2621]/20 backdrop-blur-sm mb-1 sm:mb-2">
+          {/* <span className="inline-flex items-center gap-2 px-3 py-0.5 sm:py-1 rounded-full bg-[#8F2621]/10 text-[#8F2621] text-[11px] sm:text-xs font-semibold tracking-wider uppercase border border-[#8F2621]/20 backdrop-blur-sm mb-1 sm:mb-2">
             <span className="w-1.5 h-1.5 rounded-full bg-[#8F2621] animate-pulse" />
             Signature Gallery
-          </span>
-          <h2 className="text-xl sm:text-3xl md:text-4xl font-serif font-bold text-[#1B1B1B] tracking-tight">
+          </span> */}
+          <h2 className="text-xl pt-10 sm:text-3xl md:text-4xl font-serif font-bold text-[#1B1B1B] tracking-tight">
             Architectural Excellence in Motion
           </h2>
           <p className="text-[11px] sm:text-xs md:text-sm text-[#555550] mt-0.5 font-medium">
