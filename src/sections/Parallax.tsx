@@ -17,11 +17,12 @@ function ParallaxBlock({ image, title, subtitle, description, reversed = false }
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
+    const isMobile = window.innerWidth < 768;
 
     const ctx = gsap.context(() => {
-      // Parallax effect on image
+      // Parallax effect on image - smooth subtle shift on mobile to prevent gaps
       gsap.to(imageRef.current, {
-        yPercent: -15,
+        yPercent: isMobile ? -5 : -15,
         ease: "none",
         scrollTrigger: {
           trigger: blockRef.current,
@@ -56,7 +57,7 @@ function ParallaxBlock({ image, title, subtitle, description, reversed = false }
   return (
     <div
       ref={blockRef}
-      className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 py-10 px-6 max-w-7xl mx-auto overflow-hidden ${
+      className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-20 py-10 px-4 sm:px-6 max-w-7xl mx-auto overflow-hidden ${
         reversed ? "lg:flex-row-reverse" : ""
       }`}
     >
@@ -76,14 +77,14 @@ function ParallaxBlock({ image, title, subtitle, description, reversed = false }
         <span className="text-[#7A9636] font-sans font-semibold tracking-[0.25em] text-xs uppercase mb-3 block">
           {subtitle}
         </span>
-        <h3 className="text-3xl md:text-5xl font-serif text-[#8F2621] font-bold leading-tight tracking-tight mb-6">
+        <h3 className="text-2xl sm:text-3xl md:text-5xl font-serif text-[#8F2621] font-bold leading-tight tracking-tight mb-4 sm:mb-6">
           {title}
         </h3>
-        <p className="text-[#999991] font-sans font-light text-sm md:text-base leading-relaxed mb-8">
+        <p className="text-[#999991] font-sans font-light text-sm md:text-base leading-relaxed mb-6 sm:mb-8">
           {description}
         </p>
         <div>
-          <button className="group relative inline-flex items-center justify-center overflow-hidden px-6 py-3 border border-[#8F2621] text-[#8F2621] hover:text-white transition duration-500 text-xs font-semibold uppercase tracking-widest bg-transparent rounded-[10px] cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
+          <button className="group relative inline-flex items-center justify-center min-h-[44px] overflow-hidden px-6 py-3 border border-[#8F2621] text-[#8F2621] hover:text-white transition duration-500 text-xs font-semibold uppercase tracking-widest bg-transparent rounded-[10px] cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
             <span className="absolute inset-0 w-full h-full bg-[#8F2621] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-[0.16,1,0.3,1] -z-10" />
             Learn More
           </button>

@@ -56,7 +56,7 @@ const Navbar = () => {
     : "py-5 bg-[#7A9636]/80 backdrop-blur-md border-[#999991]/10"
 }`}
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
           {/* Logo Brand */}
           <Link
             to="/"
@@ -66,7 +66,7 @@ const Navbar = () => {
             <img
               src={logo}
               alt="Viachal Logo"
-              className="w-[140px] h-12 object-contain transition-all duration-300 group-hover:scale-105 px-3 py-1.5 rounded-[20px] bg-transparent"
+              className="w-28 sm:w-36 h-auto max-h-12 object-contain transition-all duration-300 group-hover:scale-105 px-2 sm:px-3 py-1 rounded-[20px] bg-transparent"
             />
             <div className="absolute -inset-2 bg-[#8F2621]/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-xl -z-10" />
           </Link>
@@ -128,10 +128,10 @@ const Navbar = () => {
 {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 rounded-[10px] hover:bg-[#999991]/10 transition-all duration-300 relative flex items-center justify-center w-10 h-10 border border-[#999991]/30 bg-white/75 backdrop-blur-md shadow-sm text-[#1B1B1B]"
+            className="lg:hidden p-2 rounded-[10px] hover:bg-[#999991]/10 transition-all duration-300 relative flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] border border-[#999991]/30 bg-white/75 backdrop-blur-md shadow-sm text-[#1B1B1B] cursor-pointer"
             aria-label={t("nav.toggleMenu")}
           >
-            <svg width="18" height="18" viewBox="0 0 23 23" className="text-[#1B1B1B]">
+            <svg width="20" height="20" viewBox="0 0 23 23" className="text-[#1B1B1B]">
               <motion.path
                 fill="transparent"
                 strokeWidth="2.5"

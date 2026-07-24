@@ -175,7 +175,7 @@ export default function About() {
             </motion.span>
           </ScrollReveal>
 
-          <div className="mt-5 text-4xl sm:text-4xl md:text-8xl font-serif font-bold leading-tight text-[#1B1B1B]">
+          <div className="mt-5 text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-tight text-[#1B1B1B]">
             <AnimatedText as="h1" text="Crafting Legends" className="block" />
             <AnimatedText as="h1" text="Building Luxury" className="block" delay={0.15} />
             <AnimatedText
@@ -188,7 +188,7 @@ export default function About() {
 
           <ScrollReveal variant="fade-up" delay={0.35}>
             <motion.p
-              className="max-w-3xl mx-auto mt-8 text-[#999991] leading-relaxed font-sans font-light text-base md:text-lg"
+              className="max-w-3xl mx-auto mt-8 text-[#999991] leading-relaxed font-sans font-light text-sm sm:text-base md:text-lg"
               animate={{ opacity: [0.8, 1, 0.8] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
@@ -230,7 +230,7 @@ export default function About() {
                 .getElementById(`story-panel-${i}`)
                 ?.scrollIntoView({ behavior: "smooth", block: "center" })
             }
-            className="block text-left w-full group"
+            className="block text-left w-full group cursor-pointer"
           >
             <motion.h3
               animate={{
@@ -238,7 +238,7 @@ export default function About() {
                 x: activePanel === i ? 8 : 0,
               }}
               transition={{ duration: 0.3 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#1B1B1B] group-hover:opacity-80"
+              className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-[#1B1B1B] group-hover:opacity-80"
             >
               {panel.title}
             </motion.h3>
@@ -248,7 +248,7 @@ export default function About() {
     </div>
 
     {/* scrolling right panels — now split left/right per panel */}
-    <div className="py-10 lg:py-10 space-y-10 lg:space-y-10">
+    <div className="py-6 lg:py-10 space-y-6 lg:space-y-10">
       {storyPanels.map((panel, i) => {
         const reversed = i % 2 === 1; // alternate layout direction
         return (
@@ -257,10 +257,10 @@ export default function About() {
             key={panel.title}
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.6 }}
+            viewport={{ once: false, amount: 0.4 }}
             onViewportEnter={() => setActivePanel(i)}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="border border-[#999991]/30 rounded-[16px] p-8 sm:p-12 bg-white shadow-sm grid md:grid-cols-2 gap-8 items-center"
+            className="border border-[#999991]/30 rounded-[16px] p-5 sm:p-8 md:p-12 bg-white shadow-sm grid md:grid-cols-2 gap-6 sm:gap-8 items-center"
           >
             {/* text side */}
             <motion.div

@@ -226,7 +226,7 @@ export default function ProjectDetail({
   }, [galleryImages]);
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 sm:p-6 md:p-10 select-none">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center p-2 sm:p-6 md:p-10 select-none">
       {styleTag}
       
       {/* Backdrop overlay */}
@@ -243,15 +243,15 @@ export default function ProjectDetail({
       <motion.div
         layoutId={`card-${project.id}`}
         transition={{ type: "spring", damping: 30, stiffness: 200 }}
-        className="relative w-full max-w-4xl bg-[#F5F7E3] text-[#1B1B1B] border border-[#999991]/30 rounded-[16px] shadow-2xl flex flex-col overflow-hidden max-h-[85vh] md:max-h-[90vh] outline-none z-10"
+        className="relative w-full max-w-4xl bg-[#F5F7E3] text-[#1B1B1B] border border-[#999991]/30 rounded-[16px] shadow-2xl flex flex-col overflow-hidden max-h-[90vh] outline-none z-10"
       >
         {/* Close Button */}
         <button
           onClick={onBack}
-          className="absolute top-4 right-4 z-50 flex items-center justify-center w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm border border-[#999991]/35 text-[#1B1B1B] hover:text-[#8F2621] hover:border-[#8F2621]/30 transition-colors focus:outline-none focus:ring-1 focus:ring-[#8F2621] cursor-pointer"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/90 backdrop-blur-sm border border-[#999991]/35 text-[#1B1B1B] hover:text-[#8F2621] hover:border-[#8F2621]/30 transition-colors focus:outline-none focus:ring-1 focus:ring-[#8F2621] cursor-pointer"
           aria-label="Close modal"
         >
-          <X size={18} />
+          <X size={20} />
         </button>
 
         {/* Scrollable Content Container */}

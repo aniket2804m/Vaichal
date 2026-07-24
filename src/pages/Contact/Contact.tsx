@@ -286,6 +286,7 @@ const Contact = () => {
     const leftColumn = sectionRef.current?.querySelector(".left-column");
     const rightForm = sectionRef.current?.querySelector(".form-container-card");
     const header = sectionRef.current?.querySelector(".contact-header");
+    const isMobile = window.innerWidth < 768;
 
     const ctx = gsap.context(() => {
       // Header reveal
@@ -311,7 +312,7 @@ const Contact = () => {
         const leftItems = leftColumn.querySelectorAll(".contact-link-item");
         gsap.fromTo(
           leftColumn,
-          { opacity: 0, x: -50 },
+          { opacity: 0, x: isMobile ? -20 : -50 },
           {
             opacity: 1,
             x: 0,
@@ -347,7 +348,7 @@ const Contact = () => {
       if (rightForm) {
         gsap.fromTo(
           rightForm,
-          { opacity: 0, x: 50, scale: 0.98 },
+          { opacity: 0, x: isMobile ? 20 : 50, scale: 0.98 },
           {
             opacity: 1,
             x: 0,
@@ -459,7 +460,7 @@ const Contact = () => {
           <div className="form-container-card p-[1.5px] relative opacity-0">
             <form
               onSubmit={handleSubmit}
-              className="bg-white border border-[#999991]/30 p-8 grid grid-cols-1 md:grid-cols-2 gap-6 rounded-[16px] shadow-sm hover:shadow-md transition-all duration-500"
+              className="bg-white border border-[#999991]/30 p-5 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 rounded-[16px] shadow-sm hover:shadow-md transition-all duration-500"
             >
               {/* Row 1 */}
               <CustomInput

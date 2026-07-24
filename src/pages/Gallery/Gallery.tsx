@@ -286,6 +286,7 @@ function ProjectCard({
   const glowBg = useTransform([glowX, glowY], ([x, y]) => `radial-gradient(220px circle at ${x} ${y}, rgba(143,38,33,0.18), transparent 70%)`);
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (window.matchMedia("(max-width: 1024px)").matches) return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     mx.set((e.clientX - rect.left) / rect.width);
@@ -661,6 +662,12 @@ const VCH_STYLES = `
 }
 .vch-close:hover{border-color:var(--amber);color:var(--amber)}
 
+@media (max-width: 640px){
+  .vch-gallery{padding:5rem 1rem 4rem}
+  .vch-lightbox{padding:.75rem}
+  .vch-lightbox-info{padding:1rem}
+  .vch-title{font-size:2.2rem}
+}
 @media (prefers-reduced-motion: reduce){
   .vch-card-frame, .vch-img-wrap img, .vch-crop, .vch-hover-cta, .vch-scan, .vch-carousel img{transition:none;animation:none}
 }

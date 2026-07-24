@@ -70,24 +70,47 @@ export const services: ServiceItem[] = [
 ];
 
 export interface CardItem {
-  images?: string[];
-  image?: string;
+  id: number;
+  title: string;
+  category: string;
+  subtitle: string;
+  images: string[];
 }
 
 export const service: CardItem[] = [
   {
+    id: 1,
+    title: "Luxury Residential",
+    category: "Architecture",
+    subtitle: "Bespoke Sanctuaries",
     images: [home1],
   },
   {
+    id: 2,
+    title: "Modern Interiors",
+    category: "Interior Design",
+    subtitle: "State-of-the-Art Living",
     images: [home2],
   },
   {
+    id: 3,
+    title: "Commercial Hubs",
+    category: "Workspace",
+    subtitle: "Future Tech Parks",
     images: [home3],
   },
   {
+    id: 4,
+    title: "Sanctuary Spaces",
+    category: "Lifestyle",
+    subtitle: "Peaceful Retreats",
     images: [home4],
   },
   {
+    id: 5,
+    title: "Bespoke Estates",
+    category: "Landscape",
+    subtitle: "Prime Eco Destinations",
     images: [home5],
   },
 ];

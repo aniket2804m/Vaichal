@@ -551,19 +551,19 @@ export default function Features({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.05 }}
-          className="mt-10 mb-12 text-6xl text-center font-bold font-serif text-[#8F2621] sm:text-4xl"
+          className="mt-6 mb-8 text-3xl sm:text-4xl lg:text-6xl text-center font-bold font-serif text-[#8F2621]"
         >
           Projects, Built to Last
         </motion.h2>
         </div>
 
         {/* Existing Category Filter Buttons */}
-        <div className="mt-8 flex flex-wrap justify-center gap-2">
+        <div className="mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-3">
   {FILTERS.map((filter) => (
     <button
       key={filter}
       onClick={() => handleCategoryButtonClick(filter)}
-      className={`relative rounded-[4px] px-5 py-2 text-[11px] font-sans uppercase tracking-[0.12em] transition-colors duration-300 cursor-pointer select-none border border-[#999991]/30 ${
+      className={`relative rounded-[4px] px-4 py-2.5 min-h-[44px] text-xs font-sans uppercase tracking-[0.12em] transition-colors duration-300 cursor-pointer select-none border border-[#999991]/30 flex items-center justify-center ${
         activeFilter === filter
           ? "bg-[#8F2621] text-white font-bold"
           : "bg-white text-[#4A4A45] hover:bg-[#F5F7E3]/60"

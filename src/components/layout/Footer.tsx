@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
 import {
-  ArrowUp,
+  ArrowUpRight,
   Phone,
   Mail,
   MapPin,
@@ -554,7 +554,7 @@ export default function Footer() {
             </p>
 
             {/* Social Links (Glass circle, scale & rotate hover) */}
-            <div className="flex items-center gap-3 pt-2">
+            <div className="flex items-center gap-3 pt-2 flex-wrap">
               {[
                 { icon: FaFacebookF, label: "Facebook" },
                 { icon: FaInstagram, label: "Instagram" },
@@ -568,7 +568,7 @@ export default function Footer() {
                     key={idx}
                     href="#"
                     aria-label={social.label}
-                    className="w-10 h-10 rounded-full border border-[#999991]/30 bg-white/50 backdrop-blur-md flex items-center justify-center text-[#1B1B1B] hover:text-[#8F2621] hover:border-[#8F2621] hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-sm focus:outline-none focus:ring-1 focus:ring-[#8F2621]"
+                    className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full border border-[#999991]/30 bg-white/50 backdrop-blur-md flex items-center justify-center text-[#1B1B1B] hover:text-[#8F2621] hover:border-[#8F2621] hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-sm focus:outline-none focus:ring-1 focus:ring-[#8F2621]"
                   >
                     <Icon size={16} />
                   </a>
@@ -583,7 +583,7 @@ export default function Footer() {
               Quick Links
             </h3>
 
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 font-sans text-sm font-light">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 font-sans text-sm font-light">
               {QUICK_LINKS.map((link, idx) => (
                 <li key={idx}>
                   <Link
@@ -679,10 +679,10 @@ export default function Footer() {
             © {new Date().getFullYear()} Vaichal Realty. All Rights Reserved.
           </p>
 
-          <div className="flex items-center gap-6 text-[#999991]">
-            <Link to="/privacy" className="hover:text-[#8F2621] transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-[#8F2621] transition-colors">Terms & Conditions</Link>
-            <Link to="/cookie" className="hover:text-[#8F2621] transition-colors">Cookie Policy</Link>
+          <div className="flex items-center gap-6 text-[#999991] flex-wrap justify-center">
+            <Link to="/privacy" className="hover:text-[#8F2621] transition-colors py-1">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-[#8F2621] transition-colors py-1">Terms & Conditions</Link>
+            <Link to="/cookie" className="hover:text-[#8F2621] transition-colors py-1">Cookie Policy</Link>
           </div>
         </div>
       </div>
@@ -691,10 +691,10 @@ export default function Footer() {
       <button
         ref={scrollBtnRef}
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-white/95 border border-[#8F2621]/45 text-[#8F2621] shadow-md flex items-center justify-center backdrop-blur-md opacity-0 scale-50 translate-y-6 cursor-pointer focus:outline-none transition-all duration-300 hover:scale-105 group"
+        className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 z-50 w-11 h-11 sm:w-12 sm:h-12 min-w-[44px] min-h-[44px] rounded-full bg-white/95 border border-[#8F2621]/45 text-[#8F2621] shadow-md flex items-center justify-center backdrop-blur-md opacity-0 scale-50 translate-y-6 cursor-pointer focus:outline-none transition-all duration-300 hover:scale-105 group"
         aria-label="Scroll to top"
       >
-        <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300" />
+        <ArrowUpRight className="w-5 h-5 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300 rotate-[-45deg]" />
       </button>
     </div>
   );

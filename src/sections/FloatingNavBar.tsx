@@ -167,9 +167,9 @@ export default function FloatingNavBar() {
       `}</style>
 
       {/* Floating Navigation Bar */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-6xl">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-3xl">
         {/* Main nav container with glass effect */}
-        <div className="nav-glass rounded-full h-14 px-2 md:px-4 flex items-center justify-between">
+        <div className="nav-glass rounded-full h-14 px-2 md:px-4 flex items-center justify-center gap-2 md:gap-4">
           {/* Left Section - Search */}
           <div className="nav-section">
             <button 

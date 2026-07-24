@@ -45,24 +45,24 @@ export default function CTA() {
 
       <div
         ref={contentRef}
-        className="max-w-4xl mx-auto text-center border border-[#999991]/30 bg-white p-12 md:p-20 relative rounded-[16px] shadow-sm"
+        className="max-w-4xl mx-auto text-center border border-[#999991]/30 bg-white p-6 sm:p-12 md:p-20 relative rounded-[16px] shadow-sm"
       >
         <span className="text-[#7A9636] font-sans font-semibold tracking-[0.25em] text-xs uppercase mb-4 block">
           Exclusive Invitation
         </span>
         
-        <h2 className="text-4xl md:text-6xl font-serif text-[#8F2621] font-bold leading-tight tracking-tight mb-6">
+        <h2 className="text-3xl sm:text-4xl md:text-6xl font-serif text-[#8F2621] font-bold leading-tight tracking-tight mb-6">
           Begin Your Private Journey
         </h2>
         
-        <p className="max-6w-xl mx-auto text-[#999991] font-sans font-light text-sm md:text-base leading-relaxed mb-10">
+        <p className="max-w-xl mx-auto text-[#999991] font-sans font-light text-sm md:text-base leading-relaxed mb-8">
           Private tours of Pune’s finest residential landmarks are available by appointment only. Enter your details to schedule a bespoke consultation with our client relation curators.
         </p>
 
         <div>
           <button
             onClick={() => navigate("/contact")}
-            className="group relative inline-flex items-center justify-center overflow-hidden mt-7 px-10 py-4 bg-[#8F2621] text-white transition duration-300 text-xs font-semibold uppercase tracking-widest rounded-[10px] hover:bg-[#7A9636] border-none cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            className="group relative inline-flex items-center justify-center min-h-[44px] overflow-hidden mt-4 px-8 sm:px-10 py-3.5 bg-[#8F2621] text-white transition duration-300 text-xs font-semibold uppercase tracking-widest rounded-[10px] hover:bg-[#7A9636] border-none cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
           >
            Schedule a Site Visit
           </button>

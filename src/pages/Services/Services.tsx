@@ -197,20 +197,20 @@ export default function Services() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="w-full bg-white border border-[#999991]/20 rounded-[24px] p-8 md:p-16 text-center shadow-xl relative overflow-hidden mt-32"
+          className="w-full bg-white border border-[#999991]/20 rounded-[24px] p-6 sm:p-12 md:p-16 text-center shadow-xl relative overflow-hidden mt-20 sm:mt-32"
         >
           <div className="absolute inset-0 bg-[#7A9636]/5 pointer-events-none" />
           <h2 className="text-3xl md:text-5xl font-serif text-[#8F2621] font-bold mb-4">
             Ready to Build Your Sanctuary?
           </h2>
-          <p className="text-[#999991] max-w-xl mx-auto mb-8 font-light">
+          <p className="text-[#999991] max-w-xl mx-auto mb-8 font-light text-sm sm:text-base">
             Contact our consulting division to review floor plans, locations, and sustainability frameworks.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button asChild className="rounded-[10px] bg-[#8F2621] hover:bg-[#7A9636] text-white px-8 py-5 text-base border-none transition-all">
+            <Button asChild className="rounded-[10px] bg-[#8F2621] hover:bg-[#7A9636] text-white px-6 sm:px-8 py-4 sm:py-5 min-h-[44px] text-sm sm:text-base border-none transition-all cursor-pointer">
               <Link to="/contact">Book Design Session</Link>
             </Button>
-            <Button asChild variant="outline" className="rounded-[10px] border-2 border-[#8F2621] text-[#8F2621] hover:bg-[#8F2621] hover:text-white px-8 py-5 text-base transition-all bg-transparent">
+            <Button asChild variant="outline" className="rounded-[10px] border-2 border-[#8F2621] text-[#8F2621] hover:bg-[#8F2621] hover:text-white px-6 sm:px-8 py-4 sm:py-5 min-h-[44px] text-sm sm:text-base transition-all bg-transparent cursor-pointer">
               <Link to="/features">Explore Locations</Link>
             </Button>
           </div>

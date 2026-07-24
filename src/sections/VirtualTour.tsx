@@ -251,7 +251,7 @@ export default function VirtualTour() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={tabListVariants}
-            className="flex flex-wrap gap-3 border-t border-[#999991]/20 p-5 bg-white"
+            className="flex flex-wrap gap-2.5 sm:gap-3 border-t border-[#999991]/20 p-4 sm:p-5 bg-white"
           >
             {rooms.map((room) => {
               const Icon = room.icon;
@@ -261,9 +261,9 @@ export default function VirtualTour() {
                   key={room.key}
                   variants={tabItemVariants}
                   onClick={() => setActiveKey(room.key)}
-                  className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors duration-300 ${
+                  className={`flex items-center gap-2 rounded-full border px-3.5 py-2.5 sm:px-4 sm:py-2 text-xs sm:text-sm min-h-[44px] cursor-pointer transition-colors duration-300 ${
                     isActive
-                      ? "border-[#8F2621] bg-[#8F2621] text-white"
+                      ? "border-[#8F2621] bg-[#8F2621] text-white font-medium"
                       : "border-[#999991]/35 bg-transparent text-[#999991] hover:border-[#8F2621]/50 hover:text-[#8F2621]"
                   }`}
                 >

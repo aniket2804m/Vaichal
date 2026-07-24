@@ -206,24 +206,24 @@ export default function Awards() {
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? -1 : gi)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-[#F5F7E3]/35"
+                  className="flex w-full items-center justify-between gap-4 px-4 sm:px-6 py-4 sm:py-5 text-left cursor-pointer min-h-[44px] transition-colors hover:bg-[#F5F7E3]/35"
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
                     <motion.span
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#7A9636]/10 text-[#7A9636]"
+                      className="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl bg-[#7A9636]/10 text-[#7A9636]"
                       whileHover={{ rotate: 8, scale: 1.05 }}
                     >
                       <Icon size={20} />
                     </motion.span>
                     <div>
-                      <h3 className="text-base font-bold text-[#1B1B1B] sm:text-lg">{group.title}</h3>
+                      <h3 className="text-sm font-bold text-[#1B1B1B] sm:text-lg leading-tight">{group.title}</h3>
                       {group.subtitle && (
-                        <p className="text-xs text-[#4A4A45] sm:text-sm">{group.subtitle}</p>
+                        <p className="text-xs text-[#4A4A45] sm:text-sm mt-0.5">{group.subtitle}</p>
                       )}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4 shrink-0">
                     <span className="hidden rounded-full bg-[#F5F7E3] border border-[#999991]/20 px-3 py-1 text-xs text-[#4A4A45] font-semibold sm:inline-block">
                       {group.rows.length} awards
                     </span>

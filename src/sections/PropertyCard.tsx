@@ -24,6 +24,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
   const rotateY = useTransform(x, [-150, 150], [-8, 8]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (window.matchMedia("(max-width: 1024px)").matches) return;
     const rect = event.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -80,7 +81,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         {/* Sliding Price Tag in image bottom */}
         <div className="absolute bottom-4 right-4 overflow-hidden rounded-xl shadow-md">
           <div
-            className="bg-[#8F2621] text-white px-4 py-2 font-serif font-bold text-sm flex items-center gap-1 border border-[#8F2621]/20 rounded-xl"
+            className="bg-[#8F2621] text-white px-3.5 py-1.5 sm:px-4 sm:py-2 font-serif font-bold text-xs sm:text-sm flex items-center gap-1 border border-[#8F2621]/20 rounded-xl"
           >
             {property.price}
           </div>
@@ -88,31 +89,31 @@ export default function PropertyCard({ property }: PropertyCardProps) {
       </div>
 
       {/* Property Info Details */}
-      <div className="p-6 flex flex-col flex-grow bg-white">
+      <div className="p-4 sm:p-6 flex flex-col flex-grow bg-white">
         {/* Location tag */}
         <div className="flex items-center gap-1 text-[#7A9636] text-xs mb-2">
           <MapPin className="w-3.5 h-3.5 shrink-0" />
-          <span className="font-sans font-medium tracking-wide uppercase">{property.location}</span>
+          <span className="font-sans font-medium tracking-wide uppercase truncate">{property.location}</span>
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-serif font-bold text-[#1B1B1B] group-hover:text-[#8F2621] transition-colors duration-300 mb-4 leading-tight">
+        <h3 className="text-lg sm:text-xl font-serif font-bold text-[#1B1B1B] group-hover:text-[#8F2621] transition-colors duration-300 mb-4 leading-tight">
           {property.title}
         </h3>
 
         {/* Micro Specs Flex Row */}
-        <div className="grid grid-cols-3 gap-3 pt-4 mt-auto border-t border-[#999991]/20 text-[#999991] text-xs font-sans">
-          <div className="flex items-center gap-1.5">
-            <BedDouble className="w-4 h-4 text-[#7A9636]" />
-            <span>{property.beds} Bed</span>
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-3 sm:pt-4 mt-auto border-t border-[#999991]/20 text-[#999991] text-[10px] sm:text-xs font-sans">
+          <div className="flex items-center gap-1 truncate">
+            <BedDouble className="w-3.5 h-3.5 text-[#7A9636] shrink-0" />
+            <span className="truncate">{property.beds} Bed</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <Bath className="w-4 h-4 text-[#7A9636]" />
-            <span>{property.baths} Bath</span>
+          <div className="flex items-center gap-1 truncate justify-center">
+            <Bath className="w-3.5 h-3.5 text-[#7A9636] shrink-0" />
+            <span className="truncate">{property.baths} Bath</span>
           </div>
-          <div className="flex items-center gap-1.5 justify-end">
-            <Maximize2 className="w-4 h-4 text-[#7A9636]" />
-            <span>{property.sqft} sq.ft.</span>
+          <div className="flex items-center gap-1 justify-end truncate">
+            <Maximize2 className="w-3.5 h-3.5 text-[#7A9636] shrink-0" />
+            <span className="truncate">{property.sqft} sqft</span>
           </div>
         </div>
       </div>

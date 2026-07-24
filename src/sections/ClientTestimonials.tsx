@@ -198,7 +198,7 @@ export default function ClientTestimonials() {
   whileInView={{ opacity: 1, y: 0 }}
   viewport={{ once: true, amount: 0.2 }}
   transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-  className="relative overflow-hidden rounded-3xl border border-[#999991]/30 bg-white px-8 py-10 sm:px-14 sm:py-14 shadow-sm"
+  className="relative overflow-hidden rounded-3xl border border-[#999991]/30 bg-white px-5 py-8 sm:px-14 sm:py-14 shadow-sm"
 >
           <motion.div
             initial={{ opacity: 0, scale: 0.5, rotate: -8 }}
@@ -241,23 +241,27 @@ export default function ClientTestimonials() {
             </motion.div>
           </AnimatePresence>
 
-          {/* dot controls */}
-          <div className="mt-10 flex gap-2">
+          {/* dot controls with 44px touch targets */}
+          <div className="mt-10 flex gap-4 items-center">
             {testimonials.map((t, i) => (
               <button
                 key={t.id}
                 onClick={() => setActiveIndex(i)}
                 aria-label={`Show testimonial from ${t.name}`}
-                className="group relative h-2 rounded-full bg-[#999991]/30 transition-all duration-300"
-                style={{ width: i === activeIndex ? 28 : 8 }}
+                className="group relative p-3 -m-2 flex items-center justify-center cursor-pointer min-w-[44px] min-h-[44px]"
               >
-                {i === activeIndex && (
-                  <motion.span
-                    layoutId="activeDot"
-                    className="absolute inset-0 rounded-full bg-[#8F2621]"
-                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                )}
+                <span
+                  className="block h-2 rounded-full bg-[#999991]/30 transition-all duration-300 relative"
+                  style={{ width: i === activeIndex ? 28 : 8 }}
+                >
+                  {i === activeIndex && (
+                    <motion.span
+                      layoutId="activeDot"
+                      className="absolute inset-0 rounded-full bg-[#8F2621]"
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    />
+                  )}
+                </span>
               </button>
             ))}
           </div>

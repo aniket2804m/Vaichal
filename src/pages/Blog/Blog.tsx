@@ -336,6 +336,7 @@ function PostCard({ post: p, index: i }: { post: Post; index: number }) {
   );
 
   const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (window.matchMedia("(max-width: 1024px)").matches) return;
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     mx.set((e.clientX - rect.left) / rect.width);
@@ -559,6 +560,11 @@ const BLG_STYLES = `
 
 @media (max-width: 860px){
   .blg-featured{grid-template-columns:1fr}
+}
+@media (max-width: 640px){
+  .blg{padding:5rem 1rem 4rem}
+  .blg-featured-body{padding:1.2rem 1rem}
+  .blg-title{font-size:2.2rem}
 }
 @media (prefers-reduced-motion: reduce){
   .blg-card-frame, .blg-img-wrap img, .blg-scan, .blg-featured-media img{transition:none;animation:none}
