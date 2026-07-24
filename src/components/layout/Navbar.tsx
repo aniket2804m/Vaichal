@@ -52,8 +52,8 @@ const Navbar = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className={`w-full pointer-events-auto transition-all duration-300 ease-in-out border-b ${
   scrolled
-    ? "py-3 bg-[#7A9636]/80 backdrop-blur-lg border-[#999991]/20 shadow-sm"
-    : "py-5 bg-[#7A9636]/80 backdrop-blur-md border-[#999991]/10"
+    ? "py-3 bg-[#EDEDED]/50 backdrop-blur-lg border-[#999991]/20 shadow-sm"
+    : "py-5 bg-[#EDEDED]/50 backdrop-blur-md border-[#999991]/10"
 }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
