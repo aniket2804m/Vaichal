@@ -107,7 +107,7 @@ export default function FloatingNavBar() {
         }
         
         .nav-item:hover {
-          color: #7A9636; /* Hover color is Olive */
+          color: #8F2621 ; /* Hover color is Olive */
           transform: translateY(-2px);
         }
         
@@ -169,7 +169,7 @@ export default function FloatingNavBar() {
       {/* Floating Navigation Bar */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-3xl">
         {/* Main nav container with glass effect */}
-        <div className="nav-glass rounded-full h-14 px-2 md:px-4 flex items-center justify-center gap-2 md:gap-4">
+        <div className="nav-glass rounded-full h-10 px-2 md:px-4 flex items-center justify-center gap-2 md:gap-4">
           {/* Left Section - Search */}
           <div className="nav-section">
             <button 
