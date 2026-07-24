@@ -6,9 +6,9 @@ export default function Hero() {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-[#F5F7E3] select-none">
       {/* Floating Navigation Bar (z-40) */}
-      <div className="absolute bottom-4 sm:bottom-6 left-0 w-full z-40">
-        <FloatingNavBar />
-      </div>
+      <div className="absolute -bottom-8 left-0 w-full z-40">
+  <FloatingNavBar />
+</div>
 
       {/* CSS style block for premium shadows to enhance text legibility */}
       <style>{`
@@ -20,13 +20,13 @@ export default function Hero() {
       `}</style>
 
       {/* Rule 1: Static Image Background with object-cover and centered object-position */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center z-10">
-        <img
-          src={cad}
-          alt="Estate Blueprint CAD"
-          className="absolute inset-0 w-full h-full object-cover object-center sm:object-center"
-        />
-      </div>
+      <div className="relative w-full h-full overflow-hidden">
+  <img
+    src={cad}
+    alt="Estate Blueprint CAD"
+    className="w-full h-full object-cover object-center"
+  />
+</div>
 
       {/* Rule 3: Scrolling mouse/chevron helper positioned responsively to avoid overlapping navigation on mobile */}
       <div className="absolute bottom-20 sm:bottom-10 right-4 sm:right-10 z-30 flex items-center gap-3 pointer-events-none">
