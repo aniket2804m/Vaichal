@@ -1,7 +1,8 @@
-import home1 from "../assets/images/Hero/home1.png";
-import home2 from "../assets/images/Hero/home2.png";
-import home3 from "../assets/images/Hero/home3.png";
-import home4 from "../assets/images/Hero/home4.png";
+import home1 from "../assets/images/card/card1.png";
+import home2 from "../assets/images/card/card2.png";
+import home3 from "../assets/images/card/card3.png";
+import home4 from "../assets/images/card/card4.png";
+import home5 from "../assets/images/card/card5.png";
 import venkys1 from "../assets/images/Projects/Venkys1.png";
 import venkys2 from "../assets/images/Projects/Venkys2.png";
 import venkys3 from "../assets/images/Projects/Venkys3.png";
@@ -25,7 +26,7 @@ export const services: ServiceItem[] = [
     title: "Luxury Residential Development",
     short: "Bespoke Sanctuaries",
     description: "Crafting bespoke residential sanctuaries in harmony with natural surroundings. Every home is a masterpiece of timeless design, utilizing premium eco-friendly materials and smart automation.",
-    images: [home1, home2, home3, home4],
+    images: [home1, home2, home3, home4, home5],
     icon: "🏡",
     route: "/services",
     explore: "Explore Residential"
@@ -66,4 +67,27 @@ export const services: ServiceItem[] = [
     route: "/services",
     explore: "Explore Sustainability"
   }
+];
+
+export interface CardItem {
+  images?: string[];
+  image?: string;
+}
+
+export const service: CardItem[] = [
+  {
+    images: [home1],
+  },
+  {
+    images: [home2],
+  },
+  {
+    images: [home3],
+  },
+  {
+    images: [home4],
+  },
+  {
+    images: [home5],
+  },
 ];

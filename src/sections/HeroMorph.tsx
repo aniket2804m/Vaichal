@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "../lib/gsap-init";
 import { motion } from "framer-motion";
-// import { X } from "lucide-react";
 
 const BASE_PATH = 
   "M 0 280 L 100 280 L 110 285 L 280 285 L 290 280 L 450 280 L 470 290 L 590 290 L 600 280 L 1050 280 L 1070 290 L 1200 290 L 1215 280 L 1400 280 L 1420 285 L 1600 285" +
@@ -109,17 +108,16 @@ const SkylineSVG = ({ className }: { className?: string }) => (
   <svg
     className={className}
     viewBox="0 0 1600 300"
-    preserveAspectRatio="none"
+    preserveAspectRatio="xMidYMax slice"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g className="skyline-fills">
-      {/* Colored Fills (animated opacity wash - much darker!) */}
       <motion.path
         d={CREAM_DOME_FILL}
         fill="#F5F7E3"
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 1.0, 1.0, 0] }}
+        animate={{ opacity: [0, 0.4, 0.4, 0] }}
         transition={{
           duration: 4.5,
           repeat: Infinity,
@@ -131,7 +129,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
         d={TOWER_FILLS}
         fill="#8F2621"
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0.48, 0.48, 0] }}
+        animate={{ opacity: [0, 0.25, 0.25, 0] }}
         transition={{
           duration: 4.5,
           repeat: Infinity,
@@ -143,7 +141,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
         d={OLIVE_BUILDING_FILLS}
         fill="#7A9636"
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0.45, 0.45, 0] }}
+        animate={{ opacity: [0, 0.25, 0.25, 0] }}
         transition={{
           duration: 4.5,
           repeat: Infinity,
@@ -155,7 +153,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
         d={GRAY_BUILDING_FILLS}
         fill="#999991"
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0.45, 0.45, 0] }}
+        animate={{ opacity: [0, 0.25, 0.25, 0] }}
         transition={{
           duration: 4.5,
           repeat: Infinity,
@@ -167,7 +165,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
         d={FILLS_PATH}
         fill="#7A9636"
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0.65, 0.65, 0] }}
+        animate={{ opacity: [0, 0.35, 0.35, 0] }}
         transition={{
           duration: 4.5,
           repeat: Infinity,
@@ -178,15 +176,14 @@ const SkylineSVG = ({ className }: { className?: string }) => (
     </g>
 
     <g className="skyline-outlines">
-      {/* Outlines (pathLength stroke drawing loop - thicker and darker!) */}
       <motion.path
         d={BASE_PATH}
         stroke="#7A9636"
         strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
-        initial={{ pathLength: 0, opacity: 0.6 }}
-        animate={{ pathLength: [0, 1, 1], opacity: [0.6, 1.0, 0.6] }}
+        initial={{ pathLength: 0, opacity: 0.3 }}
+        animate={{ pathLength: [0, 1, 1], opacity: [0.3, 0.5, 0.3] }}
         transition={{
           duration: 4.5,
           repeat: Infinity,
@@ -200,8 +197,8 @@ const SkylineSVG = ({ className }: { className?: string }) => (
         strokeWidth="0.9"
         strokeLinecap="round"
         strokeLinejoin="round"
-        initial={{ pathLength: 0, opacity: 0.4 }}
-        animate={{ pathLength: [0, 1, 1], opacity: [0.4, 0.9, 0.4] }}
+        initial={{ pathLength: 0, opacity: 0.2 }}
+        animate={{ pathLength: [0, 1, 1], opacity: [0.2, 0.45, 0.2] }}
         transition={{
           duration: 5.2,
           repeat: Infinity,
@@ -216,8 +213,8 @@ const SkylineSVG = ({ className }: { className?: string }) => (
         strokeWidth="1.3"
         strokeLinecap="round"
         strokeLinejoin="round"
-        initial={{ pathLength: 0, opacity: 0.5 }}
-        animate={{ pathLength: [0, 1, 1], opacity: [0.5, 1.0, 0.5] }}
+        initial={{ pathLength: 0, opacity: 0.25 }}
+        animate={{ pathLength: [0, 1, 1], opacity: [0.25, 0.45, 0.25] }}
         transition={{
           duration: 4.8,
           repeat: Infinity,
@@ -232,8 +229,8 @@ const SkylineSVG = ({ className }: { className?: string }) => (
         strokeWidth="1.25"
         strokeLinecap="round"
         strokeLinejoin="round"
-        initial={{ pathLength: 0, opacity: 0.5 }}
-        animate={{ pathLength: [0, 1, 1], opacity: [0.5, 1.0, 0.5] }}
+        initial={{ pathLength: 0, opacity: 0.25 }}
+        animate={{ pathLength: [0, 1, 1], opacity: [0.25, 0.45, 0.25] }}
         transition={{
           duration: 4.2,
           repeat: Infinity,
@@ -253,30 +250,24 @@ export default function HeroMorph() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const glassCardRef = useRef<HTMLDivElement>(null);
   const shineSweepRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  // const buttonRef = useRef<HTMLButtonElement>(null);
-  // const [showCard, setShowCard] = useState(true);
-
 
   useEffect(() => {
-
-    // 2. GSAP Animations & Interactive Parallax
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.innerWidth < 768;
     const container = containerRef.current;
     
     if (!container) return;
 
     if (prefersReduced) {
-      // Reduced motion layout static fallback
       gsap.set(imageWrapperRef.current, {
-        width: "75vw",
-        height: "65vh",
+        width: isMobile ? "92vw" : "75vw",
+        height: isMobile ? "55vh" : "65vh",
         borderRadius: "24px"
       });
       gsap.set(imageRef.current, {
         opacity: 0.35,
         scale: 1,
-        filter: "blur(2px)"
+        filter: isMobile ? "none" : "blur(2px)"
       });
       gsap.set(overlayRef.current, {
         opacity: 0.6
@@ -285,51 +276,42 @@ export default function HeroMorph() {
         opacity: 1,
         y: 0,
         scale: 1,
-        rotation: 0,
-        filter: "blur(0px)"
+        filter: "none"
       });
-      const chars = glassCardRef.current?.querySelectorAll(".char");
-      if (chars) gsap.set(chars, { opacity: 1, y: 0 });
-      const subheading = glassCardRef.current?.querySelector(".subheading");
-      if (subheading) gsap.set(subheading, { opacity: 1, y: 0, filter: "none" });
-      const descLines = glassCardRef.current?.querySelectorAll(".desc-line");
-      if (descLines) gsap.set(descLines, { opacity: 1, y: 0 });
-      const button = glassCardRef.current?.querySelector(".luxury-button");
-      if (button) gsap.set(button, { opacity: 1, scale: 1 });
       return;
     }
 
-    const ctx = gsap.context((self) => {
-      // Main ScrollTrigger timeline
+    const ctx = gsap.context(() => {
+      // Main ScrollTrigger timeline - Smooth clean vertical scroll morph
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           start: "top top",
-          end: "+=200%",
-          scrub: 1.5,
+          end: () => (isMobile ? "+=100%" : "+=200%"),
+          scrub: isMobile ? 0.6 : 1.2,
           pin: true,
           anticipatePin: 1,
         },
       });
 
-      // Step 2: Image Wrapper morphs (width & height shrink, corners smooth round)
+      // Step 1: Image Wrapper morphs (width & height shrink, corners smooth round)
       tl.fromTo(
         imageWrapperRef.current,
         {
-          width: () => window.innerWidth < 768 ? "92vw" : "90vw",
-          height: () => window.innerWidth < 768 ? "60vh" : "90vh",
-          borderRadius: "20px",
+          width: () => (window.innerWidth < 768 ? "94vw" : window.innerWidth < 1024 ? "88vw" : "90vw"),
+          height: () => (window.innerWidth < 768 ? "55vh" : window.innerWidth < 1024 ? "75vh" : "90vh"),
+          borderRadius: () => (window.innerWidth < 768 ? "16px" : "20px"),
         },
         {
-          width: () => window.innerWidth < 768 ? "92vw" : "70vw",
-          height: () => window.innerWidth < 768 ? "60vh" : "60vh",
-          borderRadius: "32px",
+          width: () => (window.innerWidth < 768 ? "90vw" : window.innerWidth < 1024 ? "80vw" : "70vw"),
+          height: () => (window.innerWidth < 768 ? "50vh" : window.innerWidth < 1024 ? "60vh" : "60vh"),
+          borderRadius: () => (window.innerWidth < 768 ? "24px" : "32px"),
           ease: "none",
         },
         0
       );
 
-      // Step 2 & 3: Background Image zoom-out, opacity drop, blur, color adjustments
+      // Background Image zoom & opacity
       tl.fromTo(
         imageRef.current,
         {
@@ -339,125 +321,51 @@ export default function HeroMorph() {
         {
           scale: 1.0,
           opacity: 0.3,
-          filter: "blur(6px) brightness(0.55) contrast(1.05)",
+          filter: isMobile ? "brightness(0.55) contrast(1.05)" : "blur(6px) brightness(0.55) contrast(1.05)",
           ease: "none",
         },
         0
       );
 
-      // Step 4: Dark overlay fades in
+      // Dark overlay fade
       tl.fromTo(
         overlayRef.current,
-        {
-          opacity: 0,
-        },
-        {
-          opacity: 0.65,
-          ease: "none",
-        },
+        { opacity: 0 },
+        { opacity: 0.65, ease: "none" },
         0
       );
 
-      // Step 5 & 6: Premium Glass Card container transition (y, opacity, scale, rotation, blur)
+      // Smooth clean entrance for Glass Card (Zero Tilt / Rotation)
       tl.fromTo(
         glassCardRef.current,
         {
           opacity: 0,
-          y: 280,
-          scale: 0.8,
-          rotationX: 8,
-          rotation: 2,
-          filter: "blur(15px)",
+          y: isMobile ? 80 : 180,
+          scale: isMobile ? 0.92 : 0.88,
+          filter: isMobile ? "none" : "blur(10px)",
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          rotationX: 0,
-          rotation: 0,
-          filter: "blur(0px)",
+          filter: "none",
           ease: "power2.out",
         },
-        0.15
+        0.1
       );
 
-      // Step 7: Subheading slide up, fade, blur reveal
+      // Subheading slide & fade
       const subheading = glassCardRef.current?.querySelector(".subheading");
       if (subheading) {
         tl.fromTo(
           subheading,
-          {
-            y: 20,
-            opacity: 0,
-            filter: "blur(6px)",
-          },
-          {
-            y: 0,
-            opacity: 1,
-            filter: "blur(0px)",
-            ease: "power3.out",
-          },
-          0.3
+          { y: 20, opacity: 0, filter: isMobile ? "none" : "blur(6px)" },
+          { y: 0, opacity: 1, filter: "none", ease: "power3.out" },
+          0.25
         );
       }
 
-      // Step 7: Heading letter-by-letter stagger split reveal
-      const chars = glassCardRef.current?.querySelectorAll(".char");
-      if (chars && chars.length > 0) {
-        tl.fromTo(
-          chars,
-          {
-            y: 35,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.02,
-            ease: "power3.out",
-          },
-          0.4
-        );
-      }
-
-      // Step 7: Description lines staggered reveal
-      const descLines = glassCardRef.current?.querySelectorAll(".desc-line");
-      if (descLines && descLines.length > 0) {
-        tl.fromTo(
-          descLines,
-          {
-            y: 20,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.08,
-            ease: "power3.out",
-          },
-          0.55
-        );
-      }
-
-      // Step 7: Button Reveal (scale and opacity)
-      const button = glassCardRef.current?.querySelector(".luxury-button");
-      if (button) {
-        tl.fromTo(
-          button,
-          {
-            scale: 0.8,
-            opacity: 0,
-          },
-          {
-            scale: 1,
-            opacity: 1,
-            ease: "back.out(1.5)",
-          },
-          0.7
-        );
-      }
-
-      // Extra loops: Infinitely running light sweep on glass card
+      // Light sweep reflection effect
       if (shineSweepRef.current) {
         gsap.fromTo(
           shineSweepRef.current,
@@ -471,153 +379,6 @@ export default function HeroMorph() {
           }
         );
       }
-
-      // Ambient pulsing background elements
-      const ambientGlows = container.querySelectorAll(".ambient-glow");
-      if (ambientGlows.length > 0) {
-        gsap.to(ambientGlows, {
-          opacity: 0.45,
-          scale: 1.08,
-          duration: 5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          stagger: 0.5
-        });
-      }
-
-      // Background light rays slow float movement
-      const lightRays = container.querySelector(".light-rays");
-      if (lightRays) {
-        gsap.to(lightRays, {
-          x: 25,
-          y: -15,
-          rotation: 4,
-          duration: 10,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut"
-        });
-      }
-
-      // Lens flare slow float movement
-      const lensFlare = container.querySelector(".lens-flare");
-      if (lensFlare) {
-        gsap.to(lensFlare, {
-          x: -30,
-          y: 30,
-          scale: 1.08,
-          duration: 12,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut"
-        });
-      }
-
-      // Mouse interactive tilt and coordinates tracker
-      const glassCard = glassCardRef.current;
-      const mouseGlow = glowRef.current;
-
-      const onMouseMove = (e: MouseEvent) => {
-        const rect = container.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        if (mouseGlow) {
-          gsap.to(mouseGlow, {
-            x: x - 150,
-            y: y - 150,
-            duration: 0.35,
-            ease: "power2.out"
-          });
-        }
-
-        if (glassCard) {
-          const cardRect = glassCard.getBoundingClientRect();
-          const cardCenterX = cardRect.left + cardRect.width / 2;
-          const cardCenterY = cardRect.top + cardRect.height / 2;
-          const mouseXFromCard = e.clientX - cardCenterX;
-          const mouseYFromCard = e.clientY - cardCenterY;
-
-          // Compute max 8-degree rotations
-          const tiltX = (mouseYFromCard / (window.innerHeight / 2)) * -8;
-          const tiltY = (mouseXFromCard / (window.innerWidth / 2)) * 8;
-
-          gsap.to(glassCard, {
-            rotationX: tiltX,
-            rotationY: tiltY,
-            transformPerspective: 1200,
-            ease: "power2.out",
-            duration: 0.45
-          });
-
-          const content = glassCard.querySelector(".card-content");
-          if (content) {
-            gsap.to(content, {
-              x: tiltY * 0.6,
-              y: -tiltX * 0.6,
-              ease: "power2.out",
-              duration: 0.45
-            });
-          }
-
-          // Compute float shadow shift opposite to rotation
-          gsap.to(glassCard, {
-            boxShadow: `${-tiltY * 1.5}px ${tiltX * 1.5}px 50px -15px rgba(122, 150, 54, 0.15), 0 25px 50px -12px rgba(0, 0, 0, 0.05)`,
-            duration: 0.45
-          });
-        }
-      };
-
-      const onMouseLeave = () => {
-        if (glassCard) {
-          gsap.to(glassCard, {
-            rotationX: 0,
-            rotationY: 0,
-            ease: "power3.out",
-            duration: 0.65
-          });
-          const content = glassCard.querySelector(".card-content");
-          if (content) {
-            gsap.to(content, {
-              x: 0,
-              y: 0,
-              ease: "power3.out",
-              duration: 0.65
-            });
-          }
-          gsap.to(glassCard, {
-            boxShadow: "0 25px 60px -15px rgba(122, 150, 54, 0.08), 0 20px 40px -12px rgba(0, 0, 0, 0.05)",
-            duration: 0.65
-          });
-        }
-        if (mouseGlow) {
-          gsap.to(mouseGlow, {
-            opacity: 0,
-            duration: 0.4
-          });
-        }
-      };
-
-      const onMouseEnter = () => {
-        if (mouseGlow) {
-          gsap.to(mouseGlow, {
-            opacity: 0.15,
-            duration: 0.25
-          });
-        }
-      };
-
-      container.addEventListener("mousemove", onMouseMove);
-      container.addEventListener("mouseleave", onMouseLeave);
-      container.addEventListener("mouseenter", onMouseEnter);
-
-      // Register unmount cleanup for mouse events
-      self.add(() => {
-        container.removeEventListener("mousemove", onMouseMove);
-        container.removeEventListener("mouseleave", onMouseLeave);
-        container.removeEventListener("mouseenter", onMouseEnter);
-      });
     }, container);
 
     return () => {
@@ -625,65 +386,11 @@ export default function HeroMorph() {
     };
   }, []);
 
-  // const handleButtonMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   const btn = e.currentTarget;
-  //   const rect = btn.getBoundingClientRect();
-  //   const x = e.clientX - rect.left - rect.width / 2;
-  //   const y = e.clientY - rect.top - rect.height / 2;
-
-  //   // Pull button toward cursor (magnetic hover)
-  //   gsap.to(btn, {
-  //     x: x * 0.35,
-  //     y: y * 0.35,
-  //     scale: 1.04,
-  //     duration: 0.3,
-  //     ease: "power2.out",
-  //   });
-
-  //   const glow = btn.querySelector(".btn-inner-glow") as HTMLSpanElement;
-  //   if (glow) {
-  //     gsap.to(glow, {
-  //       x: e.clientX - rect.left - 48,
-  //       y: e.clientY - rect.top - 48,
-  //       opacity: 0.6,
-  //       duration: 0.15,
-  //     });
-  //   }
-  // };
-
-  // const handleButtonMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   const btn = e.currentTarget;
-  //   gsap.to(btn, {
-  //     x: 0,
-  //     y: 0,
-  //     scale: 1,
-  //     duration: 0.5,
-  //     ease: "elastic.out(1.1, 0.4)",
-  //   });
-
-  //   const glow = btn.querySelector(".btn-inner-glow") as HTMLSpanElement;
-  //   if (glow) {
-  //     gsap.to(glow, {
-  //       opacity: 0,
-  //       duration: 0.4,
-  //     });
-  //   }
-  // };
-
-  // const titleText = "THE MONARCH";
-  // const titleWords = titleText.split(" ");
-
-  // const descLines = [
-  //   "A limited collection of ultra-luxury estate residences",
-  //   "soaring above Pune's elite green sanctuary. Engineered",
-  //   "for those who command the horizon."
-  // ];
-
   return (
     <div
       ref={containerRef}
       id="discover"
-      className="relative w-full h-screen bg-[#F5F7E3] flex items-center justify-center overflow-hidden [perspective:1200px]"
+      className="relative w-full h-screen bg-[#F5F7E3] flex items-center justify-center overflow-hidden"
     >
       <style>{`
         @keyframes shine {
@@ -730,17 +437,17 @@ export default function HeroMorph() {
         <div className="absolute inset-0 bg-[#F5F7E3]" />
         
         {/* Olive radial ambient glow top-left */}
-        <div className="ambient-glow absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,_rgba(122,150,54,0.08)_0%,_transparent_70%)] opacity-30 pointer-events-none will-change-transform" />
+        <div className="ambient-glow absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,_rgba(122,150,54,0.08)_0%,_transparent_70%)] opacity-30 pointer-events-none" />
         
         {/* Maroon radial ambient glow bottom-right */}
-        <div className="ambient-glow absolute -bottom-[15%] -right-[15%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,_rgba(143,38,33,0.06)_0%,_transparent_70%)] opacity-25 pointer-events-none will-change-transform" />
+        <div className="ambient-glow absolute -bottom-[15%] -right-[15%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,_rgba(143,38,33,0.06)_0%,_transparent_70%)] opacity-25 pointer-events-none" />
         
         {/* Center radial depth mask */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-[radial-gradient(circle,_rgba(245,247,227,0.7)_0%,_#F5F7E3_80%)] pointer-events-none" />
       </div>
 
       {/* Ambient Light Rays */}
-      <div className="light-rays absolute inset-0 opacity-[0.05] pointer-events-none z-0 mix-blend-screen will-change-transform">
+      <div className="light-rays absolute inset-0 opacity-[0.05] pointer-events-none z-0 mix-blend-screen hidden sm:block">
         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ray-grad" x1="0" y1="0" x2="1" y2="1">
@@ -756,7 +463,7 @@ export default function HeroMorph() {
       </div>
 
       {/* Soft Lens Flare */}
-      <div className="lens-flare absolute top-[20%] left-[15%] w-[350px] h-[350px] pointer-events-none z-0 mix-blend-screen opacity-[0.07] will-change-transform">
+      <div className="lens-flare absolute top-[20%] left-[15%] w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] pointer-events-none z-0 mix-blend-screen opacity-[0.07] hidden sm:block">
         <svg className="w-full h-full" viewBox="0 0 200 200">
           <defs>
             <radialGradient id="flare-center" cx="50%" cy="50%" r="50%">
@@ -790,124 +497,47 @@ export default function HeroMorph() {
       </svg>
 
       {/* Infinite Scrolling Architectural Skyline Background (z-1) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-1 overflow-hidden bg-gradient-to-t from-[#CBE0E3] via-[#E4F0F2] to-transparent opacity-[0.98]">
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-1 overflow-hidden">
         <div className="flex w-[200%] h-full scroll-skyline">
           <SkylineSVG className="w-1/2 h-full" />
           <SkylineSVG className="w-1/2 h-full" />
         </div>
       </div>
 
-      {/* Interactive Mouse Glow */}
+      {/* Flat Glass Card Container (Zero Tilt/Rotation) */}
       <div
-        ref={glowRef}
-        className="absolute w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,_rgba(122,150,54,0.18)_0%,_transparent_70%)] pointer-events-none opacity-0 mix-blend-screen z-10 will-change-transform"
-      />
-
-
-{/* Premium Glass Card Container */}
-      <div
-  ref={glassCardRef}
-  className={`relative z-30 p-[1.5px] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-gradient-to-b from-[#7A9636]/30 via-white/5 to-[#8F2621]/15 shadow-[0_25px_60px_-15px_rgba(122,150,54,0.08)] opacity-0 select-none will-change-[transform,opacity,filter] max-w-[90vw] md:max-w-4xl [transform-style:preserve-3d]`}
->
-  {/* Card Background - now transparent instead of white */}
-  <div className="bg-transparent backdrop-blur-md rounded-[18.5px] sm:rounded-[34.5px] p-5 sm:p-8 md:p-12 lg:p-16 text-center flex flex-col items-center relative z-20 [transform-style:preserve-3d]">
-    
-    {/* Close Button */}
-    {/* <button
-      onClick={() => setShowCard(false)}
-      className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-[#7A9636]/20 flex items-center justify-center text-[#8F2621] hover:bg-[#8F2621] hover:text-white transition-all duration-300 shadow-lg cursor-pointer [transform:translateZ(20px)]"
-      aria-label="Close card"
-    >
-      <X className="w-5 h-5" />
-    </button> */}
-
-    {/* Shine sweep reflection */}
-    <div
-      ref={shineSweepRef}
-      className="absolute top-0 bottom-0 left-[-150%] w-[120%] bg-gradient-to-r from-transparent via-[#7A9636]/10 to-transparent skew-x-[-22deg] pointer-events-none z-10 will-change-[left]"
-    />
-
-    <div className="card-content flex flex-col items-center w-full z-20 [transform-style:preserve-3d] will-change-transform">
-      
-      {/* Tagline / Subheading */}
-      <motion.h1
-        initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-        className="font-bold leading-[1.05] tracking-tight text-brand-black"
-        style={{ fontFamily: "'Cormorant Garamond', serif" }}
+        ref={glassCardRef}
+        className="relative z-30 opacity-0 w-[94vw] sm:w-[90vw] md:w-[85vw] lg:w-full max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl mx-auto px-2 sm:px-4"
       >
-        <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-maroon drop-shadow-[0_2px_6px_rgba(255,255,255,0.6)]">
-          Built by the company Tata Housing and Godrej trust with their own projects
-        </span>
-
-        <span className="relative inline-block mt-4 text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-brand-olive font-bold drop-shadow-[0_2px_6px_rgba(255,255,255,0.6)]">
-          Now building yours
-          <motion.span
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ delay: 0.8, duration: 1.2 }}
-            className="absolute -bottom-3 left-0 h-[2px] bg-brand-maroon shadow-[0_0_8px_#F5F7E3]"
+        <div className="bg-[#F5F7E3]/60 sm:bg-[#F5F7E3]/45 border border-[#7A9636]/25 shadow-xl backdrop-blur-md rounded-[20px] sm:rounded-[28px] md:rounded-[36px] p-4 sm:p-6 md:p-10 lg:p-14 xl:p-16 text-center flex flex-col items-center relative z-20">
+          
+          {/* Shine sweep reflection */}
+          <div
+            ref={shineSweepRef}
+            className="absolute top-0 bottom-0 left-[-150%] w-[120%] bg-gradient-to-r from-transparent via-[#7A9636]/10 to-transparent skew-x-[-22deg] pointer-events-none z-10 will-change-[left]"
           />
-        </span>
-      </motion.h1>
 
-      {/* Split Heading with overflow masked slide up */}
-      {/* <h2 className="text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#1B1B1B] font-bold leading-none tracking-tight mb-4 sm:mb-6 flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.1em] pointer-events-none drop-shadow-[0_2px_8px_rgba(255,255,255,0.7)]">
-        {titleWords.map((word, wordIndex) => (
-          <span key={wordIndex} className="inline-block whitespace-nowrap overflow-hidden py-1.5">
-            {word.split("").map((char, charIndex) => (
-              <span key={charIndex} className="char inline-block translate-y-[100%] opacity-0 will-change-[transform,opacity]">
-                {char}
+          <div className="card-content flex flex-col items-center w-full z-20">
+            
+            {/* Heading & Subheading proportional clamp scaling */}
+            <motion.h1
+              className="font-bold leading-[1.15] sm:leading-[1.1] tracking-tight text-brand-black w-full"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            >
+              <span className="font-extrabold block mt-2 sm:mt-4 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-brand-maroon drop-shadow-[0_2px_4px_rgba(0,0,0,0.18)] break-words">
+                Built by the company Tata Housing and Godrej trust with their own projects
               </span>
-            ))}
-          </span>
-        ))}
-      </h2> */}
 
-      {/* Paragraph lines revealed */}
-      {/* <div className="max-w-xl text-[#4A4A44] font-sans font-light text-[11px] sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 flex flex-col gap-y-1.5 drop-shadow-[0_1px_4px_rgba(255,255,255,0.6)]">
-        {descLines.map((line, index) => (
-          <span key={index} className="block overflow-hidden py-0.5">
-            <span className="desc-line inline-block translate-y-[100%] opacity-0 will-change-[transform,opacity]">
-              {line}
-            </span>
-          </span>
-        ))}
-      </div> */}
-
-      {/* Luxury Gold Button */}
-      {/* <button
-        ref={buttonRef}
-        onMouseMove={handleButtonMouseMove}
-        onMouseLeave={handleButtonMouseLeave}
-        className="luxury-button group relative px-5 py-2.5 sm:px-7 sm:py-3.5 bg-gradient-to-r from-[#8F2621] via-[#7A9636] to-[#8F2621] text-white font-sans font-bold tracking-[0.22em] text-[9px] sm:text-xs uppercase rounded-full shadow-[0_0_25px_rgba(143,38,33,0.22)] hover:shadow-[0_0_45px_rgba(143,38,33,0.5)] transition-shadow duration-500 overflow-hidden outline-none cursor-pointer flex items-center justify-center select-none opacity-0"
-        aria-label="Request Private Preview"
-      >
-        <span className="btn-inner-glow absolute w-24 h-24 rounded-full bg-white/20 blur-md pointer-events-none opacity-0" />
-        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent skew-x-[-20deg] translate-x-[-150%] group-hover:animate-[shine_1.5s_infinite] pointer-events-none" />
-        <span className="relative z-10 flex items-center">
-          Request Private Preview
-          <span className="relative w-4 h-4 ml-2.5 overflow-hidden flex items-center justify-center">
-            <span className="absolute transition-transform duration-300 transform translate-x-0 group-hover:translate-x-4">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-            <span className="absolute transition-transform duration-300 transform -translate-x-4 group-hover:translate-x-0">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </span>
-          </span>
-        </span>
-      </button> */}
-    </div>
-  </div>
-</div>
-
-
-
+              <span style={{ fontFamily: "'Cormorant Garamond', serif" }} className="relative inline-block mt-3 sm:mt-5 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-brand-olive font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.18)]">
+                Now building yours
+                <motion.span
+                  className="absolute -bottom-2 sm:-bottom-3 left-0 right-0 h-[2px] sm:h-[3px] bg-brand-maroon shadow-[0_0_8px_#F5F7E3]"
+                />
+              </span>
+            </motion.h1>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

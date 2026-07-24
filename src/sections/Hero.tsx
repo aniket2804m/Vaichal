@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-[#F5F7E3] select-none">
       {/* Floating Navigation Bar (z-40) */}
-      <div className="absolute bottom-6 left-0 w-full z-40">
+      <div className="absolute bottom-4 sm:bottom-6 left-0 w-full z-40">
         <FloatingNavBar />
       </div>
 
@@ -19,19 +19,19 @@ export default function Hero() {
         }
       `}</style>
 
-      {/* Static Image Background (z-10) - Original clear image without dark overlays */}
+      {/* Rule 1: Static Image Background with object-cover and centered object-position */}
       <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center z-10">
         <img
           src={cad}
           alt="Estate Blueprint CAD"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center sm:object-center"
         />
       </div>
 
-      {/* Scrolling mouse/chevron helper (z-30) */}
-      <div className="absolute bottom-10 right-10 z-30 flex items-center gap-3 pointer-events-none">
-        <div className="animate-bounce rounded-full p-3 bg-brand-maroon shadow-md">
-          <ArrowDown className="w-4 h-4 text-[#F5F7E3]" />
+      {/* Rule 3: Scrolling mouse/chevron helper positioned responsively to avoid overlapping navigation on mobile */}
+      <div className="absolute bottom-20 sm:bottom-10 right-4 sm:right-10 z-30 flex items-center gap-3 pointer-events-none">
+        <div className="animate-bounce rounded-full p-2.5 sm:p-3 bg-brand-maroon shadow-md">
+          <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F5F7E3]" />
         </div>
       </div>
     </section>
