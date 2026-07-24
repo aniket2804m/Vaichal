@@ -99,7 +99,7 @@ export default function Stats() {
           <h2 className="text-3xl mb-6 md:text-5xl font-serif text-[#8F2621] font-bold">
             By The Numbers
           </h2>
-          <p className="mt-4 max-w-lg mx-auto text-sm text-[#999991] font-sans font-light">
+          <p className="mt-4 max-6w-lg mx-auto text-sm text-[#999991] font-sans font-light">
             Providing high-return architectural marvels and unparalleled spaces across premium micro-markets.
           </p>
         </div>

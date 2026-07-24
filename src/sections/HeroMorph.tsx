@@ -115,7 +115,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
     <g className="skyline-fills">
       <motion.path
         d={CREAM_DOME_FILL}
-        fill="#F5F7E3"
+        fill="#F3F4F6"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.4, 0.4, 0] }}
         transition={{
@@ -127,7 +127,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
       />
       <motion.path
         d={TOWER_FILLS}
-        fill="#8F2621"
+        fill="#374151"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.25, 0.25, 0] }}
         transition={{
@@ -139,7 +139,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
       />
       <motion.path
         d={OLIVE_BUILDING_FILLS}
-        fill="#7A9636"
+        fill="#6B7280"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.25, 0.25, 0] }}
         transition={{
@@ -151,7 +151,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
       />
       <motion.path
         d={GRAY_BUILDING_FILLS}
-        fill="#999991"
+        fill="#9CA3AF"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.25, 0.25, 0] }}
         transition={{
@@ -163,7 +163,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
       />
       <motion.path
         d={FILLS_PATH}
-        fill="#7A9636"
+        fill="#4B5563"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.35, 0.35, 0] }}
         transition={{
@@ -178,7 +178,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
     <g className="skyline-outlines">
       <motion.path
         d={BASE_PATH}
-        stroke="#7A9636"
+        stroke="#111827"
         strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -193,7 +193,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
       />
       <motion.path
         d={HATCHING_PATH}
-        stroke="#999991"
+        stroke="#6B7280"
         strokeWidth="0.9"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -209,7 +209,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
       />
       <motion.path
         d={FOLIAGE_PATH}
-        stroke="#7A9636"
+        stroke="#374151"
         strokeWidth="1.3"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -225,7 +225,7 @@ const SkylineSVG = ({ className }: { className?: string }) => (
       />
       <motion.path
         d={DETAILS_PATH}
-        stroke="#8F2621"
+        stroke="#1F2937"
         strokeWidth="1.25"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -321,7 +321,7 @@ export default function HeroMorph() {
         {
           scale: 1.0,
           opacity: 0.3,
-          filter: isMobile ? "brightness(0.55) contrast(1.05)" : "blur(6px) brightness(0.55) contrast(1.05)",
+          filter: isMobile ? "grayscale(100%) brightness(0.55) contrast(1.05)" : "grayscale(100%) blur(6px) brightness(0.55) contrast(1.05)",
           ease: "none",
         },
         0
@@ -390,7 +390,7 @@ export default function HeroMorph() {
     <div
       ref={containerRef}
       id="discover"
-      className="relative w-full h-screen bg-[#F5F7E3] flex items-center justify-center overflow-hidden"
+      className="relative w-full h-screen bg-[#F8F7F3] flex items-center justify-center overflow-hidden"
     >
       <style>{`
         @keyframes shine {
@@ -434,16 +434,16 @@ export default function HeroMorph() {
 
       {/* Ambient background glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[#F5F7E3]" />
+        <div className="absolute inset-0 bg-[#F8F7F3]" />
         
-        {/* Olive radial ambient glow top-left */}
-        <div className="ambient-glow absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,_rgba(122,150,54,0.08)_0%,_transparent_70%)] opacity-30 pointer-events-none" />
+        {/* Grayscale ambient glow top-left */}
+        <div className="ambient-glow absolute -top-[10%] -left-[10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.05)_0%,_transparent_70%)] opacity-30 pointer-events-none" />
         
-        {/* Maroon radial ambient glow bottom-right */}
-        <div className="ambient-glow absolute -bottom-[15%] -right-[15%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,_rgba(143,38,33,0.06)_0%,_transparent_70%)] opacity-25 pointer-events-none" />
+        {/* Grayscale ambient glow bottom-right */}
+        <div className="ambient-glow absolute -bottom-[15%] -right-[15%] w-[60%] h-[60%] rounded-full bg-[radial-gradient(circle,_rgba(0,0,0,0.04)_0%,_transparent_70%)] opacity-25 pointer-events-none" />
         
         {/* Center radial depth mask */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-[radial-gradient(circle,_rgba(245,247,227,0.7)_0%,_#F5F7E3_80%)] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-[radial-gradient(circle,_rgba(248,247,243,0.7)_0%,_#F8F7F3_80%)] pointer-events-none" />
       </div>
 
       {/* Ambient Light Rays */}
@@ -451,9 +451,9 @@ export default function HeroMorph() {
         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ray-grad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#7A9636" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#7A9636" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#7A9636" stopOpacity="0" />
+              <stop offset="0%" stopColor="#000000" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#000000" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#000000" stopOpacity="0" />
             </linearGradient>
           </defs>
           <polygon points="10,0 25,0 70,100 50,100" fill="url(#ray-grad)" />
@@ -468,22 +468,22 @@ export default function HeroMorph() {
           <defs>
             <radialGradient id="flare-center" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-              <stop offset="15%" stopColor="#F5F7E3" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#7A9636" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#F5F7E3" stopOpacity="0" />
+              <stop offset="15%" stopColor="#F8F7F3" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#666666" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#F8F7F3" stopOpacity="0" />
             </radialGradient>
             <radialGradient id="flare-ring" cx="50%" cy="50%" r="50%">
-              <stop offset="60%" stopColor="#7A9636" stopOpacity="0" />
-              <stop offset="70%" stopColor="#7A9636" stopOpacity="0.1" />
-              <stop offset="75%" stopColor="#8F2621" stopOpacity="0.15" />
-              <stop offset="80%" stopColor="#7A9636" stopOpacity="0.05" />
-              <stop offset="100%" stopColor="#F5F7E3" stopOpacity="0" />
+              <stop offset="60%" stopColor="#666666" stopOpacity="0" />
+              <stop offset="70%" stopColor="#666666" stopOpacity="0.1" />
+              <stop offset="75%" stopColor="#333333" stopOpacity="0.15" />
+              <stop offset="80%" stopColor="#666666" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="#F8F7F3" stopOpacity="0" />
             </radialGradient>
           </defs>
           <circle cx="100" cy="100" r="80" fill="url(#flare-center)" />
           <circle cx="100" cy="100" r="95" fill="url(#flare-ring)" />
-          <line x1="20" y1="20" x2="180" y2="180" stroke="#7A9636" strokeWidth="0.5" strokeOpacity="0.15" />
-          <line x1="180" y1="20" x2="20" y2="180" stroke="#7A9636" strokeWidth="0.5" strokeOpacity="0.15" />
+          <line x1="20" y1="20" x2="180" y2="180" stroke="#333333" strokeWidth="0.5" strokeOpacity="0.15" />
+          <line x1="180" y1="20" x2="20" y2="180" stroke="#333333" strokeWidth="0.5" strokeOpacity="0.15" />
         </svg>
       </div>
 
@@ -525,7 +525,7 @@ export default function HeroMorph() {
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
               <span className="font-extrabold block mt-2 sm:mt-4 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-brand-maroon drop-shadow-[0_2px_4px_rgba(0,0,0,0.18)] break-words">
-                Built by the company Tata Housing and Godrej trust with their own projects
+                Built by the company <span className="font-extrabold">Tata Housing</span>  and <span className="font-extrabold">Godrej trust</span> with their own projects
               </span>
 
               <span style={{ fontFamily: "'Cormorant Garamond', serif" }} className="relative inline-block mt-3 sm:mt-5 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-brand-olive font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.18)]">
@@ -541,3 +541,4 @@ export default function HeroMorph() {
     </div>
   );
 }
+

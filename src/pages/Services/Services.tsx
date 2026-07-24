@@ -77,7 +77,7 @@ export default function Services() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-6 text-[#999991] font-light text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
+            className="mt-6 text-[#999991] font-light text-lg md:text-xl max-w-6xl mx-auto leading-relaxed"
           >
             We blend exquisite luxury architectural concepts with sustainable, nature-friendly technology to build future-proof landmarks across Pune.
           </motion.p>
@@ -177,7 +177,7 @@ export default function Services() {
                   <div>
                     <Button 
                       asChild 
-                      className="rounded-[10px] bg-[#8F2621] text-white hover:bg-[#7A9636] border-none px-6 py-4 shadow-sm transition-all duration-300"
+                      className="rounded-[10px] bg-[#8F2621] mt-5 text-white hover:bg-[#7A9636] border-none px-6 py-4 shadow-sm transition-all duration-300"
                     >
                       <Link to="/contact" className="flex items-center gap-2 font-medium">
                         Request Consult
