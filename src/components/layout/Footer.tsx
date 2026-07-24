@@ -16,7 +16,6 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaYoutube,
-  FaTwitter,
 } from "react-icons/fa";
 
 // Register ScrollTrigger plugin
@@ -28,10 +27,10 @@ const QUICK_LINKS = [
   { name: "About Us", path: "/about" },
   { name: "Our Projects", path: "/features" },
   { name: "Services", path: "/services" },
-  { name: "Blogs & News", path: "/blog" },
+  { name: "Blogs", path: "/blog" },
   { name: "Awards", path: "/award" },
   { name: "Gallery", path: "/gallery" },
-  { name: "Contact Specialist", path: "/contact" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const PROJECT_LINKS = [
@@ -260,7 +259,7 @@ export default function Footer() {
       {/* Section 1 & 2 Combined Sky Background Container */}
       <div 
         className="relative w-full pt-12 z-10" 
-        style={{ background: "linear-gradient(to bottom, #0F1B2E, #F5F7E3)" }}
+        style={{ background: "#EDEDED" }}
       >
         <svg
           ref={svgRef}
@@ -531,26 +530,20 @@ export default function Footer() {
       </div>
 
       {/* SECTION 3: Footer Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 lg:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 xl:gap-16 items-start">
           
           {/* COLUMN 1: Company Profile */}
-          <div className="footer-animate-col flex flex-col space-y-6">
-            <div>
-              <span className="font-cinzel text-xl md:text-2xl font-bold tracking-[0.2em] text-[#1B1B1B] block">
+          <div className="footer-animate-col flex flex-col items-start space-y-5">
+            <div className="space-y-1">
+              <span className="font-cinzel text-xl md:text-2xl font-bold uppercase tracking-[0.2em] text-[#7A9636] block leading-none">
                 Vaichal
               </span>
-              <span className="font-sans text-xs font-semibold tracking-[0.45em] text-[#7A9636] block uppercase mt-1">
-                Realty
-              </span>
+             
             </div>
 
-            <h4 className="font-serif italic text-base text-[#8F2621] leading-snug">
-              Building Luxury.<br />Creating Legacy.
-            </h4>
-
-            <p className="font-sans font-light text-sm text-[#999991] leading-relaxed">
-              We develop premium residential, commercial, and investment properties designed for modern living and long-term value.
+            <p className="font-sans font-light text-sm md:text-base text-[#999991] leading-relaxed">
+              We develop premium residential, commercial, and investment properties designed for modern living and long term value.
             </p>
 
             {/* Social Links (Glass circle, scale & rotate hover) */}
@@ -560,7 +553,6 @@ export default function Footer() {
                 { icon: FaInstagram, label: "Instagram" },
                 { icon: FaLinkedinIn, label: "LinkedIn" },
                 { icon: FaYoutube, label: "YouTube" },
-                { icon: FaTwitter, label: "Twitter" },
               ].map((social, idx) => {
                 const Icon = social.icon;
                 return (
@@ -568,9 +560,9 @@ export default function Footer() {
                     key={idx}
                     href="#"
                     aria-label={social.label}
-                    className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full border border-[#999991]/30 bg-white/50 backdrop-blur-md flex items-center justify-center text-[#1B1B1B] hover:text-[#8F2621] hover:border-[#8F2621] hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-sm focus:outline-none focus:ring-1 focus:ring-[#8F2621]"
+                    className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full border border-[#999991]/30 bg-white/50 backdrop-blur-md flex items-center justify-center text-[#1B1B1B] hover:text-[#8F2621] hover:border-[#8F2621] hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-sm focus:outline-none focus:ring-1 focus:ring-[#8F2621]"
                   >
-                    <Icon size={16} />
+                    <Icon size={15} />
                   </a>
                 );
               })}
@@ -578,19 +570,19 @@ export default function Footer() {
           </div>
 
           {/* COLUMN 2: Quick Links */}
-          <div className="footer-animate-col flex flex-col space-y-6">
-            <h3 className="font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3">
+          <div className="footer-animate-col flex flex-col items-start space-y-5">
+            <h3 className="w-full font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3 leading-none">
               Quick Links
             </h3>
 
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 font-sans text-sm font-light">
+            <ul className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-4 gap-y-3 font-sans text-sm font-light">
               {QUICK_LINKS.map((link, idx) => (
                 <li key={idx}>
                   <Link
                     to={link.path}
-                    className="group flex items-center gap-1.5 text-[#1B1B1B] hover:text-[#8F2621] transition-all duration-300 py-1"
+                    className="group flex items-center gap-2 text-[#1B1B1B] hover:text-[#8F2621] transition-all duration-300 py-0.5"
                   >
-                    <ChevronRight size={14} className="text-[#7A9636]/60 group-hover:translate-x-1 transition-transform duration-300" />
+                    <ChevronRight size={14} className="text-[#7A9636]/60 shrink-0 group-hover:translate-x-1 transition-transform duration-300" />
                     <span className="relative overflow-hidden block">
                       {link.name}
                       <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#8F2621] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -602,19 +594,19 @@ export default function Footer() {
           </div>
 
           {/* COLUMN 3: Projects */}
-          <div className="footer-animate-col flex flex-col space-y-6">
-            <h3 className="font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3">
+          <div className="footer-animate-col flex flex-col items-start space-y-5">
+            <h3 className="w-full font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3 leading-none">
               Projects
             </h3>
 
-            <ul className="space-y-3.5 font-sans text-sm font-light">
+            <ul className="w-full space-y-3 font-sans text-sm font-light">
               {PROJECT_LINKS.map((proj, idx) => (
                 <li key={idx}>
                   <Link
                     to={proj.path}
-                    className="group flex items-center gap-3 text-[#1B1B1B] hover:text-[#8F2621] transition-all duration-300"
+                    className="group flex items-center gap-3 text-[#1B1B1B] hover:text-[#8F2621] transition-all duration-300 py-0.5"
                   >
-                    <Home size={15} className="text-[#7A9636]/60 group-hover:scale-110 transition-transform" />
+                    <Home size={15} className="text-[#7A9636]/60 shrink-0 group-hover:scale-110 transition-transform" />
                     <span className="relative block">
                       {proj.name}
                       <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#8F2621] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -626,26 +618,24 @@ export default function Footer() {
           </div>
 
           {/* COLUMN 4: Contact & Office info */}
-          <div className="footer-animate-col flex flex-col space-y-6">
-            <h3 className="font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3">
+          <div className="footer-animate-col flex flex-col items-start space-y-5">
+            <h3 className="w-full font-cinzel text-sm font-semibold tracking-[0.25em] text-[#7A9636] uppercase border-b border-[#999991]/25 pb-3 leading-none">
               Contact Us
             </h3>
 
-            <div className="space-y-4 font-sans text-sm font-light text-[#1B1B1B]">
+            <div className="w-full space-y-4 font-sans text-sm font-light text-[#1B1B1B]">
               <div className="flex items-start gap-3.5">
-                <Phone className="w-4 h-4 text-[#7A9636] shrink-0 mt-1" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-[#999991]">Call Specialist</span>
-                  <a href="tel:+919876543210" className="hover:text-[#8F2621] font-semibold transition-colors mt-0.5">
+                <Phone className="w-4 h-4 text-[#7A9636] shrink-0 mt-0.5" />
+                <div className="flex flex-col items-start">
+                  <a href="tel:+919876543210" className="hover:text-[#8F2621] transition-colors mt-0.5">
                     +91 98765 43210
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5">
-                <Mail className="w-4 h-4 text-[#7A9636] shrink-0 mt-1" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-[#999991]">Email Inquiry</span>
+                <Mail className="w-4 h-4 text-[#7A9636] shrink-0 mt-0.5" />
+                <div className="flex flex-col items-start">
                   <a href="mailto:info@vaichal.com" className="hover:text-[#8F2621] transition-colors mt-0.5">
                     info@vaichal.com
                   </a>
@@ -653,22 +643,22 @@ export default function Footer() {
               </div>
 
               <div className="flex items-start gap-3.5">
-                <MapPin className="w-4 h-4 text-[#7A9636] shrink-0 mt-1" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-[#999991]">Corporate Address</span>
+                <Clock className="w-4 h-4 text-[#7A9636] shrink-0 mt-0.5" />
+                <div className="flex flex-col items-start">
+                  <span className="mt-0.5 text-[#1B1B1B]">Mon–Sat: 10AM – 7PM</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3.5">
+                <MapPin className="w-4 h-4 text-[#7A9636] shrink-0 mt-0.5" />
+                <div className="flex flex-col items-start">
                   <span className="leading-relaxed mt-0.5 text-xs text-[#1B1B1B]">
                     Baner Road, Pune, Maharashtra 411045
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3.5">
-                <Clock className="w-4 h-4 text-[#7A9636] shrink-0 mt-1" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-[#999991]">Working Hours</span>
-                  <span className="mt-0.5 text-[#1B1B1B]">Mon–Sat: 10AM – 7PM</span>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -676,7 +666,7 @@ export default function Footer() {
         {/* BOTTOM SECTION */}
         <div className="border-t border-[#999991]/25 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans font-light">
           <p className="text-[#999991] text-center md:text-left">
-            © {new Date().getFullYear()} Vaichal Realty. All Rights Reserved.
+            © {new Date().getFullYear()} Vaichal . All Rights Reserved.
           </p>
 
           <div className="flex items-center gap-6 text-[#999991] flex-wrap justify-center">

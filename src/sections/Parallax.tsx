@@ -84,7 +84,7 @@ function ParallaxBlock({ image, title, subtitle, description, reversed = false }
           {description}
         </p>
         <div>
-          <button className="group relative inline-flex items-center justify-center min-h-[44px] overflow-hidden px-6 py-3 border border-[#8F2621] text-[#8F2621] hover:text-white transition duration-500 text-xs font-semibold uppercase tracking-widest bg-transparent rounded-[10px] cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
+          <button className="group mt-10 relative inline-flex items-center justify-center min-h-[44px] overflow-hidden px-6 py-3 border border-[#8F2621] text-[#8F2621] hover:text-white transition duration-500 text-xs font-semibold uppercase tracking-widest bg-transparent rounded-[10px] cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
             <span className="absolute inset-0 w-full h-full bg-[#8F2621] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-[0.16,1,0.3,1] -z-10" />
             Learn More
           </button>

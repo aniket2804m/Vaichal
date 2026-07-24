@@ -267,6 +267,7 @@ export default function VirtualTour() {
                       : "border-[#999991]/35 bg-transparent text-[#999991] hover:border-[#8F2621]/50 hover:text-[#8F2621]"
                   }`}
                 >
+                  <span className="absolute inset-0 w-full h-full bg-[#8F2621] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-[0.16,1,0.3,1] -z-10" />
                   <Icon size={15} strokeWidth={1.75} />
                   {room.label}
                 </motion.button>
