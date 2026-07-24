@@ -520,39 +520,46 @@ export default function HeroMorph() {
           <div className="card-content flex flex-col items-center w-full z-20">
             
             {/* Heading & Subheading proportional clamp scaling */}
-            <motion.h1
-              className="font-bold leading-[1.15] sm:leading-[1.1] tracking-tight text-brand-black w-full"
-              style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            >
-              <span className="font-extrabold block mt-2 sm:mt-4 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.18)] break-words">
-  <span className="text-black dark:text-white">
-    Built by the company{" "}
-  </span>
+           <motion.h1
+  className="w-full font-bold leading-[1.25] tracking-[0.02em]"
+  style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
+>
+  <span className="block mt-2 sm:mt-4 text-base sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl leading-[1.4]">
+    <span className="text-black dark:text-white">
+      Built by the company
+    </span>
 
-  <span className="text-brand-maroon">
-    Tata Housing
-  </span>
+    <br />
 
-  <span className="text-black dark:text-white">
-    {" "}and{" "}
-  </span>
-
-  <span className="text-brand-maroon">
-    Godrej
-  </span>
-
-  <span className="text-black dark:text-white">
-    {" "}trust with their own projects
-  </span>
+    <span
+  className="text-brand-maroon font-bold whitespace-nowrap transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(128,0,32,0.9)] hover:scale-105"
+>
+  Tata Housing
 </span>
 
-              <span style={{ fontFamily: "'Cormorant Garamond', serif" }} className="relative inline-block mt-3 sm:mt-5 text-lg sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-brand-olive font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.18)]">
-                Now building yours
-                <motion.span
-                  className="absolute -bottom-2 sm:-bottom-3 left-0 right-0 h-[2px] sm:h-[3px] bg-brand-maroon shadow-[0_0_8px_#F5F7E3]"
-                />
-              </span>
-            </motion.h1>
+<span className="text-black dark:text-white"> and </span>
+
+<span
+  className="text-brand-maroon font-bold whitespace-nowrap transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(128,0,32,0.9)] hover:scale-105"
+>
+  Godrej
+</span>
+
+    <br />
+
+    <span className="text-black dark:text-white">
+      trust with their own projects
+    </span>
+  </span>
+
+  <span
+    className="relative inline-block mt-4 text-base sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-brand-olive font-bold leading-[1.3]"
+    style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
+  >
+    Now building yours
+    <motion.span className="absolute -bottom-2 left-0 right-0 h-[2px] bg-brand-maroon" />
+  </span>
+</motion.h1>
           </div>
         </div>
       </div>
