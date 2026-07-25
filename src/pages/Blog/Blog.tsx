@@ -21,9 +21,9 @@
  * ------------------------------------------------------------------
  */
 
-import { useMemo, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform, type Variants } from "framer-motion";
-import { ArrowUpRight, Clock } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform, type Variants } from "framer-motion";
+import { ArrowUpRight, Clock, X } from "lucide-react";
 
 type Category = "Site Safety" | "Industrial Insights" | "Sustainability" | "Client Stories";
 
@@ -153,6 +153,7 @@ const FILTERS: Array<"All" | Category> = [
 
 export default function Blog() {
   const [active, setActive] = useState<"All" | Category>("All");
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   const featured = POSTS.find((p) => p.featured);
   const rest = useMemo(() => {
@@ -160,20 +161,57 @@ export default function Blog() {
     return active === "All" ? list : list.filter((p) => p.category === active);
   }, [active]);
 
+  useEffect(() => {
+    if (!selectedPost) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedPost(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedPost]);
+
   return (
     <section className="blg" aria-label="Vaichal site log">
       <style>{BLG_STYLES}</style>
 
-      <header className="blg-head">
-        <p className="blg-eyebrow">Site Log — dispatches from the field</p>
-        <AnimatedHeading text="Notes From the Build" />
-        <p className="blg-sub">
-          Field observations, project walkthroughs and the occasional hard-won lesson —
+      <div className="text-center py-10 md:py-10 max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center justify-center gap-2 text-[#7A9636] font-semibold tracking-[0.25em] text-sm uppercase mb-4"
+          >
+          
+            <span>Our Blogs</span>
+          </motion.div>
+          
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-4xl md:text-6xl font-serif text-[#8F2621] font-bold leading-tight"
+          >
+            Elevating Living Spaces Through Nature & Luxury
+          </motion.h1>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-6 text-[#999991] font-light text-lg md:text-xl max-w-6xl mx-auto leading-relaxed"
+          >
+            Field observations, project walkthroughs and the occasional hard-won lesson —
           written the way our site engineers actually log them.
-        </p>
-      </header>
+          </motion.p>
+        </div>
 
-      {featured && <FeaturedPost post={featured} />}
+      
+
+      {featured && <FeaturedPost post={featured} onOpen={() => setSelectedPost(featured)} />}
 
       <div className="blg-filters" role="tablist" aria-label="Filter posts by category">
         {FILTERS.map((f) => (
@@ -194,13 +232,19 @@ export default function Blog() {
 
       <div className="blg-grid">
         {rest.map((p, i) => (
-          <PostCard key={p.id} post={p} index={i} />
+          <PostCard key={p.id} post={p} index={i} onOpen={() => setSelectedPost(p)} />
         ))}
       </div>
 
       {rest.length === 0 && (
         <p className="blg-empty">No entries logged under “{active}” yet.</p>
       )}
+
+      <AnimatePresence>
+        {selectedPost && (
+          <PostModal post={selectedPost} onClose={() => setSelectedPost(null)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
@@ -208,34 +252,6 @@ export default function Blog() {
 /* ------------------------------------------------------------------ */
 /* Animated word-by-word heading                                       */
 /* ------------------------------------------------------------------ */
-
-function AnimatedHeading({ text }: { text: string }) {
-  const words = text.split(" ");
-  const container: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.08 } },
-  };
-  const word: Variants = {
-    hidden: { opacity: 0, y: 18, rotateX: 40 },
-    show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-  };
-  return (
-    <motion.h1
-      className="blg-title"
-      variants={container}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true }}
-      style={{ perspective: 600 }}
-    >
-      {words.map((w, i) => (
-        <motion.span key={i} variants={word} className="blg-title-word">
-          {w}&nbsp;
-        </motion.span>
-      ))}
-    </motion.h1>
-  );
-}
 
 /* Reveals a block of text line-by-line as it scrolls into view */
 function AnimatedParagraph({ text, className }: { text: string; className?: string }) {
@@ -269,7 +285,7 @@ function AnimatedParagraph({ text, className }: { text: string; className?: stri
 /* Featured post                                                       */
 /* ------------------------------------------------------------------ */
 
-function FeaturedPost({ post: p }: { post: Post }) {
+function FeaturedPost({ post: p, onOpen }: { post: Post; onOpen: () => void }) {
   return (
     <motion.a
       href={p.href}
@@ -278,6 +294,11 @@ function FeaturedPost({ post: p }: { post: Post }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      onClick={(event) => {
+        event.preventDefault();
+        onOpen();
+      }}
+      aria-label={`Open full article: ${p.title}`}
     >
       <div className="blg-featured-media">
         <img src={p.image} alt={p.title} loading="lazy" />
@@ -322,7 +343,7 @@ function FeaturedPost({ post: p }: { post: Post }) {
 /* Post card with tilt hover                                           */
 /* ------------------------------------------------------------------ */
 
-function PostCard({ post: p, index: i }: { post: Post; index: number }) {
+function PostCard({ post: p, index: i, onOpen }: { post: Post; index: number; onOpen: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
@@ -356,6 +377,11 @@ function PostCard({ post: p, index: i }: { post: Post; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      onClick={(event) => {
+        event.preventDefault();
+        onOpen();
+      }}
+      aria-label={`Open full article: ${p.title}`}
     >
       <motion.div
         ref={ref}
@@ -399,6 +425,64 @@ function PostCard({ post: p, index: i }: { post: Post; index: number }) {
         </div>
       </motion.div>
     </motion.a>
+  );
+}
+
+function PostModal({ post, onClose }: { post: Post; onClose: () => void }) {
+  return (
+    <motion.div
+      className="blg-modal-backdrop"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="blg-modal-card"
+        initial={{ opacity: 0, y: 30, scale: 0.96 }}
+        animate={{ opacity: 1, y: 10, scale: 1.5 }}
+        exit={{ opacity: 0, y: 20, scale: 0.96 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="blg-modal-media">
+          <img src={post.image} alt={post.title} />
+          <span className="blg-modal-badge">{post.log}</span>
+        </div>
+
+        <div className="blg-modal-body">
+          <button type="button" className="blg-modal-close" onClick={onClose} aria-label="Close article">
+            <X size={18} />
+          </button>
+
+          <div className="blg-meta">
+            <span className="blg-cat">{post.category}</span>
+            <span className="blg-date">
+              <Clock size={11} /> {post.readMins} min read
+            </span>
+          </div>
+
+          <h2>{post.title}</h2>
+          <p className="blg-excerpt">{post.excerpt}</p>
+
+          <ul className="blg-takeaways">
+            {post.takeaways.map((takeaway, index) => (
+              <li key={`${post.id}-${index}`}>
+                <span className="blg-redline" />
+                {takeaway}
+              </li>
+            ))}
+          </ul>
+
+          <div className="blg-modal-footer">
+            <span className="blg-date">{post.date}</span>
+            <span className="blg-cta">
+              Continue reading <ArrowUpRight size={16} />
+            </span>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -557,7 +641,35 @@ const BLG_STYLES = `
 .blg-card-excerpt{color:var(--ink-muted);font-size:.85rem;line-height:1.55;margin:0 0 .9rem;font-weight:300}
 
 .blg-empty{text-align:center;color:var(--ink-muted);padding:3rem 0;font-family:'Poppins',sans-serif}
-
+.blg-modal-backdrop{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  padding:1.25rem;background:rgba(27,27,27,0.7);backdrop-filter:blur(10px);
+}
+.blg-modal-card{
+  width:min(940px, 100%);
+  max-height:90vh;overflow:auto;
+  background:var(--surface);border:1px solid var(--grid-line);
+  border-radius:24px;box-shadow:0 28px 90px rgba(0,0,0,0.24);
+  display:grid;grid-template-columns:1.05fr 0.95fr;
+}
+.blg-modal-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:#F5F7E3}
+.blg-modal-media img{width:100%;height:100%;object-fit:cover;display:block}
+.blg-modal-badge{
+  position:absolute;left:12px;bottom:12px;z-index:2;
+  font-family:'Poppins',monospace;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;
+  padding:.35rem .55rem;border-radius:6px;background:rgba(255,255,255,0.9);border:1px solid var(--grid-line);color:var(--paper)
+}
+.blg-modal-body{padding:2rem;position:relative;display:flex;flex-direction:column;gap:1rem}
+.blg-modal-close{
+  position:absolute;top:1rem;right:1rem;border:none;background:rgba(245,247,227,0.95);color:var(--paper);
+  width:2.2rem;height:2.2rem;border-radius:999px;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.08)
+}
+.blg-modal-body h2{
+  font-family:'Lora',sans-serif;font-weight:700;font-size:1.65rem;line-height:1.16;margin:.2rem 0 .2rem;color:var(--paper)
+}
+.blg-modal-footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;padding-top:.25rem}
+ 
 @media (max-width: 860px){
   .blg-featured{grid-template-columns:1fr}
 }
@@ -565,6 +677,9 @@ const BLG_STYLES = `
   .blg{padding:5rem 1rem 4rem}
   .blg-featured-body{padding:1.2rem 1rem}
   .blg-title{font-size:2.2rem}
+  .blg-modal-card{grid-template-columns:1fr}
+  .blg-modal-body{padding:1.25rem 1rem 1.2rem}
+  .blg-modal-body h2{font-size:1.4rem}
 }
 @media (prefers-reduced-motion: reduce){
   .blg-card-frame, .blg-img-wrap img, .blg-scan, .blg-featured-media img{transition:none;animation:none}
