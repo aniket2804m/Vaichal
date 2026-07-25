@@ -547,7 +547,7 @@ export default function HeroMorph() {
 
     <br />
 
-    <span className="text-black dark:text-white">
+    <span className="text-black">
       trust with their own projects
     </span>
   </span>
