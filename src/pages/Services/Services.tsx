@@ -175,16 +175,20 @@ export default function Services() {
                   </p>
                   
                   <div>
-                    <Button 
-                      asChild 
-                      className="rounded-[10px] bg-[#8F2621] mt-5 text-white hover:bg-[#7A9636] border-none px-6 py-4 shadow-sm transition-all duration-300"
-                    >
-                      <Link to="/contact" className="flex items-center gap-2 font-medium">
-                        Request Consult
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </Button>
-                  </div>
+  <Button
+    asChild
+    className="group mt-10 relative inline-flex items-center justify-center min-h-[44px] overflow-hidden px-6 py-3 border border-[#8F2621] text-[#8F2621] hover:text-white transition duration-500 text-xs font-semibold uppercase tracking-widest bg-transparent rounded-[10px] cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+  >
+    <Link to="/contact" className="relative flex items-center gap-2 font-medium">
+      {/* Hover Background */}
+      <span className="absolute inset-0 bg-[#8F2621] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-[0.16,1,0.3,1] -z-10" />
+
+      <span>Request Consult</span>
+
+      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+    </Link>
+  </Button>
+</div>
                 </motion.div>
               </div>
             );
@@ -197,23 +201,51 @@ export default function Services() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="w-full bg-white border border-[#999991]/20 rounded-[24px] p-6 sm:p-12 md:p-16 text-center shadow-xl relative overflow-hidden mt-20 sm:mt-32"
+          className="w-full bg-white border border-[#999991]/20 rounded-[24px] p-6 sm:p-10 md:p-10 text-center shadow-xl relative overflow-hidden mt-10 sm:mt-15"
         >
           <div className="absolute inset-0 bg-[#7A9636]/5 pointer-events-none" />
           <h2 className="text-3xl md:text-5xl font-serif text-[#8F2621] font-bold mb-4">
             Ready to Build Your Sanctuary?
           </h2>
-          <p className="text-[#999991] max-w-xl mx-auto mb-8 font-light text-sm sm:text-base">
+          <p className="text-[#999991] max-6w-xl mx-auto mb-8 font-light text-sm sm:text-base">
             Contact our consulting division to review floor plans, locations, and sustainability frameworks.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button asChild className="rounded-[10px] bg-[#8F2621] hover:bg-[#7A9636] text-white px-6 sm:px-8 py-4 sm:py-5 min-h-[44px] text-sm sm:text-base border-none transition-all cursor-pointer">
-              <Link to="/contact">Book Design Session</Link>
-            </Button>
-            <Button asChild variant="outline" className="rounded-[10px] border-2 border-[#8F2621] text-[#8F2621] hover:bg-[#8F2621] hover:text-white px-6 sm:px-8 py-4 sm:py-5 min-h-[44px] text-sm sm:text-base transition-all bg-transparent cursor-pointer">
-              <Link to="/features">Explore Locations</Link>
-            </Button>
-          </div>
+
+  {/* Book Design Session */}
+  <div className="mt-5 flex flex-col sm:flex-row justify-between gap-4">
+  <Button
+    asChild
+    className="group relative overflow-hidden rounded-[10px] border border-[#8F2621] bg-transparent px-6 sm:px-8 py-4 sm:py-5 min-h-[44px] text-sm sm:text-base font-semibold uppercase tracking-widest text-[#8F2621] transition duration-500 hover:text-white cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+  >
+    <Link
+      to="/contact"
+      className="relative flex items-center gap-2 font-medium"
+    >
+      <span className="absolute inset-0 -z-10 bg-[#8F2621] origin-left scale-x-0 transition-transform duration-500 ease-[0.16,1,0.3,1] group-hover:scale-x-100" />
+
+      <span>Book Design Session</span>
+      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+    </Link>
+  </Button>
+
+  {/* Explore Locations */}
+  <Button
+    asChild
+    className="group relative overflow-hidden rounded-[10px] border border-[#7A9636] bg-transparent px-6 sm:px-8 py-4 sm:py-5 min-h-[44px] text-sm sm:text-base font-semibold uppercase tracking-widest text-[#7A9636] transition duration-500 hover:text-white cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+  >
+    <Link
+      to="/features"
+      className="relative flex items-center gap-2 font-medium"
+    >
+      <span className="absolute inset-0 -z-10 bg-[#7A9636] origin-left scale-x-0 transition-transform duration-500 ease-[0.16,1,0.3,1] group-hover:scale-x-100" />
+
+      <span>Explore Locations</span>
+      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+    </Link>
+  </Button>
+  </div>
+</div>
         </motion.div>
 
       </div>

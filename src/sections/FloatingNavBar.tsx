@@ -193,6 +193,7 @@ export default function FloatingNavBar() {
               aria-label="Watch full movie"
               onClick={() => navigate("/features")}
             >
+              
              <Building2 className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0" />
               <span className="hidden md:inline">VIEW PROJECTS</span>
               <span className="inline md:hidden">PROJECTS</span>

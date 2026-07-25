@@ -60,11 +60,9 @@ export default function CTA() {
         </p>
 
         <div>
-          <button
-            onClick={() => navigate("/contact")}
-            className="group relative inline-flex items-center justify-center min-h-[44px] overflow-hidden mt-4 px-8 sm:px-10 py-3.5 bg-[#8F2621] text-white transition duration-300 text-xs font-semibold uppercase tracking-widest rounded-[10px] hover:bg-[#7A9636] border-none cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
-          >
-           Schedule a Site Visit
+          <button onClick={() => navigate("/contact")} className="group mt-10 relative inline-flex items-center justify-center min-h-[44px] overflow-hidden px-6 py-3 border border-[#8F2621] text-[#8F2621] hover:text-white transition duration-500 text-xs font-semibold uppercase tracking-widest bg-transparent rounded-[10px] cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
+            <span className="absolute inset-0 w-full h-full bg-[#8F2621] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-[0.16,1,0.3,1] -z-10" />
+             Schedule a Site Visit
           </button>
         </div>
       </div>

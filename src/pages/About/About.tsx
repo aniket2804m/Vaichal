@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-// import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ShieldCheck, Award, Clock, Compass } from "lucide-react";
+import AnimatedText from "../../components/ui/AnimatedText";
+import { useNavigate } from "react-router-dom";
 
 import myImage from "../../assets/images/Vaichal vastu.png";
 import { ScrollReveal } from "../../components/layout/ScrollProgress";
@@ -25,93 +26,8 @@ const memberships = [
   { id: 4, name: "Indian Plumbing Association", logo: "💧" },
 ];
 
-// story panels for the sticky "our story" scroll section
-const storyPanels = [
-  {
-    tag: "01 — Foundation",
-    title: "About Us",
-    body: "At Vaichal Group, we believe in creating value for our customers helping them build their long term assets. We are at the beginning of the journey when our customers envision the future of their companies, businesses and industries. We help them realize their visions by being their partners in this process.",
-    image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    tag: "02 — Since 1990",
-    title: "History",
-    body: "The Vaichal Group story begins back in 1990, with a humble beginning executing small scale jobs under MCES, Sopur industrial area. Vaichal Constructions Pvt. Ltd. was incorporated in 2000 with the same passion and vision — and today, with 20+ years in the industry, we're poised to expand across the country.",
-    image: "https://images.unsplash.com/photo-1541976590-713941681591?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    tag: "03 — What Drives Us",
-    title: "Core Ideology",
-    body: "We hold a strong commitment to quality, integrity, teamwork and customer satisfaction as our core ideals. We do business with the highest standards of fairness and professional ethics, and believe in proactive learning, innovation and change. We care.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
-  },
-];
-
-// ---- word-by-word scroll reveal ----
-const wordContainer: Variants = {
-  hidden: {},
-  visible: (delayChildren: number = 0) => ({
-    transition: { staggerChildren: 0.045, delayChildren },
-  }),
-};
-
-const wordItem: Variants = {
-  hidden: { opacity: 0, y: "0.6em", rotateX: -60, filter: "blur(6px)" },
-  visible: {
-    opacity: 1,
-    y: "0em",
-    rotateX: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
-function AnimatedText({
-  text,
-  as: Tag = "span",
-  className = "",
-  delay = 0,
-  once = true,
-}: {
-  text: string;
-  as?: keyof React.JSX.IntrinsicElements;
-  className?: string;
-  delay?: number;
-  once?: boolean;
-}) {
-  const words = text.split(" ");
-  const MotionTag = motion(Tag as any);
-  return (
-    <MotionTag
-      className={className}
-      style={{ perspective: "600px" }}
-      variants={wordContainer}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, amount: 0.4 }}
-      custom={delay}
-    >
-      {words.map((word, i) => (
-        <motion.span
-          key={`${word}-${i}`}
-          variants={wordItem}
-          style={{
-            display: "inline-block",
-            willChange: "transform, opacity, filter",
-            transformOrigin: "50% 100%",
-          }}
-        >
-          {word}
-          {i !== words.length - 1 ? "\u00A0" : ""}
-        </motion.span>
-      ))}
-    </MotionTag>
-  );
-}
-
 export default function About() {
-  // const navigate = useNavigate();
-  const [activePanel, setActivePanel] = useState(0);
+  const navigate = useNavigate();
 
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: heroProgress } = useScroll({
@@ -121,28 +37,16 @@ export default function About() {
   const heroTextY = useTransform(heroProgress, [0, 1], [0, 160]);
   const heroTextOpacity = useTransform(heroProgress, [0, 0.8], [1, 0]);
 
-  const storyRef = useRef<HTMLDivElement>(null);
-
   const visionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: visionProgress } = useScroll({
-    target: visionRef,
-    offset: ["start end", "end start"],
-  });
-  const visionImgRotate = useTransform(visionProgress, [0, 1], [-6, 6]);
 
   const missionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: missionProgress } = useScroll({
-    target: missionRef,
-    offset: ["start end", "end start"],
-  });
-  const missionImgRotate = useTransform(missionProgress, [0, 1], [6, -6]);
 
   return (
     <section id="about" className="bg-[#F5F7E3] text-[#1B1B1B] overflow-hidden">
       {/* ============ HERO — centered (original layout) ============ */}
       <div
         ref={heroRef}
-        className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-10 relative overflow-hidden"
+        className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-5 relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-[#F5F7E3]" />
         <ParticleBackground color="#7A9636" />
@@ -165,15 +69,16 @@ export default function About() {
           className="relative z-10 text-center max-w-5xl mt-5"
           style={{ y: heroTextY, opacity: heroTextOpacity }}
         >
-          <ScrollReveal variant="fade-down" delay={0.1}>
-            <motion.span
-              className="font-cinzel font-semibold uppercase tracking-[0.3em] text-[#7A9636] text-xl inline-block"
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              About Vaichal
-            </motion.span>
-          </ScrollReveal>
+          <motion.div
+  className="inline-flex items-center mb-10 gap-3 px-5 py-2 rounded-full border border-[#7A9636]/30 bg-white/60 backdrop-blur-md shadow-sm"
+  animate={{ y: [0, -4, 0] }}
+  transition={{ duration: 3, repeat: Infinity }}
+>
+  <span className="w-2 h-2 rounded-full bg-[#7A9636]" />
+  <span className="font-cinzel uppercase tracking-[0.35em] text-[#7A9636] text-xs sm:text-sm font-semibold">
+    About Vaichal
+  </span>
+</motion.div>
 
           <div className="mt-5 text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-tight text-[#1B1B1B]">
             <AnimatedText as="h1" text="Crafting Legends" className="block" />
@@ -187,119 +92,212 @@ export default function About() {
           </div>
 
           <ScrollReveal variant="fade-up" delay={0.35}>
-            <motion.p
-              className="max-w-3xl mx-auto mt-8 text-[#999991] leading-relaxed font-sans font-light text-sm sm:text-base md:text-lg"
-              animate={{ opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              At Vaichal Group, we believe in creating value for our
-              customers helping them build their long term assets. We are
-              at the beginning of the journey when our customers envision
-              the future of their companies, businesses and industries.
-            </motion.p>
+            <motion.div
+  className="max-w-4xl mx-auto mt-10"
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+>
+  <div className="relative overflow-hidden rounded-2xl border border-[#7A9636]/20 bg-white/70 backdrop-blur-md px-6 py-6 shadow-lg">
+    {/* Left Accent */}
+    <div className="absolute left-0 top-0 h-full w-1 bg-[#7A9636]" />
+
+    <motion.p
+      className="pl-4 text-[#55554F] text-base sm:text-lg md:text-xl leading-9 tracking-wide font-light"
+      animate={{ opacity: [0.9, 1, 0.9] }}
+      transition={{ duration: 3, repeat: Infinity }}
+    >
+      At{" "}
+      <span className="font-semibold text-[#7A9636]">
+        Vaichal Group
+      </span>
+      , we believe in{" "}
+      <span className="font-semibold text-[#8F2621]">
+        creating lasting value
+      </span>{" "}
+      for our customers by helping them build{" "}
+      <span className="font-semibold text-[#7A9636]">
+        long-term assets
+      </span>
+      . From the very beginning of every vision, we partner with businesses,
+      entrepreneurs, and families to transform ambitious ideas into{" "}
+      <span className="font-semibold text-[#8F2621]">
+        timeless landmarks
+      </span>{" "}
+      through trust, innovation, and uncompromising quality.
+    </motion.p>
+  </div>
+</motion.div>
           </ScrollReveal>
 
           {/* Scroll cue */}
-          <motion.div
-            className="mt-14 flex flex-col items-center gap-2 text-[#7A9636]/70"
-            animate={{ y: [0, 10, 0], opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <span className="text-[10px] tracking-[0.4em] uppercase font-sans">
-              Scroll
-            </span>
-            <div className="w-[1px] h-10 bg-gradient-to-b from-[#7A9636] to-transparent" />
-          </motion.div>
+         <motion.div
+  className="mt-14 flex justify-center"
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+>
+  <motion.button
+  type="button"
+  onClick={() => navigate("/features")}
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.96 }}
+  className="group mt-5 relative inline-flex items-center justify-center min-h-[44px] overflow-hidden px-6 py-3 border border-[#8F2621] text-[#8F2621] hover:text-white transition duration-500 text-base font-semibold uppercase tracking-widest bg-transparent rounded-[10px] cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+>
+  <span className="absolute inset-0 w-full h-full bg-[#8F2621] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-[0.16,1,0.3,1] -z-10" />
+  <span>Explore Projects</span>
+
+  <motion.span
+    animate={{ x: [0, 6, 0] }}
+    transition={{ duration: 1.5, repeat: Infinity }}
+    className="text-lg"
+  >
+    →
+  </motion.span>
+</motion.button>
+</motion.div>
         </motion.div>
       </div>
 
       {/* ============ OUR STORY SECTION ============ */}
-      <div ref={storyRef} className="relative border-t border-[#999991]/25">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[0.9fr_1.6fr] gap-10">
-    {/* sticky left nav — same as before */}
-   <div className="lg:sticky lg:top-0 h-fit lg:h-screen flex flex-col justify-center py-10 lg:py-0">
-      <span className="font-cinzel uppercase tracking-[0.3em] text-[#7A9636] text-xs mb-6">
-        Our Story
-      </span>
-      <div className="space-y-4">
-        {storyPanels.map((panel, i) => (
-          <button
-            key={panel.title}
-            onClick={() =>
-              document
-                .getElementById(`story-panel-${i}`)
-                ?.scrollIntoView({ behavior: "smooth", block: "center" })
-            }
-            className="block text-left w-full group cursor-pointer"
+{/* About us */}
+      <div
+        ref={visionRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-10 border-t border-[#999991]/25 grid lg:grid-cols-2 gap-10 lg:gap-20"
+      >
+        <div className="lg:sticky lg:top-24 h-fit">
+          <motion.h2
+             initial={{ opacity: 0.15, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+           transition={{
+  duration: 0.6,
+  ease: [0.42, 0, 1, 1], // easeIn
+}}
+            className="text-[#8F2621] text-5xl sm:text-6xl md:text-8xl font-serif font-bold leading-none"
           >
-            <motion.h3
-              animate={{
-                opacity: activePanel === i ? 1 : 0.35,
-                x: activePanel === i ? 8 : 0,
-              }}
-              transition={{ duration: 0.3 }}
-              className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-[#1B1B1B] group-hover:opacity-80"
-            >
-              {panel.title}
-            </motion.h3>
-          </button>
-        ))}
-      </div>
-    </div>
+            About us
+          </motion.h2>
+        </div>
 
-    {/* scrolling right panels — now split left/right per panel */}
-    <div className="py-6 lg:py-10 space-y-6 lg:space-y-10">
-      {storyPanels.map((panel, i) => {
-        const reversed = i % 2 === 1; // alternate layout direction
-        return (
-          <motion.div
-            id={`story-panel-${i}`}
-            key={panel.title}
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.4 }}
-            onViewportEnter={() => setActivePanel(i)}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="border border-[#999991]/30 rounded-[16px] p-5 sm:p-8 md:p-12 bg-white shadow-sm grid md:grid-cols-2 gap-6 sm:gap-8 items-center"
-          >
-            {/* text side */}
-            <motion.div
-              initial={{ opacity: 0, x: reversed ? 40 : -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.6 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className={reversed ? "md:order-2" : "md:order-1"}
-            >
-              <span className="text-[#7A9636] font-cinzel text-sm tracking-widest uppercase font-semibold">
-                {panel.tag}
-              </span>
-              <AnimatedText
-                as="p"
-                text={panel.body}
-                className="block mt-6 text-[#999991] leading-relaxed font-sans font-light text-base md:text-lg"
-              />
-            </motion.div>
+        <div className="space-y-8">
+ 
 
-            {/* image / highlight side */}
-            <motion.div
-              initial={{ opacity: 0, x: reversed ? -40 : 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.6 }}
-              transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-              className={`${reversed ? "md:order-1" : "md:order-2"} rounded-[12px] overflow-hidden aspect-[4/3]`}
-            >
-              <img
-                src={panel.image}
-                alt={panel.title}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </motion.div>
-        );
-      })}
-    </div>
-  </div>
+  {[
+    "At Vaichal Group, we believe in creating value for our customers, helping them build long-term assets. We are at the beginning of the journey when our customers envision the future of their companies, businesses, and industries. We help them realize those visions by becoming trusted partners throughout the entire process.",
+
+    "Our developments are designed with a perfect balance of innovation, quality craftsmanship, and sustainable planning, ensuring every project delivers exceptional value and an elevated lifestyle.",
+
+    "With an unwavering commitment to excellence, transparency, and customer satisfaction, every Vaichal Group project is built to become a lasting legacy for generations to come.",
+  ].map((para, i) => (
+    <motion.div
+      key={i}
+      initial={{ opacity: 0, x: 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{
+        duration: 0.6,
+        delay: i * 0.15,
+        ease: "easeOut",
+      }}
+      viewport={{ once: false, amount: 0.6 }}
+      className="relative pl-6"
+    >
+      {/* Left Accent */}
+      <span className="absolute left-0 top-1 h-[85%] w-1 rounded-full bg-[#7A9636]" />
+
+      <p className="text-[#66665F] text-lg md:text-xl leading-9 font-light tracking-wide transition-all duration-300 hover:text-[#333333]">
+        {para}
+      </p>
+    </motion.div>
+  ))}
+
+  {/* Bottom Highlight */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    viewport={{ once: true }}
+    className="border-l-4 border-[#7A9636] bg-[#F8F9EE] px-6 py-5 rounded-r-xl shadow-sm"
+  >
+    <p className="text-[#7A9636] uppercase tracking-[0.2em] text-sm md:text-base font-semibold">
+      Building Trust • Creating Value • Shaping the Future
+    </p>
+  </motion.div>
 </div>
+
+      </div>
+
+{/* History */}
+      <div
+        ref={missionRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-10 border-t border-[#999991]/25 grid lg:grid-cols-2 gap-10 lg:gap-20"
+      >
+        <div className="lg:sticky lg:top-24 h-fit lg:order-last">
+          <motion.h2
+           
+             initial={{ opacity: 0.15, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+           transition={{
+  duration: 0.6,
+  ease: [0.42, 0, 1, 1], // easeIn
+}}
+            
+            className="text-[#7A9636] text-5xl sm:text-6xl md:text-8xl font-serif font-bold leading-none text-right lg:text-right"
+          >
+           History
+          </motion.h2>
+        </div>
+
+        <div className="space-y-8">
+
+  {/* Highlight Quote */}
+  <motion.div
+    initial={{ opacity: 0, x: -30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    viewport={{ once: false, amount: 0.6 }}
+    className="border-l-4 border-[#7A9636] bg-[#F8F9EE] px-6 py-5 rounded-r-xl shadow-sm"
+  >
+    <p className="font-serif italic text-xl md:text-2xl leading-relaxed text-[#2F2F2F]">
+      "The Vaichal Group story begins back in 1990, with a humble beginning
+      executing small scale jobs under MCES, Sopur Industrial Area. Vaichal
+      Constructions Pvt. Ltd. was incorporated in 2000 with the same passion
+      and vision—and today, with 20+ years in the industry, we're poised to
+      expand across the country."
+    </p>
+  </motion.div>
+
+  {/* Timeline Points */}
+  {missionPoints.map((point, i) => (
+    <motion.div
+      key={i}
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{
+        duration: 0.6,
+        delay: i * 0.15,
+        ease: "easeOut",
+      }}
+      viewport={{ once: false, amount: 0.6 }}
+      className="relative flex items-start gap-5 pl-6"
+    >
+      {/* Left Accent */}
+      <span className="absolute left-0 top-2 h-[75%] w-1 rounded-full bg-[#7A9636]" />
+
+      {/* Number */}
+      <span className="text-[#8F2621] font-serif font-bold text-xl min-w-[45px]">
+        0{i + 1}.
+      </span>
+
+      {/* Text */}
+      <p className="text-[#66665F] text-lg leading-8 font-light tracking-wide transition-colors duration-300 hover:text-[#333333]">
+        {point}
+      </p>
+    </motion.div>
+  ))}
+</div>
+      </div>
+
 
       {/* ============ OUR VISION — pinned image, scrolling text ============ */}
       <div
@@ -308,42 +306,54 @@ export default function About() {
       >
         <div className="lg:sticky lg:top-24 h-fit">
           <motion.h2
-            style={{ rotate: visionImgRotate }}
+             initial={{ opacity: 0.15, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+           transition={{
+  duration: 0.6,
+  ease: [0.42, 0, 1, 1], // easeIn
+}}
             className="text-[#8F2621] text-5xl sm:text-6xl md:text-8xl font-serif font-bold leading-none"
           >
-            OUR
-            <br />
-            VISION
+            OUR VISION
           </motion.h2>
         </div>
 
-        <div className="space-y-8 text-[#999991] text-lg leading-relaxed font-sans font-light">
-          {[
-            "To be recognized as a premier real estate development company, delivering world-class residential and commercial spaces that transcend luxury and establish new benchmarks in architectural excellence.",
-            "We envision creating timeless properties that become iconic landmarks, revered not just for their structural magnificence but for the quality of life they provide.",
-            "Every project is a testament to our commitment to craftsmanship, innovation, and customer satisfaction.",
-          ].map((para, i) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0.15, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              viewport={{ once: false, amount: 0.6 }}
-            >
-              {para}
-            </motion.p>
-          ))}
-          <motion.p
-            className="text-[#7A9636] font-sans font-semibold tracking-wider uppercase text-base"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.6 }}
-          >
-            Excellence in every stone, integrity in every deal, legacy in
-            every project.
-          </motion.p>
-        </div>
+        <div className="space-y-8">
+  {[
+    "To be recognized as a premier real estate development company, delivering world-class residential and commercial spaces that transcend luxury and establish new benchmarks in architectural excellence.",
+    "We envision creating timeless properties that become iconic landmarks, revered not just for their structural magnificence but for the quality of life they provide.",
+    "Every project is a testament to our commitment to craftsmanship, innovation, and customer satisfaction.",
+  ].map((para, i) => (
+    <motion.div
+      key={i}
+      initial={{ opacity: 0, x: 30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
+      viewport={{ once: false, amount: 0.6 }}
+      className="relative pl-6"
+    >
+      {/* Left Accent */}
+      <span className="absolute left-0 top-1 h-[85%] w-1 rounded-full bg-[#7A9636]" />
+
+      <p className="text-[#66665F] text-lg md:text-xl leading-9 font-light tracking-wide transition-all duration-300 hover:text-[#3D3D3D]">
+        {para}
+      </p>
+    </motion.div>
+  ))}
+
+  <motion.div
+    initial={{ opacity: 0, x: 30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    viewport={{ once: true, amount: 0.6 }}
+    className="mt-10 rounded-r-xl border-l-4 border-[#7A9636] bg-[#F8F9EE] px-6 py-5 shadow-md"
+  >
+    <p className="text-[#7A9636] font-semibold uppercase tracking-[0.2em] text-sm md:text-base leading-relaxed">
+      Excellence in every stone, integrity in every deal, legacy in every
+      project.
+    </p>
+  </motion.div>
+</div>
       </div>
 
       {/* ============ OUR MISSION — styled to match Vision's layout ============ */}
@@ -353,40 +363,67 @@ export default function About() {
       >
         <div className="lg:sticky lg:top-24 h-fit lg:order-last">
           <motion.h2
-            style={{ rotate: missionImgRotate }}
+             initial={{ opacity: 0.15, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+           transition={{
+  duration: 0.6,
+  ease: [0.42, 0, 1, 1], // easeIn
+}}
             className="text-[#7A9636] text-5xl sm:text-6xl md:text-8xl font-serif font-bold leading-none text-right lg:text-right"
           >
-            OUR
-            <br />
-            MISSION
+            OUR MISSION
           </motion.h2>
         </div>
 
-        <div className="space-y-8 text-[#999991] text-lg leading-relaxed font-sans font-light">
-          <motion.p
-            initial={{ opacity: 0.15, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: false, amount: 0.6 }}
-            className="font-serif italic text-xl text-[#1B1B1B]"
-          >
-            "Our mission is to build more than just properties—we build legacies that endure for generations, creating spaces where ambitions flourish and memories are made."
-          </motion.p>
-          {missionPoints.map((point, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0.15, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: i * 0.1 }}
-              viewport={{ once: false, amount: 0.6 }}
-              className="flex items-start gap-4"
-            >
-              <span className="text-[#8F2621] font-serif font-bold text-xl">0{i + 1}.</span>
-              <p className="mt-0.5">{point}</p>
-            </motion.div>
-          ))}
-        </div>
+        <div className="space-y-8">
+
+  {/* Highlight Quote */}
+  <motion.div
+    initial={{ opacity: 0, x: -30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+    viewport={{ once: false, amount: 0.6 }}
+    className="border-l-4 border-[#7A9636] bg-[#F8F9EE] px-6 py-5 rounded-r-xl shadow-sm"
+  >
+    <p className="font-serif italic text-xl md:text-2xl leading-relaxed text-[#2F2F2F]">
+      "Our mission is to build more than just properties—we build legacies
+      that endure for generations, creating spaces where ambitions flourish
+      and memories are made."
+    </p>
+  </motion.div>
+
+  {/* Mission Points */}
+  {missionPoints.map((point, i) => (
+    <motion.div
+      key={i}
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{
+        duration: 0.6,
+        delay: i * 0.15,
+        ease: "easeOut",
+      }}
+      viewport={{ once: false, amount: 0.6 }}
+      className="relative flex items-start gap-5 pl-6"
+    >
+      {/* Left Accent */}
+      <span className="absolute left-0 top-2 h-[75%] w-1 rounded-full bg-[#7A9636]" />
+
+      {/* Number */}
+      <span className="text-[#8F2621] font-serif font-bold text-xl min-w-[45px]">
+        0{i + 1}.
+      </span>
+
+      {/* Point */}
+      <p className="text-[#66665F] text-lg leading-8 font-light tracking-wide transition-colors duration-300 hover:text-[#333333]">
+        {point}
+      </p>
+    </motion.div>
+  ))}
+</div>
       </div>
+
+      
 
       {/* ============ WHY CHOOSE VAICHAL ============ */}
       <section id="why-choose-us" className="py-10 md:py-10 bg-[#F5F7E3] border-t border-[#999991]/25">
@@ -658,18 +695,18 @@ export default function About() {
   <div className="max-w-5xl mx-auto px-8 lg:px-10 py-10 text-center flex flex-col items-center">
 
     {/* Small Label */}
-    <span className="uppercase tracking-[0.35em] text-[#7A9636] text-sm font-medium">
+    <span className="uppercase tracking-[0.35em] text-[#7A9636] text-base font-medium">
       Build Your Legacy
     </span>
 
     {/* Heading */}
-    <h2 className="mt-20 font-serif text-4xl sm:text-5xl lg:text-7xl leading-tight text-[#8F2621]">
+    <h2 className="pt-5 font-serif text-4xl sm:text-5xl lg:text-7xl leading-tight text-[#8F2621]">
       Homes Crafted <br />
       For Generations.
     </h2>
 
     {/* Description */}
-    <p className="mt-8 max-w-2xl text-[#999991] text-lg leading-8">
+    <p className="pt-5 max-w-2xl text-[#999991] text-lg leading-8">
       More than residences, we create thoughtfully planned spaces rooted in
       Vāstu principles, timeless architecture, and uncompromising quality.
       Experience a lifestyle where every detail is designed to inspire comfort,
@@ -678,11 +715,13 @@ export default function About() {
 
     {/* Buttons */}
     <div className="flex flex-col sm:flex-row gap-5 mt-12">
-      <button className="bg-[#8F2621] hover:bg-[#7A9636] text-white px-8 py-4 rounded-xl uppercase tracking-widest font-semibold transition">
+      <button className="group relative inline-flex items-center justify-center min-h-[44px] overflow-hidden px-6 py-3 border border-[#8F2621] text-[#8F2621] hover:text-white transition duration-500 text-base font-semibold uppercase tracking-widest bg-transparent rounded-[10px] cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
+        <span className="absolute inset-0 w-full h-full bg-[#8F2621] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-[0.16,1,0.3,1] -z-10" />
         Schedule Visit
       </button>
 
-      <button className="border border-[#8F2621] text-[#8F2621] hover:bg-[#8F2621] hover:text-white px-8 py-4 rounded-xl uppercase tracking-widest font-semibold transition">
+      <button className="group relative inline-flex items-center justify-center min-h-[44px] overflow-hidden px-6 py-3 border border-[#8F2621] text-[#8F2621] hover:text-white transition duration-500 text-xs font-semibold uppercase tracking-widest bg-transparent rounded-[10px] cursor-pointer hover:scale-[1.02] active:scale-[0.98]">
+        <span className="absolute inset-0 w-full h-full bg-[#8F2621] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-[0.16,1,0.3,1] -z-10" />
         View Projects
       </button>
     </div>
