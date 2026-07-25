@@ -439,8 +439,8 @@ function PostModal({ post, onClose }: { post: Post; onClose: () => void }) {
     >
       <motion.div
         className="blg-modal-card"
-        initial={{ opacity: 0, y: 30, scale: 0.96 }}
-        animate={{ opacity: 1, y: 10, scale: 1.5 }}
+        initial={{ opacity: 0, y: 10, scale: 0.96 }}
+        animate={{ opacity: 1, y: 10, scale: 1 }}
         exit={{ opacity: 0, y: 20, scale: 0.96 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         onClick={(event) => event.stopPropagation()}
@@ -527,7 +527,7 @@ const BLG_STYLES = `
   display:block;max-width:1200px;margin:0 auto 3rem;
   text-decoration:none;color:inherit;
   background:var(--surface);border:1px solid var(--grid-line);
-  display:grid;grid-template-columns:1.1fr 1fr;overflow:hidden;
+  display:grid;grid-template-columns:minmax(0, 1.1fr) minmax(0, 1fr);overflow:hidden;
   transition:border-color .3s ease;
   border-radius:16px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -586,9 +586,10 @@ const BLG_STYLES = `
 
 .blg-filters{
   max-width:1200px;margin:0 auto 2.5rem;
-  display:flex;gap:1.6rem;flex-wrap:wrap;
+  display:flex;gap:1rem 1.6rem;flex-wrap:wrap;
   border-top:1px solid var(--grid-line);border-bottom:1px solid var(--grid-line);
   padding:1rem 0;
+  align-items:center;
 }
 .blg-filter{
   position:relative;background:none;border:none;cursor:pointer;
@@ -603,21 +604,24 @@ const BLG_STYLES = `
 
 .blg-grid{
   max-width:1200px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
   gap:1.75rem;
 }
+
 .blg-card{display:block;text-decoration:none;color:inherit;cursor:pointer}
 .blg-card-frame{
   position:relative;background:var(--surface);border:1px solid var(--grid-line);
-  overflow:hidden;transition:border-color .3s ease;will-change:transform;
+  overflow:hidden;transition:border-color .3s ease, box-shadow .3s ease;will-change:transform;
   border-radius:16px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  height:100%;display:flex;flex-direction:column;
 }
 .blg-card-frame:hover{border-color:var(--amber);box-shadow: 0 4px 6px rgba(0,0,0,0.05)}
 .blg-glow{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:0;transition:opacity .3s ease}
 .blg-card-frame:hover .blg-glow{opacity:1}
 
-.blg-img-wrap{position:relative;aspect-ratio:16/10;overflow:hidden;background:#F5F7E3}
+.blg-img-wrap{position:relative;aspect-ratio:16/10;overflow:hidden;background:#F5F7E3;flex-shrink:0}
 .blg-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1);filter:saturate(.95) contrast(1.01)}
 .blg-card-frame:hover .blg-img-wrap img{transform:scale(1.08)}
 .blg-log-badge{
@@ -633,7 +637,7 @@ const BLG_STYLES = `
 .blg-card-frame:hover .blg-scan{animation:blg-scan-move 1.1s ease-in-out;opacity:1}
 @keyframes blg-scan-move{0%{top:0;opacity:0}10%{opacity:1}100%{top:100%;opacity:0}}
 
-.blg-card-body{position:relative;z-index:2;padding:1.25rem 1.2rem 1.3rem;background:var(--surface)}
+.blg-card-body{position:relative;z-index:2;padding:1.25rem 1.2rem 1.3rem;background:var(--surface);display:flex;flex-direction:column;flex:1}
 .blg-card-body h3{
   font-family:'Lora',sans-serif;font-weight:700;
   font-size:1.02rem;line-height:1.25;margin:.6rem 0 .5rem;color:var(--paper);
@@ -648,10 +652,12 @@ const BLG_STYLES = `
 }
 .blg-modal-card{
   width:min(940px, 100%);
-  max-height:90vh;overflow:auto;
+  max-height:min(90vh, 860px);
+  overflow:auto;
   background:var(--surface);border:1px solid var(--grid-line);
   border-radius:24px;box-shadow:0 28px 90px rgba(0,0,0,0.24);
-  display:grid;grid-template-columns:1.05fr 0.95fr;
+  display:grid;grid-template-columns:minmax(0, 1.05fr) minmax(0, 0.95fr);
+  overscroll-behavior:contain;
 }
 .blg-modal-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:#F5F7E3}
 .blg-modal-media img{width:100%;height:100%;object-fit:cover;display:block}
@@ -670,16 +676,22 @@ const BLG_STYLES = `
 }
 .blg-modal-footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;padding-top:.25rem}
  
+@media (max-width: 1140px){
+  .blg-grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
+}
 @media (max-width: 860px){
   .blg-featured{grid-template-columns:1fr}
+  .blg-modal-card{grid-template-columns:1fr}
+  .blg-modal-body{padding:1.3rem 1.1rem 1.2rem}
 }
 @media (max-width: 640px){
   .blg{padding:5rem 1rem 4rem}
   .blg-featured-body{padding:1.2rem 1rem}
   .blg-title{font-size:2.2rem}
-  .blg-modal-card{grid-template-columns:1fr}
+  .blg-grid{grid-template-columns:1fr}
   .blg-modal-body{padding:1.25rem 1rem 1.2rem}
   .blg-modal-body h2{font-size:1.4rem}
+  .blg-modal-footer{flex-direction:column;align-items:flex-start}
 }
 @media (prefers-reduced-motion: reduce){
   .blg-card-frame, .blg-img-wrap img, .blg-scan, .blg-featured-media img{transition:none;animation:none}
