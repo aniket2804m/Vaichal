@@ -124,7 +124,7 @@ export default function Awards() {
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="relative mx-auto max-w-6xl">
+      <div className="relative mt-20 mx-auto max-w-6xl">
         {/* ---------- Hero ---------- */}
         <motion.div
           initial="hidden"
