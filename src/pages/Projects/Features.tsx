@@ -476,6 +476,7 @@ export default function Features({
   const activeFilter = controlledFilter ?? internalFilter;
 
   const setActiveFilter = (filter: FilterValue) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     onFilterChange ? onFilterChange(filter) : setInternalFilter(filter);
   };
 
@@ -483,12 +484,13 @@ export default function Features({
     const urlFilter = searchParams.get("type") as FilterValue | null;
     if (urlFilter && FILTERS.includes(urlFilter)) {
       if (urlFilter !== internalFilter) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setInternalFilter(urlFilter);
       }
     } else if (!urlFilter && internalFilter !== "Featured") {
       setInternalFilter("Featured");
     }
-  }, [searchParams]);
+  }, [internalFilter, searchParams]);
 
   // Find corresponding project data
   const selectedProject = useMemo(() => {

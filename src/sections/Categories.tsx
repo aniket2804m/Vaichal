@@ -326,6 +326,7 @@ function CategoryCard({
                 className="absolute w-[2.5px] bg-[#8F2621]/80"
                 style={{
                   left: `${10 + i * 12}%`,
+                  // eslint-disable-next-line react-hooks/purity
                   height: `${60 + Math.random() * 50}px`,
                   top: "100%",
                 }}
@@ -352,15 +353,20 @@ function CategoryCard({
                 key={i}
                 className="absolute w-2.5 h-2.5 rounded-full bg-[#7A9636]"
                 style={{
+                  // eslint-disable-next-line react-hooks/purity
                   left: `${15 + Math.random() * 70}%`,
+                  // eslint-disable-next-line react-hooks/purity
                   top: `${160 + Math.random() * 60}px`,
                 }}
                 animate={{
                   scale: [0.5, 2.5, 0],
+                  // eslint-disable-next-line react-hooks/purity
                   y: [0, -90 - Math.random() * 60],
+                  // eslint-disable-next-line react-hooks/purity
                   x: [0, (Math.random() - 0.5) * 60],
                   opacity: [0, 0.95, 0],
                 }}
+                // eslint-disable-next-line react-hooks/purity
                 transition={{ duration: 0.6, delay: Math.random() * 0.25 }}
               />
             ))}
