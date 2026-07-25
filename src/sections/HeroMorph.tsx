@@ -525,7 +525,7 @@ export default function HeroMorph() {
   style={{ fontFamily: "Helvetica, Arial, sans-serif" }}
 >
   <span className="block mt-2 sm:mt-4 text-base sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl leading-[1.4]">
-    <span className="text-black dark:text-white">
+    <span className="text-black">
       Built by the company
     </span>
 
@@ -537,7 +537,7 @@ export default function HeroMorph() {
   Tata Housing
 </span>
 
-<span className="text-black dark:text-white"> and </span>
+<span className="text-black"> and </span>
 
 <span
   className="text-brand-maroon font-bold whitespace-nowrap transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(128,0,32,0.9)] hover:scale-105"
